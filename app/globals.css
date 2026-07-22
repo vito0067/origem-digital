@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0b0d17;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.35);
+  color: #ffffff;
+}
+
+/* Scrollbar discreta no tema */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0d17;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.4), rgba(168, 85, 247, 0.4));
+  border-radius: 8px;
+}
+
+@layer components {
+  /* Cartão de vidro padrão da identidade */
+  .glass-card {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-glass;
+  }
+
+  /* Texto com gradiente ciano → violeta */
+  .text-gradient-neon {
+    background: linear-gradient(92deg, #00f0ff 0%, #7dd3fc 45%, #a855f7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Grid de chão neon, ecoando a foto-inicial */
+  .neon-grid {
+    background-image:
+      linear-gradient(rgba(168, 85, 247, 0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 85, 247, 0.10) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%);
+  }
+}
+
+/* Respeito total a usuários com movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Fluxo de venda animado (SaleFlow) */
+@keyframes flowNodeOn {
+  0%, 100% { border-color: rgba(255, 255, 255, 0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 8px 32px rgba(0,0,0,.45); transform: scale(1); }
+  6%, 16% { border-color: rgba(0, 240, 255, 0.7); box-shadow: 0 0 24px rgba(0, 240, 255, 0.4), 0 0 64px rgba(0, 240, 255, 0.15); transform: scale(1.05); }
+  24% { border-color: rgba(255, 255, 255, 0.1); transform: scale(1); }
+}
+@keyframes flowArrowOn {
+  0%, 100% { opacity: 0.25; }
+  6%, 16% { opacity: 1; text-shadow: 0 0 12px rgba(0, 240, 255, 0.8); }
+  24% { opacity: 0.25; }
+}
+.flow-node { animation: flowNodeOn 6.6s ease-in-out infinite; }
+.flow-arrow { animation: flowArrowOn 6.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .flow-node, .flow-arrow { animation: none !important; }
+}
