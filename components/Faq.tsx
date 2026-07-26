@@ -4,7 +4,7 @@ import NeonButton from "./NeonButton";
 const faqs = [
   {
     q: "Quanto custa?",
-    a: "Sites profissionais a partir de R$ 897 de setup único + R$ 39/mês (com domínio, hospedagem e manutenção básica inclusos). Agentes de IA a partir de R$ 597 de setup + R$ 197/mês. O Pacote Completo tem 10–15% de desconto no setup e mensalidade unificada de R$ 219/mês. No diagnóstico gratuito indicamos exatamente o que faz sentido para o seu caso.",
+    a: "Sites profissionais a partir de R$ 987 de setup único + R$ 43/mês (com domínio, hospedagem e manutenção básica inclusos). Agentes de IA a partir de R$ 657 de setup + R$ 217/mês. O Pacote Completo tem 10–15% de desconto no setup e mensalidade unificada de R$ 241/mês. No diagnóstico gratuito indicamos exatamente o que faz sentido para o seu caso.",
   },
   {
     q: "Quanto tempo demora?",
