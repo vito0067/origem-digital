@@ -1,11 +1,10 @@
 import Reveal from "./Reveal";
 
 const techs = [
-  "OpenAI",
-  "Claude",
+  "OpenAI Chat Model",
   "n8n",
   "WhatsApp Business",
-  "HostGator",
+  "Vercel",
   "Cloudfy",
   "APIs e Automações",
 ];
