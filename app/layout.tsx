@@ -56,7 +56,7 @@ const jsonLd = {
   },
   email: "origemdigital00@gmail.com",
   telephone: "+55-11-93929-9209",
-  sameAs: ["https://instagram.com/origem.digital_"],
+  sameAs: ["https://instagram.com/origem__digital"],
   makesOffer: [
     { "@type": "Offer", name: "Sites Profissionais" },
     { "@type": "Offer", name: "Agentes de IA no WhatsApp" },
