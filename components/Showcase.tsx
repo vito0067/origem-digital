@@ -24,21 +24,6 @@ const items = [
     caption: "Atendimento concluído com agendamento confirmado",
     tag: "Agente de IA · demonstração",
   },
-  {
-    placeholder: true,
-    caption: "Print do painel de automações (n8n) — SUBSTITUIR",
-    tag: "Bastidores",
-  },
-  {
-    placeholder: true,
-    caption: "Site entregue para cliente — SUBSTITUIR",
-    tag: "Projeto real",
-  },
-  {
-    placeholder: true,
-    caption: "Conversa real do agente em produção — SUBSTITUIR",
-    tag: "Projeto real",
-  },
 ];
 
 export default function Showcase() {
