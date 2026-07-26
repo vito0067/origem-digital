@@ -47,8 +47,8 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://instagram.com/origem.digital_" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-neon">
-                @origem.digital_
+              <a href="https://instagram.com/origem__digital" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-neon">
+                @origem__digital
               </a>
             </li>
           </ul>
