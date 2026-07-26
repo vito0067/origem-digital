@@ -5,8 +5,8 @@ import Reveal from "./Reveal";
 import NeonButton from "./NeonButton";
 
 /**
- * Ancoragem real: R$ 1.494 é o setup de site (R$ 897) + agente (R$ 597)
- * contratados separadamente; R$ 1.345 aplica os 10% de desconto do
+ * Ancoragem real: R$ 1.644 é o setup de site (R$ 987) + agente (R$ 657)
+ * contratados separadamente; R$ 1.480 aplica os 10% de desconto do
  * pacote. Oferta válida no mês corrente (nome do mês é dinâmico).
  */
 export default function Offer() {
@@ -40,13 +40,13 @@ export default function Offer() {
             <div className="mt-8 flex flex-col items-center gap-1">
               <p className="text-sm text-slate-400">
                 Setup contratado separado:{" "}
-                <s className="text-slate-500">R$ 1.494</s>
+                <s className="text-slate-500">R$ 1.644</s>
               </p>
               <p className="font-display text-5xl font-bold text-gradient-neon sm:text-6xl">
-                R$ 1.345
+                R$ 1.480
               </p>
               <p className="mt-1 text-sm text-slate-300">
-                + R$ 219/mês (hospedagem, uso do agente e suporte inclusos)
+                + R$ 241/mês (hospedagem, uso do agente e suporte inclusos)
               </p>
             </div>
 
