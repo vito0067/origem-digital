@@ -6,7 +6,7 @@ import NeonButton from "./NeonButton";
 
 /**
  * Ancoragem real: R$ 1.644 é o setup de site (R$ 987) + agente (R$ 657)
- * contratados separadamente; R$ 1.480 aplica os 10% de desconto do
+ * contratados separadamente; R$ 1.447 aplica os 10% de desconto do
  * pacote. Oferta válida no mês corrente (nome do mês é dinâmico).
  */
 export default function Offer() {
@@ -43,10 +43,10 @@ export default function Offer() {
                 <s className="text-slate-500">R$ 1.644</s>
               </p>
               <p className="font-display text-5xl font-bold text-gradient-neon sm:text-6xl">
-                R$ 1.480
+                R$ 1.447
               </p>
               <p className="mt-1 text-sm text-slate-300">
-                + R$ 241/mês (hospedagem, uso do agente e suporte inclusos)
+                + R$ 260/mês (hospedagem, uso do agente e suporte inclusos)
               </p>
             </div>
 
@@ -55,7 +55,7 @@ export default function Offer() {
                 "Site profissional no ar em 1 a 2 semanas",
                 "Agente de IA atendendo seu WhatsApp 24/7",
                 "Suporte e manutenção contínuos inclusos",
-                "10% de desconto no setup — válido somente este mês",
+                "12% de desconto no setup — válido somente este mês",
               ].map((b) => (
                 <li key={b} className="flex items-start gap-2.5 text-sm text-slate-300">
                   <span aria-hidden className="mt-0.5 font-bold text-cyan-neon">✓</span>
