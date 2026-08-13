@@ -40,7 +40,7 @@ const faqs = [
   },
   {
     q: "E se eu quiser cancelar?",
-    a: "Sem fidelidade escondida: conversamos abertamente sobre prazos e condições antes de qualquer contrato. Transparência faz parte do nosso jeito de trabalhar.",
+    a: "Trabalhamos com planos de fidelidade transparentes — 3 ou 12 meses, sempre explicados antes da assinatura. Há também 7 dias de arrependimento após a contratação, conforme o Código de Defesa do Consumidor. Sem letra miúda: você sabe exatamente as condições antes de assinar.",
   },
 ];
 
