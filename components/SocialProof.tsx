@@ -5,10 +5,10 @@ import Reveal from "./Reveal";
  * assim que existirem. Tudo centralizado aqui para trocar num lugar só.
  */
 const METRICS = [
-  { value: "+XX", label: "Empresas atendidas" }, // PLACEHOLDER
+  { value: "Sob medida", label: "Cada projeto é único" },
   { value: "1–2 semanas", label: "Tempo médio de entrega" },
   { value: "24/7", label: "Atendimento com IA" },
-  { value: "★★★★★", label: "Satisfação dos clientes" }, // PLACEHOLDER
+  { value: "Suporte", label: "Incluso em todo plano" },
 ];
 
 export default function SocialProof() {
