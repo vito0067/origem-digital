@@ -4,7 +4,7 @@ const items = [
   {
     title: "Atendimento humano e consultivo",
     description:
-      "Você fala com gente de verdade, que entende seu negócio antes de propor qualquer coisa. Sem letra miúda, sem surpresa no contrato.",
+      "Você fala com gente de verdade, que entende seu negócio antes de propor qualquer coisa. Sem letra miúda.",
   },
   {
     title: "IA personalizada para o seu negócio",
