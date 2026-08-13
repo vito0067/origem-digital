@@ -29,6 +29,13 @@ export const metadata: Metadata = {
     "presença digital",
   ],
   openGraph: {
+    url: "https://origemdigitalsite.com.br",
+    images: [
+      {
+        url: "https://origemdigitalsite.com.br/media/frame-inicial.png",
+        alt: "Origem Digital — sites profissionais e agentes de IA no WhatsApp",
+      },
+    ],
     title,
     description,
     locale: "pt_BR",
@@ -36,6 +43,7 @@ export const metadata: Metadata = {
     siteName: "Origem Digital",
   },
   twitter: {
+    images: ["https://origemdigitalsite.com.br/media/frame-inicial.png"],
     card: "summary_large_image",
     title,
     description,
