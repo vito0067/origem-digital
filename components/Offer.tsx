@@ -6,15 +6,15 @@ import NeonButton from "./NeonButton";
 
 /**
  * Ancoragem real: R$ 1.644 é o setup de site (R$ 987) + agente (R$ 657)
- * contratados separadamente; R$ 1.447 aplica os 10% de desconto do
+ * contratados separadamente; R$ 1.447 aplica os 12% de desconto do
  * pacote. Oferta válida no mês corrente (nome do mês é dinâmico).
  */
 export default function Offer() {
-  const [month, setMonth] = useState("este mês");
+  const [month, setMonth] = useState("deste mês");
 
   useEffect(() => {
     const m = new Date().toLocaleDateString("pt-BR", { month: "long" });
-    setMonth(m.charAt(0).toUpperCase() + m.slice(1));
+    setMonth("de " + m.charAt(0).toUpperCase() + m.slice(1));
   }, []);
 
   return (
@@ -27,7 +27,7 @@ export default function Offer() {
         <Reveal>
           <div className="glass-card relative p-9 text-center ring-1 ring-cyan-neon/40 shadow-neon-cyan sm:p-12">
             <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-cyan-neon/60 bg-abyss px-4 py-1 text-[11px] font-semibold uppercase tracking-widest text-cyan-neon">
-              Oferta de {month}
+              Oferta {month}
             </span>
 
             <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
@@ -69,7 +69,7 @@ export default function Offer() {
                 href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Quero%20garantir%20o%20Pacote%20In%C3%ADcio%20Digital%20com%20desconto%20deste%20m%C3%AAs."
                 external
               >
-                Garantir minha condição de {month}
+                Garantir minha condição {month}
               </NeonButton>
             </div>
             <p className="mt-4 text-xs text-slate-500">
