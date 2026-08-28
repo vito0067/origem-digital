@@ -119,7 +119,7 @@ export default function HeroCinematic() {
           <video
             ref={videoRef}
             className="absolute inset-0 h-full w-full object-cover"
-src="https://d8j0ntlcm91z4.cloudfront.net/user_3GgWMZRkhxVIevwtKUWgnJ7JLDW/hf_20260726_194310_74620b6a-d0c4-475c-84e5-6c248d5abb63.mp4"           
+            src="/media/hero-video.mp4"             poster="/media/frame-inicial.png"           
             muted
             playsInline
             preload="auto"
