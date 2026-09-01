@@ -12,6 +12,7 @@ import Offer from "@/components/Offer";
 import Guarantee from "@/components/Guarantee";
 import HowItWorks from "@/components/HowItWorks";
 import Showcase from "@/components/Showcase";
+import Projects from "@/components/Projects";
 import Differentials from "@/components/Differentials";
 import DiagnosticQuiz from "@/components/DiagnosticQuiz";
 import Technologies from "@/components/Technologies";
@@ -36,6 +37,7 @@ export default function Home() {
       <Guarantee />
       <HowItWorks />
       <Showcase />
+            <Projects />
       <Differentials />
       <DiagnosticQuiz />
       <Technologies />
