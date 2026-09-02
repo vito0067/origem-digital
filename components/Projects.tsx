@@ -29,10 +29,10 @@ export default function Projects() {
 
             <div className="flex flex-col justify-center p-8 sm:p-10">
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-neon">
-                Site Profissional · entregue
+                Site Profissional
               </p>
               <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
-                O Mundo da Sá
+                O Mundo da Sa
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-slate-300">
                 Layout exclusivo, feito do zero. Otimizado para celular,
@@ -44,13 +44,13 @@ export default function Projects() {
                 <li>Carregamento rápido em qualquer celular</li>
                 <li>Indexado no Google desde o primeiro dia</li>
               </ul>
-              
+              <a
                 href="https://mundodasa.com.br"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-cyan-neon transition hover:bg-white/5"
               >
-                Ver site ao vivo →
+                Ver site ao vivo
               </a>
             </div>
           </div>
