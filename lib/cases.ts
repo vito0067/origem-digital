@@ -18,7 +18,7 @@ export const cases: Case[] = [
   {
     slug: "origem-digital",
     titulo: "Origem Digital — nosso próprio sistema",
-    segmento: "Tecnologia · Serviços digitais",
+    segmento: "Tecnologia - Serviços digitais",
     problema:
       "Como toda empresa nova, precisávamos provar valor antes do primeiro cliente: apresentar serviços com clareza, transmitir autoridade técnica e atender interessados a qualquer hora — sem uma equipe de plantão.",
     solucao:
@@ -30,7 +30,7 @@ export const cases: Case[] = [
     {
     slug: "o-mundo-da-sa",
     titulo: "O Mundo da Sá",
-    segmento: "PREENCHER — ex: Alimentação · Doces artesanais",
+    segmento: "Tecnologia - Redes Sociais",
     problema:
       "O negócio existia nas redes sociais, mas não tinha um endereço próprio na internet. Quem procurava pelo nome no Google não encontrava nada oficial, e todo contato dependia de a pessoa achar o perfil primeiro.",
     solucao:
