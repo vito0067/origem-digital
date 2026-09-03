@@ -27,5 +27,16 @@ export const cases: Case[] = [
     resultado:
       "Este site que você está navegando é o resultado — cada seção, animação e automação daqui é exatamente o que entregamos para nossos clientes. O produto é a prova.",
   },
-  // <- adicione novos cases aqui
+    {
+    slug: "o-mundo-da-sa",
+    titulo: "O Mundo da Sá",
+    segmento: "PREENCHER — ex: Alimentação · Doces artesanais",
+    problema:
+      "O negócio existia nas redes sociais, mas não tinha um endereço próprio na internet. Quem procurava pelo nome no Google não encontrava nada oficial, e todo contato dependia de a pessoa achar o perfil primeiro.",
+    solucao:
+      "Site profissional com layout exclusivo, desenhado do zero para a marca — sem template pronto. Otimizado para carregar rápido no celular, com botão de WhatsApp visível em todas as páginas e cada página com título e descrição preparados para o Google.",
+    tecnologias: ["Next.js", "Vercel", "Design sob medida", "Otimização para Google", "Contato por WhatsApp"],
+    resultado:
+      "O site está no ar em mundodasa.com.br, indexado no Google e carregando rápido no celular — que é de onde vem a maior parte dos visitantes. É o projeto que mostra o padrão de entrega da Origem Digital.",
+  },// <- adicione novos cases aqui
 ];
