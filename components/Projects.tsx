@@ -49,13 +49,22 @@ export default function Projects() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-cyan-neon transition hover:bg-white/5"
-              >
+                            >
                 Ver site ao vivo
               </a>
             </div>
           </div>
         </Reveal>
+
+        <Reveal delay={220}>
+          <div className="mt-10 text-center">
+            <Link
+              href="/cases"
+              className="text-sm font-semibold text-cyan-neon hover:underline"
+            >
+              Ver cases completos — problema, solução e resultado →
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
-  );
-}
