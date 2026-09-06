@@ -4,14 +4,13 @@ import SocialProof from "@/components/SocialProof";
 import About from "@/components/About";
 import Statement from "@/components/Statement";
 import SaleFlow from "@/components/SaleFlow";
-import Comparison from "@/components/Comparison";
-import Services from "@/components/Services";
 import AgentDemo from "@/components/AgentDemo";
-import LossCalculator from "@/components/LossCalculator";
+import Comparison from "@/components/Comparison";
 import Offer from "@/components/Offer";
 import Guarantee from "@/components/Guarantee";
 import HowItWorks from "@/components/HowItWorks";
-import Showcase from "@/components/Showcase";
+import Services from "@/components/Services";
+import LossCalculator from "@/components/LossCalculator";
 import Projects from "@/components/Projects";
 import Differentials from "@/components/Differentials";
 import DiagnosticQuiz from "@/components/DiagnosticQuiz";
@@ -29,15 +28,18 @@ export default function Home() {
       <About />
       <Statement />
       <SaleFlow />
-      <Comparison />
-      <Services />
+
+      {/* Bloco do produto: vê funcionando, entende por que é diferente,
+          vê o preço, a garantia e o que acontece depois de contratar. */}
       <AgentDemo />
-      <LossCalculator />
+      <Comparison />
       <Offer />
       <Guarantee />
       <HowItWorks />
-      <Showcase />
-            <Projects />
+
+      <Services />
+      <LossCalculator />
+      <Projects />
       <Differentials />
       <DiagnosticQuiz />
       <Technologies />
