@@ -1,29 +1,27 @@
 import Reveal from "./Reveal";
 
-const techs = [
-  "OpenAI Chat Model",
-  "n8n",
-  "WhatsApp Business",
-  "Vercel",
-  "Cloudfy",
-  "APIs e Automações",
+const capacidades = [
+  "Inteligência artificial de última geração",
+  "Automação de processos",
+  "Atendimento integrado ao WhatsApp",
+  "Infraestrutura em nuvem global",
 ];
 
 export default function Technologies() {
   return (
-    <section aria-label="Tecnologias" className="relative py-16">
-      <div className="mx-auto max-w-5xl px-6 text-center">
+    <section aria-label="Tecnologia" className="relative py-12">
+      <div className="mx-auto max-w-4xl px-6 text-center">
         <Reveal>
-          <p className="text-xs font-medium uppercase tracking-[0.35em] text-slate-400">
-            Construído com tecnologia de ponta
+          <p className="text-[0.65rem] font-medium uppercase tracking-[0.35em] text-slate-500">
+            Tecnologia por trás
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            {techs.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 font-display text-sm text-slate-300 backdrop-blur-md transition-colors hover:border-cyan-neon/40 hover:text-cyan-neon"
-              >
-                {t}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+            {capacidades.map((c, i) => (
+              <span key={c} className="flex items-center gap-3">
+                <span className="text-xs text-slate-500">{c}</span>
+                {i < capacidades.length - 1 && (
+                  <span aria-hidden className="text-slate-700">•</span>
+                )}
               </span>
             ))}
           </div>
