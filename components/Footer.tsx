@@ -56,7 +56,9 @@ export default function Footer() {
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-300">
-                      <ul className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
+            Legal
+          </p>
+          <ul className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
             <li>
               <Link href="/termos" className="hover:text-cyan-neon">
                 Termos de uso e contratação
@@ -77,3 +79,13 @@ export default function Footer() {
               usados apenas para responder ao seu contato.
             </li>
           </ul>
+        </div>
+      </div>
+
+      <p className="mt-12 text-center text-xs text-slate-500">
+        © {new Date().getFullYear()} Origem Digital. Todos os direitos
+        reservados.
+      </p>
+    </footer>
+  );
+}
