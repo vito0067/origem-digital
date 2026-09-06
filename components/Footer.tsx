@@ -56,26 +56,24 @@ export default function Footer() {
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-300">
-            Legal
-          </p>
-          <ul className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
+                      <ul className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
+            <li>
+              <Link href="/termos" className="hover:text-cyan-neon">
+                Termos de uso e contratação
+              </Link>
+            </li>
             <li>
               <Link href="/privacidade" className="hover:text-cyan-neon">
                 Política de privacidade
               </Link>
+            </li>
+            <li className="mt-2 text-xs leading-relaxed text-slate-500">
+              Origem Digital — São Paulo/SP.
+              <br />
+              Responsável: Samantha Mañe Carrieri Portella Scaglione.
             </li>
             <li className="text-xs leading-relaxed text-slate-500">
               Seus dados são tratados conforme a LGPD (Lei 13.709/2018) e
               usados apenas para responder ao seu contato.
             </li>
           </ul>
-        </div>
-      </div>
-
-      <p className="mt-12 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} Origem Digital. Todos os direitos
-        reservados.
-      </p>
-    </footer>
-  );
-}
