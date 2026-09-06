@@ -27,7 +27,7 @@ export default function Termos() {
         <Bloco titulo="1. Quem presta o serviço">
           <p>
             A Origem Digital é uma operação de tecnologia sediada em São Paulo/SP,
-            sob responsabilidade de SEU NOME COMPLETO AQUI. Contato oficial:
+            sob responsabilidade de Samantha Mañe Carrieri Portella Scaglione. Contato oficial:
             origemdigital00@gmail.com e WhatsApp (11) 93929-9209.
           </p>
         </Bloco>
