@@ -35,20 +35,12 @@ export default function CasePage({ params }: { params: { slug: string } }) {
       </h1>
 
       <div className="mt-10 flex flex-col gap-5">
+        {/* Saiu o bloco "Tecnologias utilizadas". Next.js, Vercel e n8n
+            não dizem nada para o dono de clínica que está lendo o case —
+            e o bloco ficava exatamente entre a solução e o resultado, que
+            é a parte que ele veio ver. */}
         <Block label="O problema">{c.problema}</Block>
         <Block label="A solução">{c.solucao}</Block>
-        <Block label="Tecnologias utilizadas">
-          <div className="flex flex-wrap gap-2">
-            {c.tecnologias.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs text-slate-300"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </Block>
         <Block label="O resultado">{c.resultado}</Block>
       </div>
 

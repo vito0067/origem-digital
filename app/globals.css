@@ -4,6 +4,9 @@
 
 :root {
   color-scheme: dark;
+  /* Altura da barra fixa do topo. Usada pelo scroll-margin das âncoras
+     para o título da seção não ficar escondido atrás do menu. */
+  --topo: 76px;
 }
 
 html {
@@ -14,6 +17,11 @@ body {
   background-color: #0b0d17;
   color: #ffffff;
   overflow-x: hidden;
+}
+
+/* Âncora do menu para no lugar certo, e não colada embaixo da barra. */
+section[id] {
+  scroll-margin-top: var(--topo);
 }
 
 ::selection {
@@ -47,28 +55,372 @@ body {
     color: transparent;
   }
 
-  /* Grid de chão neon, ecoando a foto-inicial */
+  /* Grid de chão neon, ecoando a foto-inicial.
+     A posição vertical vem de --grade-y, que o ParallaxGrade escreve
+     conforme a pessoa rola: a grade anda mais devagar do que o
+     conteúdo e o fundo ganha profundidade, como se estivesse atrás. */
   .neon-grid {
     background-image:
       linear-gradient(rgba(168, 85, 247, 0.10) 1px, transparent 1px),
       linear-gradient(90deg, rgba(168, 85, 247, 0.10) 1px, transparent 1px);
     background-size: 56px 56px;
+    background-position: 0 var(--grade-y, 0px);
     mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%);
   }
 }
 
-/* Respeito total a usuários com movimento reduzido */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@layer utilities {
+  /* Quebra o título em linhas de largura parecida, em vez de deixar
+     uma palavra órfã na última linha. É detalhe, e é o que separa
+     tipografia caprichada de texto jogado. */
+  .equilibrado {
+    text-wrap: balance;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+
+  /* Número gigante de fundo, atrás do conteúdo, tipo revista. */
+  .numero-fantasma {
+    @apply pointer-events-none select-none font-display font-bold leading-none text-white/[0.04];
   }
+
+  /* Coluna que fica presa enquanto a coluna vizinha rola.
+     Só a partir do desktop: no celular, empilhar é o certo. */
+  .coluna-presa {
+    @apply lg:sticky;
+    top: calc(var(--topo) + 2rem);
+  }
+}
+
+/* ============================================================
+   Traço que se desenha da esquerda para a direita
+   Acompanha o título da seção. A classe `desenhado` é ligada pelo
+   Reveal quando a seção entra na tela.
+   ============================================================ */
+.regua-neon {
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, #00f0ff, rgba(168, 85, 247, 0.6), transparent);
+}
+.desenhado .regua-neon {
+  animation: drawLine 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+@keyframes drawLine {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================================
+   Brilho que segue o cursor dentro do cartão
+   As coordenadas --mx/--my são escritas pelo componente Spotlight.
+   Sem JavaScript o cartão continua normal, só sem o brilho.
+   ============================================================ */
+.holofote {
+  position: relative;
+}
+.holofote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 240, 255, 0.12),
+    transparent 62%
+  );
+  pointer-events: none;
+}
+.holofote:hover::before {
+  opacity: 1;
+}
+
+/* ============================================================
+   Faixa infinita (marquee)
+   O conteúdo é duplicado no HTML; a faixa anda metade da largura
+   e reinicia sem emenda visível.
+   ============================================================ */
+.faixa {
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.faixa:hover .faixa-trilho {
+  animation-play-state: paused;
+}
+
+/* ============================================================
+   Trilha horizontal do Sistema Origem
+   Os cartões andam para o lado enquanto a página rola para baixo.
+   O deslocamento vem de --avanco, escrito pelo componente.
+   ============================================================ */
+.trilha {
+  will-change: transform;
+  transform: translate3d(calc(var(--avanco, 0) * -1px), 0, 0);
+}
+
+/* ============================================================
+   Brilho que atravessa o botão quando o mouse chega
+   Uma faixa clara inclinada corre de um lado ao outro. É o acabamento
+   que faz o botão parecer feito de material, e não de cor chapada.
+   ============================================================ */
+.brilho-passa {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.brilho-passa::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  z-index: 1;
+  pointer-events: none;
+  transform: skewX(-18deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
+  transition: left 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.brilho-passa:hover::after {
+  left: 115%;
+}
+
+/* ============================================================
+   Sublinhado que se desenha da esquerda para a direita
+   Não é `text-decoration`: é um traço em degradê que cresce. Some no
+   mesmo caminho quando o mouse sai.
+   ============================================================ */
+.sublinha {
+  background-image: linear-gradient(90deg, #00f0ff, #a855f7);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sublinha:hover {
+  background-size: 100% 1px;
+}
+
+/* ============================================================
+   Cartão que inclina seguindo o cursor
+   Os ângulos vêm de --girox / --giroy, escritos pelo Holofote no
+   mesmo movimento de mouse que já alimenta o brilho — ou seja, o
+   efeito não custa um ouvinte a mais.
+   ============================================================ */
+.inclina {
+  transform: perspective(900px) rotateX(var(--girox, 0deg))
+    rotateY(var(--giroy, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* ============================================================
+   Sanfona do FAQ
+   O truque é a linha de grade indo de 0fr a 1fr: dá para animar,
+   enquanto `height: auto` não dá. O filho precisa de overflow
+   escondido para não vazar enquanto o espaço ainda está fechando.
+   ============================================================ */
+.sanfona {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sanfona-aberta {
+  grid-template-rows: 1fr;
+}
+.sanfona > * {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Ponto de luz que acompanha o cursor
+   O tamanho e o brilho vêm do atributo data-estado, escrito pelo
+   CursorGlobal. Fica tudo no CSS para a troca de estado não custar
+   nada de JavaScript.
+   ============================================================ */
+.cursor-anel {
+  width: 30px;
+  height: 30px;
+  opacity: 0.55;
+  transition: width 0.28s ease, height 0.28s ease, opacity 0.28s ease,
+    background-color 0.28s ease, border-color 0.28s ease;
+  will-change: transform;
+}
+.cursor-anel[data-estado="clicavel"] {
+  width: 52px;
+  height: 52px;
+  opacity: 1;
+  background-color: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.85);
+}
+.cursor-anel[data-estado="escondido"],
+.cursor-miolo[data-estado="escondido"] {
+  opacity: 0;
+}
+.cursor-miolo {
+  opacity: 0.9;
+  transition: opacity 0.28s ease;
+  will-change: transform;
+}
+
+/* ============================================================
+   Cor do brilho de fundo mudando conforme a pessoa desce
+   --descida vai de 0 (topo) a 1 (fim da página), escrito pelo
+   ParallaxGrade. As seções leem daqui e trocam de ciano para violeta
+   sem que ninguém perceba a troca acontecendo.
+   ============================================================ */
+.brilho-descida {
+  /* Reserva para navegador antigo que não saiba misturar cor: fica no
+     ciano, que é a cor do topo. Nada quebra, só não muda. */
+  background-color: rgba(0, 240, 255, 0.1);
+  /* A mistura preserva a transparência das duas pontas — por isso as
+     cores vão em rgba, e não em código hexadecimal. Sem isso o brilho
+     viraria um borrão sólido em vez de uma luz. */
+  background-color: color-mix(
+    in oklab,
+    rgba(0, 240, 255, 0.1) calc((1 - var(--descida, 0)) * 100%),
+    rgba(168, 85, 247, 0.13)
+  );
+}
+
+/* ============================================================
+   Celular em três dimensões
+   A moldura gira seguindo o cursor, e as camadas de dentro ficam
+   empurradas para a frente — é o afastamento entre elas que cria a
+   sensação de espessura, e não um desenho de sombra.
+
+   Feito com transformação de CSS em vez de um modelo 3D de verdade:
+   um modelo custaria uns 150 KB de download e um segundo carregador,
+   para um objeto que só precisa inclinar de leve. Aqui é o mesmo
+   efeito por zero byte.
+   ============================================================ */
+.palco-celular {
+  perspective: 1100px;
+  perspective-origin: 50% 40%;
+}
+.celular-3d {
+  transform: rotateX(var(--girox, 0deg)) rotateY(var(--giroy, 0deg))
+    translateZ(0);
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+/* a tela flutua à frente da moldura */
+.celular-tela {
+  transform: translateZ(18px);
+}
+/* o brilho acompanha a inclinação e denuncia a face virada para a luz */
+.celular-luz {
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0) 45%
+  );
+  opacity: calc(0.35 + var(--luz, 0) * 0.65);
+  transition: opacity 0.4s ease;
+}
+
+/* ============================================================
+   Pulso lento de respiração — usado nos selos das garantias
+   ============================================================ */
+@keyframes respira {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.18);
+  }
+  50% {
+    transform: scale(1.045);
+    box-shadow: 0 0 34px rgba(0, 240, 255, 0.34);
+  }
+}
+.respira {
+  animation: respira 4.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   Abertura da primeira visita
+   ============================================================ */
+@keyframes marcaEntra {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+@keyframes enchendo {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Balão de mensagem entrando na conversa da Aurora */
+@keyframes balaoEntra {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Contorno que se desenha sozinho — usado nos escudos das garantias.
+   O traço tem 100 de comprimento e começa todo "fora" do desenho;
+   a animação puxa ele de volta para dentro. */
+@keyframes desenhaTraco {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.escudo-traco {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+.desenhado .escudo-traco {
+  animation: desenhaTraco 1.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.desenhado .escudo-traco-2 {
+  animation-delay: 0.55s;
+}
+
+/* Print do cliente passeando devagar dentro da moldura.
+   O quanto percorrer vem de --percurso, medido pelo componente.
+   As pausas nas pontas (0–8% e 42–50%) existem para o topo e o rodapé
+   do site do cliente ficarem um instante parados, legíveis. */
+@keyframes passeiaPrint {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  42%,
+  50% {
+    transform: translateY(calc(var(--percurso, 0px) * -1));
+  }
+  92%,
+  100% {
+    transform: translateY(0);
+  }
+}
+/* Pousar o mouse congela o passeio: quem quer olhar um pedaço com
+   calma só precisa parar em cima. */
+.group\/print:hover [style*="passeiaPrint"] {
+  animation-play-state: paused;
 }
 
 /* Fluxo de venda animado (SaleFlow) */
@@ -84,6 +436,30 @@ body {
 }
 .flow-node { animation: flowNodeOn 6.6s ease-in-out infinite; }
 .flow-arrow { animation: flowArrowOn 6.6s ease-in-out infinite; }
+
+/* Respeito total a usuários com movimento reduzido.
+   Fica por último para vencer as regras acima. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
   .flow-node, .flow-arrow { animation: none !important; }
+  .regua-neon { transform: scaleX(1); }
+  .trilha { transform: none; }
+  /* os contornos aparecem prontos, em vez de ficarem invisíveis */
+  .escudo-traco { stroke-dashoffset: 0; }
+  .respira { animation: none !important; }
+  .inclina { transform: none !important; }
+  .celular-3d { transform: none !important; }
+  .brilho-passa::after { display: none; }
+  /* a sanfona abre e fecha na hora, sem deslizar */
+  .sanfona { transition: none; }
+  .neon-grid { background-position: 0 0 !important; }
 }

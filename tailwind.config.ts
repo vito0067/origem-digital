@@ -9,6 +9,9 @@ const config: Config = {
     extend: {
       colors: {
         abyss: "#0B0D17",
+        // Um degrau acima do abyss. Serve para separar uma faixa da outra
+        // sem desenhar borda: o olho percebe a mudança de seção sozinho.
+        surface: "#0E1120",
         cyan: {
           neon: "#00F0FF",
         },
@@ -38,11 +41,25 @@ const config: Config = {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(100%)" },
         },
+        // Faixa infinita que desliza da direita para a esquerda.
+        // Metade da largura porque o conteúdo é duplicado no HTML —
+        // quando a primeira cópia sai, a segunda já está no lugar dela.
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        // Traço que se desenha da esquerda para a direita sob os títulos.
+        drawLine: {
+          "0%": { transform: "scaleX(0)" },
+          "100%": { transform: "scaleX(1)" },
+        },
       },
       animation: {
         "pulse-glow": "pulseGlow 2.6s ease-in-out infinite",
         "float-y": "floatY 6s ease-in-out infinite",
         "scanline": "scanline 7s linear infinite",
+        "marquee": "marquee 38s linear infinite",
+        "draw-line": "drawLine 1.1s cubic-bezier(.22,1,.36,1) forwards",
       },
     },
   },

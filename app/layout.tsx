@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import SmoothScroll from "@/components/SmoothScroll";
+import Medicao from "@/components/Medicao";
+import AvisoCookies from "@/components/AvisoCookies";
+import ParallaxGrade from "@/components/ParallaxGrade";
+import TransicaoPagina from "@/components/TransicaoPagina";
+import CursorGlobal from "@/components/CursorGlobal";
+import Abertura from "@/components/Abertura";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -19,6 +26,10 @@ const description =
   "Pare de perder clientes por falta de site ou demora no WhatsApp. Sites profissionais e atendimento automatizado com IA 24/7, entregues em 1 a 2 semanas. Diagnóstico gratuito.";
 
 export const metadata: Metadata = {
+  // Endereço de base do site. Sem ele, a imagem de compartilhamento é
+  // anunciada com caminho relativo, e WhatsApp, Instagram e LinkedIn
+  // não conseguem buscar a imagem — o link volta a aparecer sem figura.
+  metadataBase: new URL("https://origemdigitalsite.com.br"),
   title,
   description,
   keywords: [
@@ -29,13 +40,6 @@ export const metadata: Metadata = {
     "presença digital",
   ],
   openGraph: {
-    url: "https://origemdigitalsite.com.br",
-    images: [
-      {
-        url: "https://origemdigitalsite.com.br/media/frame-inicial.png",
-        alt: "Origem Digital — sites profissionais e agentes de IA no WhatsApp",
-      },
-    ],
     title,
     description,
     locale: "pt_BR",
@@ -43,7 +47,6 @@ export const metadata: Metadata = {
     siteName: "Origem Digital",
   },
   twitter: {
-    images: ["https://origemdigitalsite.com.br/media/frame-inicial.png"],
     card: "summary_large_image",
     title,
     description,
@@ -82,7 +85,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
+
+        {/* A medição só entra depois de a pessoa permitir no aviso
+            abaixo. Sem permissão, o código nem é carregado. */}
+        <Medicao />
+        <AvisoCookies />
+
+        <ParallaxGrade />
+        <TransicaoPagina />
+        <CursorGlobal />
+        <Abertura />
       </body>
     </html>
   );

@@ -14,8 +14,11 @@ export default function NeonButton({
   variant = "primary",
   external = false,
 }: Props) {
+  // `brilho-passa` faz uma faixa clara atravessar o botão quando o
+  // mouse chega. É só CSS, num pseudo-elemento — não acrescenta
+  // marcação nem ouvinte nenhum.
   const base =
-    "inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-sm font-semibold tracking-wide transition-transform duration-200 hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-neon";
+    "brilho-passa inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-sm font-semibold tracking-wide transition-transform duration-200 hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-neon";
 
   const styles =
     variant === "primary"
