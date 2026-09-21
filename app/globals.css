@@ -11,6 +11,13 @@
 
 html {
   scroll-behavior: smooth;
+  /* Vários blocos entram deslizando de lado (de "direita", 28px). No
+     instante antes de entrarem, eles passam da borda da tela. O body
+     já esconde esse excesso, mas alguns navegadores de celular ainda
+     deixam arrastar a página para o lado por causa dele. `clip` fecha
+     isso sem criar barra de rolagem e sem quebrar as colunas presas
+     (que param de funcionar com `hidden` aqui). */
+  overflow-x: clip;
 }
 
 body {
