@@ -72,8 +72,16 @@ export default function Marca({
         className={emLinha ? "h-8 w-auto" : "h-12 w-auto"}
       />
 
+      {/* No formato em linha (a barra do topo), o nome só aparece a
+          partir de 640px de largura. Em celular, a barra tem que caber
+          símbolo, botão de diagnóstico e menu — os três juntos com o
+          nome por extenso não cabem, e o botão acabava por cima do
+          nome. O símbolo sozinho já identifica; o nome completo aparece
+          na abertura, no rodapé e na imagem de compartilhamento. */}
       <span
-        className={`flex flex-col ${emLinha ? "items-start" : "items-center"}`}
+        className={`flex-col ${
+          emLinha ? "hidden items-start sm:flex" : "flex items-center"
+        }`}
       >
         <span
           className={`whitespace-nowrap font-display font-bold leading-none tracking-[0.06em] ${
