@@ -47,7 +47,7 @@ function Tela({
   tom: "frio" | "quente";
 }) {
   return (
-    <div className="flex h-full w-full flex-col bg-[#0b141a]">
+    <div className="flex min-h-full w-full flex-col bg-[#0b141a]">
       <div
         className={`flex items-center justify-between border-b border-white/[0.06] px-5 py-3 ${
           tom === "quente" ? "bg-[#1f2c34]" : "bg-[#1a1a1f]"
@@ -121,11 +121,22 @@ export default function AntesDepois() {
 
         <div
           ref={caixa}
-          className="relative mt-8 select-none overflow-hidden rounded-2xl border border-white/10"
-          style={{ aspectRatio: "16 / 11" }}
+          className="relative mt-8 flex select-none flex-col overflow-hidden rounded-2xl border border-white/10 sm:min-h-[420px]"
         >
-          {/* Lado "com a Aurora" ocupa o fundo inteiro */}
-          <div className="absolute inset-0">
+          {/* Lado "com a Aurora" fica no fluxo normal da página, e é ELE
+              que define a altura da caixa.
+
+              Antes a caixa tinha proporção fixa (16 por 11). No
+              computador sobrava espaço; no celular estreito, as quatro
+              mensagens precisavam de mais altura do que a proporção
+              dava, e as últimas eram cortadas — a conversa da Aurora
+              aparecia pela metade. Com a altura vindo do próprio
+              conteúdo, a caixa cresce o quanto precisar, em qualquer
+              largura e com qualquer tamanho de letra que o aparelho use.
+
+              Ele é o mais alto dos dois lados, por isso é ele que manda;
+              o lado "sem agente" se estica para a mesma altura. */}
+          <div className="relative flex flex-1">
             <Tela falas={COM} titulo="Com a Aurora" tom="quente" />
           </div>
 
