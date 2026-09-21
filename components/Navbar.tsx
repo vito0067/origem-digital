@@ -87,11 +87,17 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
+      {/* No celular a barra aperta: margem lateral menor e espaço
+          garantido entre as peças. Samsung com "zoom de tela" ligado
+          deixa a página com uns 320px de largura útil — nessa largura,
+          marca completa + botão + menu não cabiam, e o botão passava
+          por cima do nome "ORIGEM DIGITAL". */}
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3.5 sm:px-6">
         <Link
           href="#"
           aria-label="Origem Digital — início"
           onClick={() => setAberto(false)}
+          className="shrink-0"
         >
           <Marca formato="linha" />
         </Link>
@@ -119,7 +125,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           {/* O ímã fica só neste botão, e não em todos os links do
               menu. Cada Magnetic mantém o próprio laço de animação
               rodando; colocar em cinco links custaria cinco laços para
@@ -130,9 +136,15 @@ export default function Navbar() {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="brilho-passa inline-block rounded-lg border border-cyan-neon/40 bg-cyan-neon/10 px-4 py-2 text-xs font-medium text-cyan-neon backdrop-blur-md transition-shadow hover:shadow-neon-cyan sm:text-sm"
+              // whitespace-nowrap: o botão nunca quebra em duas linhas
+              // (no Samsung ele virava um bloco alto que invadia a marca)
+              className="brilho-passa inline-block whitespace-nowrap rounded-lg border border-cyan-neon/40 bg-cyan-neon/10 px-3 py-2 text-xs font-medium text-cyan-neon backdrop-blur-md transition-shadow hover:shadow-neon-cyan sm:px-4 sm:text-sm"
             >
-              Diagnóstico gratuito
+              Diagnóstico
+              {/* "gratuito" só entra quando cabe. Abaixo de 400px, o
+                  botão diz só "Diagnóstico" — a palavra "gratuito" já
+                  aparece grande no botão principal da capa, logo abaixo. */}
+              <span className="hidden min-[400px]:inline"> gratuito</span>
             </Link>
           </Magnetic>
 
