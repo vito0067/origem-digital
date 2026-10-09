@@ -37,7 +37,7 @@ export default function Privacidade() {
             A Origem Digital respeita a sua privacidade e trata dados pessoais
             em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº
             13.709/2018). Contato para qualquer assunto de privacidade:
-            origemdigital00@gmail.com.
+            contato@origemdigitalsite.com.br.
           </p>
         </Bloco>
 
@@ -113,7 +113,7 @@ export default function Privacidade() {
           <p>Basta fazer o pedido por um destes canais:</p>
           <p>
             <strong className="text-slate-300">E-mail:</strong>{" "}
-            origemdigital00@gmail.com, com o assunto &quot;Exclusão de
+            contato@origemdigitalsite.com.br, com o assunto &quot;Exclusão de
             dados&quot; e o seu número de WhatsApp ou nome de usuário do
             Instagram.
           </p>
