@@ -37,8 +37,8 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="mailto:origemdigital00@gmail.com" className="sublinha hover:text-cyan-neon">
-                origemdigital00@gmail.com
+              <a href="mailto:contato@origemdigitalsite.com.br" className="sublinha hover:text-cyan-neon">
+                contato@origemdigitalsite.com.br
               </a>
             </li>
             <li>
