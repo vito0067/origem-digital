@@ -28,7 +28,7 @@ const secoes: Secao[] = [
   {
     titulo: "1. Quem presta o serviço",
     paragrafos: [
-      "A Origem Digital é uma operação de tecnologia sediada em São Paulo/SP, sob responsabilidade de Samantha Mañe Carrieri Portella Scaglione. Contato oficial: origemdigital00@gmail.com e WhatsApp (11) 93929-9209.",
+      "A Origem Digital é uma operação de tecnologia sediada em São Paulo/SP, sob responsabilidade de Samantha Mañe Carrieri Portella Scaglione. Contato oficial: contato@origemdigitalsite.com.br e WhatsApp (11) 93929-9209.",
     ],
   },
   {
