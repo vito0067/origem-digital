@@ -65,7 +65,7 @@ const jsonLd = {
     addressRegion: "SP",
     addressCountry: "BR",
   },
-  email: "origemdigital00@gmail.com",
+  email: "contato@origemdigitalsite.com.br",
   telephone: "+55-11-93929-9209",
   sameAs: ["https://instagram.com/origem__digital"],
   makesOffer: [
