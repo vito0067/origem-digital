@@ -28,18 +28,13 @@ const config: Config = {
         "neon-violet": "0 0 24px rgba(168, 85, 247, 0.35), 0 0 64px rgba(168, 85, 247, 0.15)",
         "glass": "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.45)",
       },
+      // Saíram daqui na limpeza de animações (outubro/2026): o brilho
+      // que pulsava sem parar nos botões principais (pulseGlow) e a
+      // faixa de luz que varria a capa de cima a baixo (scanline).
       keyframes: {
-        pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(0,240,255,0.35), 0 0 48px rgba(0,240,255,0.12)" },
-          "50%": { boxShadow: "0 0 32px rgba(0,240,255,0.65), 0 0 96px rgba(0,240,255,0.28)" },
-        },
         floatY: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
-        },
-        scanline: {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(100%)" },
         },
         // Faixa infinita que desliza da direita para a esquerda.
         // Metade da largura porque o conteúdo é duplicado no HTML —
@@ -55,9 +50,7 @@ const config: Config = {
         },
       },
       animation: {
-        "pulse-glow": "pulseGlow 2.6s ease-in-out infinite",
         "float-y": "floatY 6s ease-in-out infinite",
-        "scanline": "scanline 7s linear infinite",
         "marquee": "marquee 38s linear infinite",
         "draw-line": "drawLine 1.1s cubic-bezier(.22,1,.36,1) forwards",
       },

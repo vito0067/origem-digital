@@ -1,0 +1,62 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { cases } from "@/lib/cases";
+
+export function generateStaticParams() {
+  return cases.map((c) => ({ slug: c.slug }));
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const c = cases.find((x) => x.slug === params.slug);
+  return { title: c ? `${c.titulo} — Case Origem Digital` : "Case" };
+}
+
+const Block = ({ label, children }: { label: string; children: React.ReactNode }) => (
+  <div className="glass-card p-7">
+    <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan-neon">
+      {label}
+    </p>
+    <div className="mt-3 text-sm leading-relaxed text-slate-300">{children}</div>
+  </div>
+);
+
+export default function CasePage({ params }: { params: { slug: string } }) {
+  const c = cases.find((x) => x.slug === params.slug);
+  if (!c) notFound();
+
+  return (
+    <main className="mx-auto max-w-3xl px-6 py-28">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-neon">
+        {c.segmento}
+      </p>
+      <h1 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+        {c.titulo}
+      </h1>
+
+      <div className="mt-10 flex flex-col gap-5">
+        {/* Saiu o bloco "Tecnologias utilizadas". Next.js, Vercel e n8n
+            não dizem nada para o dono de clínica que está lendo o case —
+            e o bloco ficava exatamente entre a solução e o resultado, que
+            é a parte que ele veio ver. */}
+        <Block label="O problema">{c.problema}</Block>
+        <Block label="A solução">{c.solucao}</Block>
+        <Block label="O resultado">{c.resultado}</Block>
+      </div>
+
+      <div className="mt-10 flex flex-wrap items-center gap-6">
+        <a
+          href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Vi%20o%20case%20no%20site%20e%20quero%20um%20projeto%20assim."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-xl bg-cyan-neon px-7 py-3.5 text-sm font-semibold text-abyss shadow-neon-cyan transition-[transform,box-shadow] hover:scale-[1.03] hover:shadow-[0_0_32px_rgba(0,240,255,0.6),0_0_96px_rgba(0,240,255,0.25)]"
+        >
+          Quero um projeto assim
+        </a>
+        <Link href="/cases" className="text-sm text-cyan-neon hover:underline">
+          ← Todos os cases
+        </Link>
+      </div>
+    </main>
+  );
+}
