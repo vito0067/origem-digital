@@ -126,15 +126,20 @@ export default function DiagnosticQuiz() {
           {/* ---- Perguntas ---- */}
           <div className="lg:col-span-7">
             <ol className="flex flex-col gap-3">
+              {/* O Reveal é o próprio <li> (como="li"): um <div> entre o
+                  <ol> e o item quebrava a lista para leitor de tela. */}
               {perguntas.map((p, i) => (
-                <Reveal key={p} de="esquerda" delay={i * 70}>
-                  <li
-                    className={`glass-card flex flex-col gap-4 p-5 transition-colors duration-300 sm:flex-row sm:items-center sm:justify-between ${
-                      respostas[i] !== null
-                        ? "border-white/[0.16]"
-                        : "border-white/10"
-                    }`}
-                  >
+                <Reveal
+                  key={p}
+                  como="li"
+                  de="esquerda"
+                  delay={i * 70}
+                  className={`glass-card flex flex-col gap-4 p-5 transition-colors duration-300 sm:flex-row sm:items-center sm:justify-between ${
+                    respostas[i] !== null
+                      ? "border-white/[0.16]"
+                      : "border-white/10"
+                  }`}
+                >
                     <p className="flex gap-3 text-sm text-slate-200">
                       <span className="font-display font-bold text-gradient-neon">
                         {i + 1}.
@@ -160,7 +165,6 @@ export default function DiagnosticQuiz() {
                         </button>
                       ))}
                     </div>
-                  </li>
                 </Reveal>
               ))}
             </ol>

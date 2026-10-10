@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -18,6 +18,25 @@ type Props = {
   /** Distância percorrida, em pixels. */
   distancia?: number;
   className?: string;
+  /**
+   * NA CARGA: entra assim que a página aparece, por CSS, sem esperar o
+   * JavaScript. Use SÓ no que já está na primeira tela (o topo da capa).
+   *
+   * Por quê: no modo normal, o bloco sai do servidor invisível e só
+   * aparece depois que o JavaScript carrega e percebe que ele está na
+   * tela. Num celular comum isso leva 2 a 4 segundos — a capa ficava
+   * com o título pela metade e o parágrafo em branco esse tempo todo.
+   * O Lighthouse media isso como "maior conteúdo da tela em 4,9 s".
+   * Com a animação no CSS, ela começa no primeiro instante, e o texto
+   * aparece mesmo se o JavaScript falhar.
+   */
+  naCarga?: boolean;
+  /**
+   * A tag do bloco. Use "li" quando o Reveal for um item de lista: um
+   * <div> entre o <ul> e o <li> quebra a lista para leitor de tela (o
+   * Lighthouse acusava isso como erro de acessibilidade).
+   */
+  como?: "div" | "li";
 };
 
 const DESLOCAMENTO = {
@@ -25,6 +44,14 @@ const DESLOCAMENTO = {
   esquerda: (d: number) => `translate3d(-${d}px, 0, 0)`,
   direita: (d: number) => `translate3d(${d}px, 0, 0)`,
   parado: () => "none",
+};
+
+/** O mesmo deslocamento, em variáveis, para a animação de CSS da carga. */
+const PONTO_DE_PARTIDA = {
+  baixo: (d: number) => ({ "--de-x": "0px", "--de-y": `${d}px` }),
+  esquerda: (d: number) => ({ "--de-x": `-${d}px`, "--de-y": "0px" }),
+  direita: (d: number) => ({ "--de-x": `${d}px`, "--de-y": "0px" }),
+  parado: () => ({ "--de-x": "0px", "--de-y": "0px" }),
 };
 
 /**
@@ -41,7 +68,9 @@ const DESLOCAMENTO = {
  * mas some do caminho da leitura — e desfoque animado ainda custa caro
  * para celular simples.
  *
- * Para quem pediu menos movimento no sistema, aparece tudo pronto.
+ * Para quem pediu menos movimento no sistema, aparece tudo pronto. Sem
+ * JavaScript, uma regra em <noscript> no layout mostra tudo também
+ * (o atributo `data-reveal` é o gancho dela).
  */
 export default function Reveal({
   children,
@@ -49,11 +78,14 @@ export default function Reveal({
   de = "baixo",
   distancia = 18,
   className = "",
+  naCarga = false,
+  como = "div",
 }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [visivel, setVisivel] = useState(false);
 
   useEffect(() => {
+    if (naCarga) return; // quem entra na carga não precisa de vigia
     const el = ref.current;
     if (!el) return;
 
@@ -75,11 +107,31 @@ export default function Reveal({
     );
     vigia.observe(el);
     return () => vigia.disconnect();
-  }, []);
+  }, [naCarga]);
+
+  const Tag = como;
+
+  if (naCarga) {
+    return (
+      <Tag
+        ref={ref as never}
+        className={`${className} desenhado`}
+        style={
+          {
+            ...PONTO_DE_PARTIDA[de](distancia),
+            animation: `revelaNaCarga .7s cubic-bezier(.22,1,.36,1) ${delay}ms both`,
+          } as CSSProperties
+        }
+      >
+        {children}
+      </Tag>
+    );
+  }
 
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={ref as never}
+      data-reveal
       className={`${className} ${visivel ? "desenhado" : ""}`}
       style={{
         transform: visivel ? "none" : DESLOCAMENTO[de](distancia),
@@ -90,6 +142,6 @@ export default function Reveal({
       }}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

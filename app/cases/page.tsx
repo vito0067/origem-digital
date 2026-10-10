@@ -4,7 +4,10 @@ import { cases } from "@/lib/cases";
 
 export const metadata: Metadata = {
   title: "Cases — Origem Digital",
-  description: "Projetos reais: problema, solução, tecnologias e resultado.",
+  // "tecnologias" saiu da descrição: o bloco de tecnologias foi tirado
+  // das páginas de case, e a descrição prometia algo que não existe mais.
+  description: "Projetos reais da Origem Digital: o problema, a solução e o resultado.",
+  alternates: { canonical: "/cases" },
 };
 
 export default function CasesIndex() {

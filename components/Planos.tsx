@@ -96,7 +96,13 @@ const BRILHO = {
 };
 
 export default function Planos() {
-  const [mes, setMes] = useState("este mês");
+  /**
+   * O nome do mês, calculado no aparelho da pessoa. Antes de calcular
+   * (e na versão que o servidor entrega e o Google lê), fica vazio e o
+   * texto usa a forma neutra — "Oferta do mês". Antes o valor provisório
+   * era "este mês", e saía "Oferta de este mês" e "condição de este mês".
+   */
+  const [mes, setMes] = useState("");
 
   useEffect(() => {
     const m = new Date().toLocaleDateString("pt-BR", { month: "long" });
@@ -232,7 +238,7 @@ export default function Planos() {
               <div className="md:col-span-3">
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="rounded-full border border-cyan-neon/60 bg-cyan-neon/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-cyan-neon">
-                    Oferta de {mes}
+                    {mes ? `Oferta de ${mes}` : "Oferta do mês"}
                   </span>
                   <span className="text-[11px] font-semibold uppercase tracking-widest text-slate-500">
                     Melhor custo-benefício
@@ -304,7 +310,9 @@ export default function Planos() {
                     variant="primary"
                     external
                   >
-                    Garantir minha condição de {mes}
+                    {mes
+                      ? `Garantir minha condição de ${mes}`
+                      : "Garantir a condição deste mês"}
                   </NeonButton>
                 </div>
                 <p className="mt-4 text-xs text-slate-500">

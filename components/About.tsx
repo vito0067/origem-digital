@@ -79,9 +79,16 @@ export default function About() {
                 className="absolute bottom-6 left-[27px] top-6 w-px bg-gradient-to-b from-cyan-neon/50 via-violet-neon/30 to-transparent"
               />
 
+              {/* O Reveal É o <li> (como="li"): um <div> entre o <ol> e
+                  o item quebrava a lista para leitor de tela. */}
               {etapas.map((etapa, i) => (
-                <Reveal key={etapa.label} de="direita" delay={i * 90}>
-                  <li className="relative flex items-center gap-5 py-3">
+                <Reveal
+                  key={etapa.label}
+                  como="li"
+                  de="direita"
+                  delay={i * 90}
+                  className="relative flex items-center gap-5 py-3"
+                >
                     <span
                       className="flow-node glass-card relative z-10 flex h-14 w-14 shrink-0 items-center justify-center text-xl"
                       style={{ animationDelay: `${i * 1.1}s` }}
@@ -104,7 +111,6 @@ export default function About() {
                     >
                       {i < etapas.length - 1 ? "↓" : "★"}
                     </span>
-                  </li>
                 </Reveal>
               ))}
             </ol>

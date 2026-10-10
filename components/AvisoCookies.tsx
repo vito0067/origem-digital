@@ -54,7 +54,11 @@ export default function AvisoCookies() {
       aria-label="Aviso de privacidade"
       className="fixed inset-x-0 bottom-0 z-[95] p-4 sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-sm sm:p-0"
     >
-      <div className="glass-card border-white/15 p-5 shadow-glass">
+      {/* Fundo quase opaco (bg-abyss/95), e não o vidro transparente
+          dos outros cartões. No celular o aviso fica em cima do botão
+          ciano da capa: com o vidro, o ciano vazava por trás e o título
+          branco ficava com contraste de 1,4 para 1 — ilegível. */}
+      <div className="glass-card border-white/15 bg-abyss/95 p-5 shadow-glass">
         <p className="font-display text-sm font-bold text-white">
           Um aviso rápido sobre privacidade
         </p>

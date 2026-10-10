@@ -121,30 +121,31 @@ export default function Numeros() {
       <div className="mx-auto max-w-6xl px-6">
         <dl className="grid grid-cols-2 lg:grid-cols-4">
           {itens.map((item, i) => (
+            // O <dt> e o <dd> ficam DIRETO dentro do Reveal. O HTML
+            // aceita um <div> entre o <dl> e o par, mas não dois — e
+            // havia dois, o que o Lighthouse acusava como lista quebrada.
             <Reveal
               key={item.rotulo}
               delay={i * 90}
-              className={`border-white/[0.06] py-7 ${
+              className={`border-white/[0.06] px-5 py-7 text-center ${
                 i % 2 === 1 ? "border-l" : ""
               } ${i < 2 ? "border-b lg:border-b-0" : ""} ${
                 i === 2 ? "lg:border-l" : ""
               } ${i === 3 ? "border-l" : ""}`}
             >
-              <div className="px-5 text-center">
-                <dt className="font-display text-xl font-bold text-gradient-neon sm:text-2xl">
-                  {item.conta !== undefined ? (
-                    <>
-                      <Contador valor={item.conta} duracao={1100} />
-                      {item.sufixo}
-                    </>
-                  ) : (
-                    <LetraPorLetra texto={item.valor} atraso={i * 90} />
-                  )}
-                </dt>
-                <dd className="mt-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500 sm:text-[11px]">
-                  {item.rotulo}
-                </dd>
-              </div>
+              <dt className="font-display text-xl font-bold text-gradient-neon sm:text-2xl">
+                {item.conta !== undefined ? (
+                  <>
+                    <Contador valor={item.conta} duracao={1100} />
+                    {item.sufixo}
+                  </>
+                ) : (
+                  <LetraPorLetra texto={item.valor} atraso={i * 90} />
+                )}
+              </dt>
+              <dd className="mt-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500 sm:text-[11px]">
+                {item.rotulo}
+              </dd>
             </Reveal>
           ))}
         </dl>

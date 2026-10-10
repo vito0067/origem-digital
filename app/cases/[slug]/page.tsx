@@ -9,7 +9,13 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const c = cases.find((x) => x.slug === params.slug);
-  return { title: c ? `${c.titulo} — Case Origem Digital` : "Case" };
+  return {
+    title: c ? `${c.titulo} — Case Origem Digital` : "Case",
+    // Sem descrição própria, o case aparecia no Google com a descrição
+    // genérica da capa. O problema do cliente diz muito mais.
+    description: c?.problema,
+    alternates: { canonical: `/cases/${params.slug}` },
+  };
 }
 
 const Block = ({ label, children }: { label: string; children: React.ReactNode }) => (

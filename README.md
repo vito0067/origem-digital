@@ -1,60 +1,70 @@
-# Origem Digital — Landing Page
+# Origem Digital — site
 
-Landing page cinematográfica em **Next.js 14 (App Router) + TypeScript + Tailwind CSS**, com Hero de scroll scrubbing de vídeo e identidade dark futurista (ciano `#00F0FF` + violeta `#A855F7` sobre `#0B0D17`).
+Site da Origem Digital: **[origemdigitalsite.com.br](https://origemdigitalsite.com.br)**.
+Sites profissionais e agentes de IA no WhatsApp (a Aurora) para pequenas empresas.
 
-## Como rodar
+Feito em Next.js 14 + TypeScript + Tailwind CSS, publicado na Vercel.
+
+---
+
+## Como uma mudança vai ao ar
+
+1. O arquivo é editado ou enviado aqui no GitHub (pelo navegador).
+2. A Vercel percebe a mudança e publica sozinha, em 1 a 2 minutos.
+3. O sinal verde ✓ ao lado da última mudança quer dizer que publicou. Um **X vermelho** quer dizer que a publicação falhou — **o site não cai**: continua no ar na versão anterior até a próxima publicação dar certo.
+
+⚠️ Ao enviar arquivos, confira a pasta. Um arquivo de `components/` enviado na raiz do repositório quebra a publicação.
+
+---
+
+## Onde fica cada coisa
+
+| O que | Onde |
+|---|---|
+| A página inicial e a ordem das seções | `app/page.tsx` |
+| Cada seção da página inicial | `components/` (um arquivo por seção) |
+| **Todos os preços** | `lib/precos.ts` — fonte única; o resto do site lê daqui |
+| Página para clínicas | `app/clinicas/page.tsx` |
+| Cases (projetos entregues) | `lib/cases.ts` — case novo entra na lista e ganha página sozinho |
+| Termos de Uso | `app/termos/page.tsx` |
+| Política de Privacidade | `app/privacidade/page.tsx` |
+| Página de endereço não encontrado (404) | `app/not-found.tsx` |
+| Cores, fontes e animações gerais | `app/globals.css` e `tailwind.config.ts` |
+| Título e descrição para o Google, dados da empresa | `app/layout.tsx` |
+| Lista de páginas para o Google | `app/sitemap.ts` e `app/robots.ts` |
+| Imagem que aparece ao compartilhar o link | `app/opengraph-image.tsx` |
+| Imagens, vídeo e a marca em 3D | `public/media/` |
+| Ferramentas para comprimir imagem, vídeo e 3D | `scripts/` |
+
+---
+
+## Regras que evitam estrago
+
+**O contrato manda, o site acompanha.** Prazo, pagamento, fidelidade, cancelamento e garantias do site seguem o Contrato Master revisado. Pelo Código de Defesa do Consumidor, o que o site anuncia vale como parte do contrato — então o site nunca promete mais do que o contrato. Esses textos estão em `components/Garantias.tsx`, `components/Faq.tsx`, `app/termos/page.tsx` e `app/clinicas/page.tsx`.
+
+**Preço mudou?** Mude em `lib/precos.ts` e também nas respostas do FAQ (`components/Faq.tsx`), na conversa de demonstração (`components/ConversaAurora.tsx` e `components/AntesDepois.tsx`) — e, principalmente, **na tabela de preços da Aurora no n8n**. Senão o agente informa um valor e o site mostra outro.
+
+**WhatsApp comercial** — (11) 93929-9209 — aparece em 14 arquivos. Para trocar, procure por `5511939299209` em `app/` e `components/`.
+
+**E-mail oficial:** contato@origemdigitalsite.com.br.
+
+**Animação com moderação.** Uma coisa se mexendo por tela, sempre com motivo. Nada de efeito em looping infinito ou que persegue o mouse.
+
+---
+
+## Para criar a página de outro ramo (salões, restaurantes…)
+
+1. Copie a pasta `app/clinicas` com o nome do ramo (ex.: `app/saloes`).
+2. Troque os textos e a conversa de exemplo.
+3. Acrescente a página em `app/sitemap.ts` e no rodapé (`components/Footer.tsx`).
+
+---
+
+## Rodar no computador
 
 ```bash
 npm install
 npm run dev
-# abrir http://localhost:3000
 ```
 
-Build de produção:
-
-```bash
-npm run build && npm start
-```
-
-## O vídeo da Hero (Higgsfield)
-
-A Hero funciona em dois modos, automaticamente:
-
-1. **Com vídeo** — coloque o arquivo gerado no Higgsfield em:
-   `public/media/hero-video.mp4`
-   O scroll da página passa a "esfregar" (scrub) o tempo do vídeo, com interpolação suave via requestAnimationFrame.
-2. **Sem vídeo (fallback atual)** — enquanto o arquivo não existe, a Hero faz um crossfade cinematográfico entre `frame-inicial.png` e `frame-final.png`, dirigido pelo mesmo progresso de scroll.
-
-### Prompt sugerido para o Higgsfield (start frame → end frame)
-
-- **Start frame:** `public/media/frame-inicial.png`
-- **End frame:** `public/media/frame-final.png`
-- **Prompt:** "Ultra-realistic cinematic transition representing digital transformation for small businesses. The camera glides forward through a dark server room bathed in deep purple neon, glowing data particles begin to rise from the grid floor, accelerating into streaks of cyan light; the environment dissolves at high speed into a futuristic holographic interface bursting with electric cyan panels, charts and UI elements — fluid, seamless, high-energy morph, volumetric neon lighting, 4K, no text artifacts."
-- **Dica técnica:** exporte em 1080×1920 ou 1920×1080 conforme o corte desejado (o CSS usa `object-cover`, então qualquer proporção funciona), H.264, e de preferência com **keyframes frequentes** (ex.: `ffmpeg -g 15`) — vídeos com poucos keyframes fazem o scrubbing "engasgar" no navegador.
-
-## Estrutura
-
-```
-app/
-  layout.tsx       # fontes (Space Grotesk + Inter), metadata pt-BR
-  page.tsx         # composição das seções
-  globals.css      # tema, glassmorphism, grid neon, reduced-motion
-components/
-  HeroCinematic.tsx  # hero 300vh sticky com video scrubbing + fallback
-  NeonButton.tsx     # CTA com brilho pulsante ciano / ghost em vidro
-  Navbar.tsx         # navegação fixa em vidro
-  Services.tsx       # Sites, Agentes de IA, Pacote Completo
-  Differentials.tsx  # entrega rápida, suporte, tecnologia
-  FinalCta.tsx       # CTA final com brilhos ambientes
-  Footer.tsx
-  Reveal.tsx         # animação de entrada por IntersectionObserver
-public/media/
-  frame-inicial.png   # frame inicial (referência Higgsfield)
-  frame-final.png     # frame final (referência Higgsfield)
-  hero-video.mp4     # ← colocar aqui o vídeo gerado
-```
-
-## Acessibilidade
-
-- `prefers-reduced-motion` respeitado: hero vira imagem estática, animações desativadas.
-- Foco visível nos CTAs, textos com contraste garantido pela máscara escura.
+Depois, abrir http://localhost:3000.

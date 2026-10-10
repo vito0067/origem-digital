@@ -98,14 +98,20 @@ export default function AgentDemo() {
             </Reveal>
 
             <ul className="mt-7 flex flex-col gap-2.5">
+              {/* O Reveal é o próprio <li>: um <div> entre a lista e o
+                  item quebrava a leitura por leitor de tela. */}
               {beneficios.map((b, i) => (
-                <Reveal key={b} de="direita" delay={180 + i * 70}>
-                  <li className="flex items-start gap-2.5 text-sm text-slate-300">
-                    <span aria-hidden className="mt-0.5 font-bold text-cyan-neon">
-                      ✓
-                    </span>
-                    {b}
-                  </li>
+                <Reveal
+                  key={b}
+                  como="li"
+                  de="direita"
+                  delay={180 + i * 70}
+                  className="flex items-start gap-2.5 text-sm text-slate-300"
+                >
+                  <span aria-hidden className="mt-0.5 font-bold text-cyan-neon">
+                    ✓
+                  </span>
+                  {b}
                 </Reveal>
               ))}
             </ul>
@@ -157,12 +163,21 @@ export default function AgentDemo() {
               </div>
 
               {linhas.map((linha, i) => (
-                <Reveal key={linha.sem} de="direita" delay={i * 80}>
+                // O traço entre as linhas fica no Reveal, e não na linha
+                // de dentro. Na linha de dentro, o `last:border-0` valia
+                // para TODAS (cada uma é a única filha do seu Reveal) e
+                // nenhum traço aparecia.
+                <Reveal
+                  key={linha.sem}
+                  de="direita"
+                  delay={i * 80}
+                  className="border-b border-white/[0.07] last:border-0"
+                >
                   {/* Linhas mais justas do que antes (py-4 → py-3, texto
                       um ponto menor). As seis continuam aqui: você pediu
                       para encurtar sem perder informação, então o que
                       encolheu foi o espaço em volta, não o conteúdo. */}
-                  <div className="group grid grid-cols-2 border-b border-white/[0.07] last:border-0 transition-colors hover:bg-white/[0.02]">
+                  <div className="group grid grid-cols-2 transition-colors hover:bg-white/[0.02]">
                     <p className="flex items-start gap-2.5 px-5 py-3 text-[13px] leading-snug text-slate-500">
                       <span aria-hidden className="mt-px font-bold text-red-400/70">
                         ✕

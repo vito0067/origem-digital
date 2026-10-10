@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import HeroCinematic from "@/components/HeroCinematic";
 import Faixa from "@/components/Faixa";
@@ -37,6 +38,20 @@ import BotaoFlutuante from "@/components/BotaoFlutuante";
  * vazios escritos "em breve". No lugar dela entrou Projetos, com
  * trabalho de verdade e link para abrir.
  */
+
+/**
+ * Endereço oficial desta página. Links compartilhados no Instagram e no
+ * WhatsApp chegam com pedaços a mais (?fbclid=…, ?igsh=…); sem isto, o
+ * Google pode tratar cada variação como uma página diferente. Título e
+ * descrição continuam vindo do layout.
+ *
+ * Fica em cada página, e não no layout, de propósito: no layout, TODAS
+ * as páginas herdariam o endereço da capa e diriam ao Google que são
+ * cópias dela.
+ */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const segmentos = [
   "Clínicas",

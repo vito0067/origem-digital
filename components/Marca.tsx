@@ -65,10 +65,16 @@ export default function Marca({
       } ${className}`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* Largura e altura declaradas (o desenho é 614 × 326, e estes
+          números mantêm a proporção): o navegador reserva o espaço do
+          símbolo antes de baixá-lo, e nada na barra se mexe quando ele
+          chega. O tamanho que vale na tela continua sendo o do CSS. */}
       <img
         src="/media/logo-od.svg"
         alt=""
         aria-hidden
+        width={emLinha ? 60 : 90}
+        height={emLinha ? 32 : 48}
         className={emLinha ? "h-8 w-auto" : "h-12 w-auto"}
       />
 
@@ -77,7 +83,7 @@ export default function Marca({
           símbolo, botão de diagnóstico e menu — os três juntos com o
           nome por extenso não cabem, e o botão acabava por cima do
           nome. O símbolo sozinho já identifica; o nome completo aparece
-          na abertura, no rodapé e na imagem de compartilhamento. */}
+          no rodapé e na imagem de compartilhamento. */}
       <span
         className={`flex-col ${
           emLinha ? "hidden items-start sm:flex" : "flex items-center"

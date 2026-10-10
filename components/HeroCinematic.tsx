@@ -51,6 +51,55 @@ export default function HeroCinematic() {
   const [sem3D, setSem3D] = useState(false);
   const [poucoMovimento, setPoucoMovimento] = useState(false);
   const [rolagem, setRolagem] = useState(0);
+  /**
+   * Se a marca em 3D já pode ser montada.
+   *
+   * SÓ EM TELA GRANDE. A coluna do 3D fica escondida abaixo de 1024px,
+   * mas esconder com CSS não impede o React de montar o componente: o
+   * celular baixava o three.js e o modelo inteiro (uns 180 KB) para
+   * desenhar uma peça que ninguém via. Medido no Lighthouse, era a maior
+   * causa de lentidão da página no celular.
+   *
+   * E SÓ DEPOIS DE A PÁGINA ESTAR PRONTA. No computador, o 3D entra
+   * quando o navegador fica livre, depois do carregamento. Assim ele não
+   * disputa o processador com o texto da capa, que é o que precisa
+   * aparecer primeiro — e a peça se monta enquanto o título termina de
+   * entrar, o que até combina com o efeito de montagem dela.
+   */
+  const [montar3D, setMontar3D] = useState(false);
+
+  useEffect(() => {
+    const telaGrande = window.matchMedia("(min-width: 1024px)");
+    let agendado = false;
+
+    const agendar = () => {
+      if (agendado || !telaGrande.matches) return;
+      agendado = true;
+      const montar = () => setMontar3D(true);
+      const quandoLivre = (
+        window as Window & {
+          requestIdleCallback?: (fn: () => void, o?: { timeout: number }) => number;
+        }
+      ).requestIdleCallback;
+      if (quandoLivre) quandoLivre(montar, { timeout: 1500 });
+      else setTimeout(montar, 600);
+    };
+
+    const depoisDeCarregar = () => {
+      if (document.readyState === "complete") agendar();
+      else window.addEventListener("load", agendar, { once: true });
+    };
+    depoisDeCarregar();
+
+    // Quem abre no celular deitado ou aumenta a janela até virar tela
+    // grande também ganha o 3D.
+    const aoMudar = () => depoisDeCarregar();
+    telaGrande.addEventListener("change", aoMudar);
+    return () => {
+      telaGrande.removeEventListener("change", aoMudar);
+      window.removeEventListener("load", agendar);
+    };
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -177,7 +226,10 @@ export default function HeroCinematic() {
                 aria-hidden
                 className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-cyan-neon shadow-neon-cyan"
               />
-              <Reveal de="esquerda" distancia={12}>
+              {/* `naCarga` em tudo que está na primeira tela: entra por
+                  CSS no primeiro instante, sem esperar o JavaScript (ver
+                  o comentário em Reveal.tsx). */}
+              <Reveal de="esquerda" distancia={12} naCarga>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan-neon/90 sm:text-xs">
                   Agência digital · São Paulo · atende todo o Brasil
                 </p>
@@ -191,6 +243,7 @@ export default function HeroCinematic() {
               como="h1"
               passo={72}
               origem="esquerda"
+              naCarga
               className="equilibrado mt-7 font-display text-[2.5rem] font-bold leading-[1.05] text-white sm:text-5xl lg:text-[3.6rem]"
             >
               Você não perde vendas por falta de clientes.
@@ -201,7 +254,7 @@ export default function HeroCinematic() {
                 de uma máscara própria e o degradê não atravessa a máscara —
                 resultado: a linha inteira fica invisível. Aqui ela desliza
                 da esquerda como um bloco só, que dá no mesmo efeito. */}
-            <Reveal de="esquerda" delay={520} distancia={36}>
+            <Reveal de="esquerda" delay={520} distancia={36} naCarga>
               <p className="equilibrado mt-2 font-display text-[2.5rem] font-bold leading-[1.05] text-gradient-neon sm:text-5xl lg:text-[3.6rem]">
                 Perde porque demora para responder.
               </p>
@@ -210,7 +263,7 @@ export default function HeroCinematic() {
             {/* Parágrafo entra como bloco: palavra por palavra em texto
                 corrido atrasa a leitura justamente da frase que explica
                 o que a empresa faz. */}
-            <Reveal de="esquerda" delay={700} distancia={16}>
+            <Reveal de="esquerda" delay={700} distancia={16} naCarga>
               <p className="mt-8 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg">
                 A gente resolve: site profissional + agente de IA respondendo
                 em segundos, 24 horas por dia — seu negócio vendendo no digital
@@ -236,8 +289,16 @@ export default function HeroCinematic() {
             </div>
 
             {/* Três garantias curtas logo abaixo do botão: tiram o medo
-                de clicar antes que ele apareça. */}
-            <ul className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3">
+                de clicar antes que ele apareça.
+
+                `lg:min-h-[2.75rem]` reserva sempre a altura de DUAS
+                linhas no computador. Medido: com a fonte reserva (a que
+                aparece por um instante, antes de a fonte do site chegar)
+                as três frases ocupam duas linhas; com a fonte certa,
+                cabem numa só. Sem a reserva, a capa encolhia 28px quando
+                a fonte chegava e tudo pulava 14px para baixo — em
+                conexão lenta, bem na hora em que a pessoa ia clicar. */}
+            <ul className="mt-9 flex flex-wrap content-start items-center gap-x-7 gap-y-3 lg:min-h-[2.75rem]">
               {/* O prazo é o do Contrato Master (cláusula 3.1). */}
               {[
                 "Diagnóstico sem compromisso",
@@ -261,10 +322,20 @@ export default function HeroCinematic() {
           <div className="relative hidden lg:col-span-5 lg:block">
             <div className="relative aspect-square w-full">
               {!sem3D && !poucoMovimento ? (
-                <MarcaTridimensional
-                  progress={rolagem}
-                  onFail={() => setSem3D(true)}
-                />
+                montar3D ? (
+                  <MarcaTridimensional
+                    progress={rolagem}
+                    onFail={() => setSem3D(true)}
+                  />
+                ) : (
+                  // Enquanto o 3D não entra: só o brilho, no mesmo lugar.
+                  // Sem logo parado aqui, para não haver a troca "logo
+                  // plano → peça 3D" na frente da pessoa.
+                  <div
+                    aria-hidden
+                    className="absolute inset-[18%] rounded-full bg-cyan-neon/10 blur-[90px]"
+                  />
+                )
               ) : (
                 // Reserva: o logo parado, com o mesmo brilho. Ninguém
                 // percebe que deveria haver 3D ali.
@@ -280,7 +351,9 @@ export default function HeroCinematic() {
                     src="/media/logo-od.svg"
                     alt=""
                     aria-hidden
-                    className="relative w-3/5 animate-float-y"
+                    width={614}
+                    height={326}
+                    className="relative h-auto w-3/5 animate-float-y"
                   />
                 </div>
               )}
@@ -288,7 +361,7 @@ export default function HeroCinematic() {
 
             {/* Legenda discreta que convida a mexer. Sem ela, muita gente
                 não descobre que a peça reage ao mouse. */}
-            {!sem3D && !poucoMovimento && (
+            {!sem3D && !poucoMovimento && montar3D && (
               <p className="pointer-events-none absolute inset-x-0 bottom-0 text-center text-[10px] uppercase tracking-[0.3em] text-slate-500">
                 mexa o mouse
               </p>

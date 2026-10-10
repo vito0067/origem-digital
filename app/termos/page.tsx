@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Termos de Uso e Contratação — Origem Digital",
   description:
     "Prazo, pagamento, fidelidade, cancelamento, direito de arrependimento, suporte e responsabilidades na contratação de sites e agentes de IA da Origem Digital.",
+  alternates: { canonical: "/termos" },
 };
 
 /**

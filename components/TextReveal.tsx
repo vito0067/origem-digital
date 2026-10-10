@@ -12,6 +12,17 @@ type Props = {
   className?: string;
   /** Tag renderizada. Use h1/h2 para manter a semântica do título. */
   como?: "h1" | "h2" | "h3" | "p" | "span";
+  /**
+   * NA CARGA: as palavras entram por CSS assim que a página aparece, sem
+   * esperar o JavaScript. É o modo do título da capa.
+   *
+   * No modo normal, o título saía do servidor já visível; quando o
+   * JavaScript chegava, ele SUMIA por um instante e entrava de novo
+   * palavra por palavra — no celular, segundos depois de a pessoa já
+   * ter começado a ler. Com a animação no CSS, ela roda uma vez só,
+   * do primeiro instante, e o texto nunca pisca.
+   */
+  naCarga?: boolean;
 };
 
 /**
@@ -38,12 +49,14 @@ export default function TextReveal({
   origem = "baixo",
   className = "",
   como = "h2",
+  naCarga = false,
 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const [visivel, setVisivel] = useState(false);
   const [ligado, setLigado] = useState(false);
 
   useEffect(() => {
+    if (naCarga) return; // a animação é do CSS; nada a vigiar
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setVisivel(true);
       return;
@@ -63,7 +76,7 @@ export default function TextReveal({
     );
     vigia.observe(el);
     return () => vigia.disconnect();
-  }, []);
+  }, [naCarga]);
 
   const deslocamento =
     origem === "esquerda"
@@ -71,6 +84,14 @@ export default function TextReveal({
       : origem === "direita"
         ? "translate3d(28px,0,0)"
         : "translate3d(0,0.9em,0)";
+
+  /** O mesmo ponto de partida, em variáveis, para a animação de CSS. */
+  const partida =
+    origem === "esquerda"
+      ? { "--de-x": "-28px", "--de-y": "0px" }
+      : origem === "direita"
+        ? { "--de-x": "28px", "--de-y": "0px" }
+        : { "--de-x": "0px", "--de-y": "0.9em" };
 
   // `keyof JSX.IntrinsicElements` abre o leque de TODAS as tags de HTML
   // e o TypeScript desiste de montar o tipo ("union type too complex").
@@ -110,12 +131,21 @@ export default function TextReveal({
           }}
         >
           <span
-            style={{
-              display: "inline-block",
-              transform: ligado && !visivel ? deslocamento : "translate3d(0,0,0)",
-              opacity: ligado && !visivel ? 0 : 1,
-              transition: `transform .75s cubic-bezier(.22,1,.36,1) ${i * passo}ms, opacity .6s ease ${i * passo}ms`,
-            }}
+            style={
+              naCarga
+                ? ({
+                    display: "inline-block",
+                    ...partida,
+                    animation: `palavraNaCarga .75s cubic-bezier(.22,1,.36,1) ${i * passo}ms both`,
+                  } as React.CSSProperties)
+                : {
+                    display: "inline-block",
+                    transform:
+                      ligado && !visivel ? deslocamento : "translate3d(0,0,0)",
+                    opacity: ligado && !visivel ? 0 : 1,
+                    transition: `transform .75s cubic-bezier(.22,1,.36,1) ${i * passo}ms, opacity .6s ease ${i * passo}ms`,
+                  }
+            }
           >
             {palavra}
           </span>

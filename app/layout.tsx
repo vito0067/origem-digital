@@ -55,6 +55,11 @@ const jsonLd = {
   "@type": "LocalBusiness",
   name: "Origem Digital",
   description,
+  // Endereço e logo da empresa: é o que o Google usa para ligar o site
+  // ao nome "Origem Digital" nas buscas e mostrar o símbolo certo.
+  url: "https://origemdigitalsite.com.br",
+  logo: "https://origemdigitalsite.com.br/icon.png",
+  image: "https://origemdigitalsite.com.br/opengraph-image",
   areaServed: "BR",
   address: {
     "@type": "PostalAddress",
@@ -81,6 +86,15 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {/* Rede de segurança: os blocos que entram ao rolar (Reveal)
+            nascem invisíveis e dependem do JavaScript para aparecer. Se
+            ele estiver desligado ou falhar, esta regra mostra tudo. */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              "<style>[data-reveal]{opacity:1!important;transform:none!important}</style>",
+          }}
         />
         <SmoothScroll>{children}</SmoothScroll>
 

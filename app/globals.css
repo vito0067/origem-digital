@@ -288,6 +288,35 @@ section[id] {
   transition: opacity 0.4s ease;
 }
 
+/* ============================================================
+   Entrada "na carga" — o topo das páginas
+   Usadas pelo Reveal e pelo TextReveal com `naCarga`. A animação começa
+   no primeiro instante em que a página aparece, sem esperar o
+   JavaScript: o ponto de partida vem de --de-x / --de-y, escritos no
+   próprio elemento. Para quem pediu menos movimento, a regra do fim do
+   arquivo encurta a animação a zero e o texto já nasce no lugar.
+   ============================================================ */
+@keyframes revelaNaCarga {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--de-x, 0px), var(--de-y, 0px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes palavraNaCarga {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--de-x, 0px), var(--de-y, 0px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 /* Balão de mensagem entrando na conversa da Aurora */
 @keyframes balaoEntra {
   from {

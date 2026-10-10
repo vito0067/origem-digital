@@ -298,6 +298,8 @@ export default function ConversaAurora({
                   src="/media/logo-od.svg"
                   alt=""
                   aria-hidden
+                  width={36}
+                  height={36}
                   className="h-9 w-9 object-contain"
                 />
               </>

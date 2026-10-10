@@ -193,13 +193,15 @@ export default function Clinicas() {
 
         <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">
-            <Reveal de="esquerda" distancia={12}>
+            {/* `naCarga` em tudo da primeira tela: entra por CSS no
+                primeiro instante, sem esperar o JavaScript. */}
+            <Reveal de="esquerda" distancia={12} naCarga>
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan-neon/90 sm:text-xs">
                 Para clínicas e consultórios
               </p>
             </Reveal>
 
-            <Reveal de="esquerda" delay={80}>
+            <Reveal de="esquerda" delay={80} naCarga>
               <h1 className="equilibrado mt-6 font-display text-[2.3rem] font-bold leading-[1.06] text-white sm:text-5xl lg:text-[3.3rem]">
                 Sua clínica respondendo pacientes{" "}
                 <span className="text-gradient-neon">
@@ -208,7 +210,7 @@ export default function Clinicas() {
               </h1>
             </Reveal>
 
-            <Reveal de="esquerda" delay={200}>
+            <Reveal de="esquerda" delay={200} naCarga>
               <p className="mt-7 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg">
                 Site profissional e uma atendente de inteligência artificial
                 que tira dúvidas, informa valores e encaminha o agendamento —
@@ -216,7 +218,7 @@ export default function Clinicas() {
               </p>
             </Reveal>
 
-            <Reveal de="esquerda" delay={300}>
+            <Reveal de="esquerda" delay={300} naCarga>
               <div className="mt-9 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
                 <NeonButton href={WA} variant="primary" external>
                   Quero o diagnóstico da minha clínica
@@ -244,7 +246,7 @@ export default function Clinicas() {
           </div>
 
           <div className="lg:col-span-5">
-            <Reveal de="direita" delay={150}>
+            <Reveal de="direita" delay={150} naCarga>
               <ConversaAurora
                 falas={conversaClinica}
                 nome="Clínica Exemplo"
