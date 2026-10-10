@@ -288,7 +288,7 @@ export default function HeroCinematic() {
             {/* Legenda discreta que convida a mexer. Sem ela, muita gente
                 não descobre que a peça reage ao mouse. */}
             {!sem3D && !poucoMovimento && (
-              <p className="pointer-events-none absolute inset-x-0 bottom-0 text-center text-[10px] uppercase tracking-[0.3em] text-slate-600">
+              <p className="pointer-events-none absolute inset-x-0 bottom-0 text-center text-[10px] uppercase tracking-[0.3em] text-slate-500">
                 mexa o mouse
               </p>
             )}

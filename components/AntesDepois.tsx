@@ -68,7 +68,7 @@ function Tela({
             return (
               <p
                 key={i}
-                className="py-0.5 text-center text-[11px] italic text-slate-600"
+                className="py-0.5 text-center text-[11px] italic text-slate-500"
               >
                 {f.texto}
               </p>
