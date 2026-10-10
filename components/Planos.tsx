@@ -20,9 +20,9 @@ import { acheProduto, avulsos, reais, setupSeparado } from "@/lib/precos";
  * quantos pacotes existiam. Agora é um bloco só, com o preço cheio
  * riscado ao lado do preço com desconto.
  *
- * A garantia de 14 dias virou uma faixa no fim da seção: ela serve para
- * tirar o medo na hora de decidir, então precisa estar ao lado do preço,
- * não três telas depois dele.
+ * As garantias ficam no fim da seção: elas servem para tirar o medo na
+ * hora de decidir, então precisam estar ao lado do preço, não três
+ * telas depois dele.
  *
  * ATENÇÃO — os preços aqui aparecem em mais lugares (tabela da Aurora no
  * n8n, planilha, manuais). Mudar aqui e esquecer lá faz o agente informar
@@ -54,7 +54,7 @@ const servicos: Servico[] = [
       "Rápido, responsivo e otimizado para o Google",
       "Botão direto para o seu WhatsApp",
       "Domínio, hospedagem e manutenção inclusos",
-      "No ar em 1 a 2 semanas",
+      "Primeira versão em até 15 dias úteis",
     ],
     degraus: ["site-simples", "site-completo"],
     cta: "Quero um site profissional",
@@ -70,7 +70,7 @@ const servicos: Servico[] = [
       "Apresenta serviços e tira dúvidas em tempo real",
       "Qualifica leads e registra interessados",
       "Transfere para você nos momentos decisivos",
-      "Funcionando em 1 a 2 semanas",
+      "Primeira versão em até 15 dias úteis",
     ],
     degraus: ["agente-essencial", "agente-avancado"],
     cta: "Quero automatizar meu atendimento",
@@ -80,8 +80,10 @@ const servicos: Servico[] = [
   },
 ];
 
+// Prazos: os do Contrato Master (cláusula 3) — 15 dias úteis para a
+// primeira versão. O site não pode prometer menos tempo que o contrato.
 const pacoteBullets = [
-  "Site profissional no ar em 1 a 2 semanas",
+  "Site e agente com a primeira versão em até 15 dias úteis",
   "Agente de IA atendendo seu WhatsApp 24/7",
   "Site e agente integrados, uma única equipe cuidando de tudo",
   "Suporte e manutenção contínuos inclusos",
@@ -325,9 +327,13 @@ export default function Planos() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan-neon">
                 Precisou mudar depois?
               </p>
+              {/* Antes dizia "alterações maiores já entram na sua
+                  mensalidade" — o contrário do contrato (cláusulas 11.2
+                  e 11.3): só pequenos ajustes entram; o resto é orçado. */}
               <p className="mt-2.5 text-sm leading-relaxed text-slate-400">
-                Ajuste avulso, sem mudar de plano e sem taxa escondida.
-                Alterações maiores já entram na sua mensalidade.
+                Pequenos ajustes já entram na sua mensalidade: até 5 textos,
+                imagens ou informações por pedido. O que passar disso vira
+                ajuste avulso, sem mudar de plano.
               </p>
             </div>
 
@@ -357,9 +363,9 @@ export default function Planos() {
             components/TabelaPrecos.tsx, caso um dia faça falta. */}
 
         {/* ---- As três garantias ----
-            A garantia de 14 dias era uma faixa sozinha aqui. Agora ela é
-            uma das três, ao lado do direito de arrependimento e da
-            carência — as três com cláusula correspondente nos Termos. */}
+            Todas com cláusula correspondente no Contrato Master: metade
+            do setup só na entrega, 4 rodadas de ajuste e o direito de
+            arrependimento. */}
         <Garantias />
       </div>
     </section>

@@ -31,9 +31,11 @@ type Item = {
   sufixo?: string;
 };
 
+// O prazo é o do Contrato Master (cláusula 3.1). Não é "tempo médio":
+// é o máximo que o contrato promete para a primeira versão.
 const itens: Item[] = [
   { valor: "Sob medida", rotulo: "Cada projeto é único" },
-  { valor: "1–2 semanas", rotulo: "Tempo médio de entrega" },
+  { valor: "15 dias úteis", rotulo: "Prazo da 1ª versão" },
   { valor: "24/7", rotulo: "Atendimento com IA", conta: 24, sufixo: "/7" },
   { valor: "Suporte", rotulo: "Incluso em todo plano" },
 ];
@@ -72,25 +74,41 @@ function LetraPorLetra({ texto, atraso = 0 }: { texto: string; atraso?: number }
     return () => vigia.disconnect();
   }, []);
 
+  /**
+   * Cada PALAVRA fica num bloco que não quebra, e as letras animam
+   * dentro dele. Sem isso, o navegador podia quebrar a linha entre duas
+   * letras quaisquer — no celular estreito "15 dias úteis" virava
+   * "15 dias ú" numa linha e "teis" na outra.
+   *
+   * `split("")` e não `[...texto]`: o TypeScript do projeto não permite
+   * percorrer texto com reticências. Dá no mesmo aqui, porque estes
+   * rótulos não têm emoji nem acento combinado ("ú" é um caractere só).
+   */
+  let n = 0; // posição da letra no texto inteiro, para o atraso seguir
   return (
     <span ref={ref}>
-      {/* `split("")` e não `[...texto]`: o TypeScript do projeto não
-          permite percorrer texto com reticências. Dá no mesmo aqui,
-          porque estes rótulos não têm emoji nem acento combinado. */}
-      {texto.split("").map((letra, i) => (
-        <span
-          key={`${letra}-${i}`}
-          style={{
-            display: "inline-block",
-            // espaço em branco não colapsa se virar um bloco vazio
-            whiteSpace: letra === " " ? "pre" : undefined,
-            opacity: ligado && !visivel ? 0 : 1,
-            transform:
-              ligado && !visivel ? "translate3d(0, 0.35em, 0)" : "none",
-            transition: `opacity .4s ease ${atraso + i * 28}ms, transform .5s cubic-bezier(.22,1,.36,1) ${atraso + i * 28}ms`,
-          }}
-        >
-          {letra}
+      {texto.split(" ").map((palavra, p) => (
+        <span key={`${palavra}-${p}`}>
+          {p > 0 && " "}
+          <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+            {palavra.split("").map((letra) => {
+              const i = n++;
+              return (
+                <span
+                  key={`${letra}-${i}`}
+                  style={{
+                    display: "inline-block",
+                    opacity: ligado && !visivel ? 0 : 1,
+                    transform:
+                      ligado && !visivel ? "translate3d(0, 0.35em, 0)" : "none",
+                    transition: `opacity .4s ease ${atraso + i * 28}ms, transform .5s cubic-bezier(.22,1,.36,1) ${atraso + i * 28}ms`,
+                  }}
+                >
+                  {letra}
+                </span>
+              );
+            })}
+          </span>
         </span>
       ))}
     </span>

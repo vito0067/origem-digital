@@ -32,7 +32,7 @@ const SEM = [
 
 const COM = [
   { hora: "23:47", texto: "Oi, vocês fazem site pra clínica?", de: "cliente" },
-  { hora: "23:47", texto: "Olá! Fazemos sim — a partir de R$ 987 + R$ 43/mês, pronto em 1 a 2 semanas.", de: "aurora" },
+  { hora: "23:47", texto: "Olá! Fazemos sim — a partir de R$ 987 + R$ 43/mês, com a primeira versão em até 15 dias úteis.", de: "aurora" },
   { hora: "23:48", texto: "Que horas posso falar com alguém?", de: "cliente" },
   { hora: "23:48", texto: "Agendei amanhã às 10h e já avisei a equipe ✅", de: "aurora" },
 ];

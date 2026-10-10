@@ -28,7 +28,7 @@ import Holofote from "./Holofote";
 const etapas = [
   { n: "01", title: "Diagnóstico", text: "Entendemos seu negócio e mapeamos onde você está perdendo clientes hoje." },
   { n: "02", title: "Estratégia", text: "Desenhamos a presença digital certa para o seu caso — sem pacote engessado." },
-  { n: "03", title: "Site", text: "Sua vitrine profissional no ar em até 2 semanas, otimizada para o Google." },
+  { n: "03", title: "Site", text: "Sua vitrine profissional, otimizada para o Google, com a primeira versão em até 15 dias úteis." },
   { n: "04", title: "IA", text: "Agente treinado com seus serviços e preços, atendendo o WhatsApp 24/7." },
   { n: "05", title: "Automação", text: "Agendamentos, registro de leads e follow-ups acontecendo sem esforço." },
   { n: "06", title: "Suporte", text: "Acompanhamento contínuo, manutenção e melhorias mês a mês." },
@@ -46,9 +46,9 @@ const diferenciais = [
       "Seu agente aprende seus serviços, seus preços e seu jeito de atender — não é um robô genérico de respostas prontas.",
   },
   {
-    title: "Entrega rápida de verdade",
+    title: "Prazo escrito no contrato",
     description:
-      "Projeto no ar em 1 a 2 semanas. Enquanto outros ainda estão orçando, seus clientes já estão sendo atendidos.",
+      "Primeira versão em até 15 dias úteis, com o prazo no papel. Enquanto outros ainda estão orçando, o seu projeto já está sendo feito.",
   },
   {
     title: "Suporte contínuo incluso",

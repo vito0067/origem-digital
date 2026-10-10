@@ -27,12 +27,17 @@ import Image from "next/image";
  *
  * Para quem pediu menos movimento no sistema, a conversa aparece
  * inteira e parada, sem digitação.
+ *
+ * OUTRAS CONVERSAS: o mesmo celular serve para mostrar a Aurora
+ * atendendo um cliente de outro ramo (a página de clínicas usa assim).
+ * Basta passar `falas`, `nome`, `iniciais` e `selo`. Sem esses dados,
+ * ele mostra a conversa da própria Origem Digital, como na capa.
  */
 
 const SITE_SETUP = "R$ 987";
 const SITE_MENSAL = "R$ 43/mês";
 
-type Fala = {
+export type Fala = {
   de: "cliente" | "aurora";
   texto: string;
   hora: string;
@@ -55,7 +60,9 @@ const conversa: Fala[] = [
   },
   {
     de: "aurora",
-    texto: `Nossos sites profissionais saem a partir de ${SITE_SETUP} + ${SITE_MENSAL} — com domínio, hospedagem e manutenção inclusos. Fica pronto em 1 a 2 semanas.`,
+    // O prazo aqui é o do contrato (cláusula 3.1): 15 dias úteis para
+    // a primeira versão. Se o contrato mudar, mude aqui e na Aurora.
+    texto: `Nossos sites profissionais saem a partir de ${SITE_SETUP} + ${SITE_MENSAL} — com domínio, hospedagem e manutenção inclusos. A primeira versão fica pronta em até 15 dias úteis.`,
     hora: "14:02",
     pensando: 1500,
   },
@@ -114,7 +121,21 @@ function Digitando() {
   );
 }
 
-export default function ConversaAurora() {
+export default function ConversaAurora({
+  falas = conversa,
+  nome = "Aurora · Origem Digital",
+  iniciais,
+  selo = "ao vivo",
+}: {
+  /** A conversa a mostrar. Sem ela, vale a da Origem Digital. */
+  falas?: Fala[];
+  /** Nome no topo do aplicativo. */
+  nome?: string;
+  /** Com iniciais, o topo mostra um círculo com elas no lugar do logo. */
+  iniciais?: string;
+  /** Etiqueta no canto do aparelho. */
+  selo?: string;
+} = {}) {
   const caixa = useRef<HTMLDivElement>(null);
   const rolagem = useRef<HTMLDivElement>(null);
   /** A moldura do celular, que gira seguindo o cursor. */
@@ -145,7 +166,7 @@ export default function ConversaAurora() {
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setParado(true);
-      setQuantas(conversa.length);
+      setQuantas(falas.length);
       return;
     }
 
@@ -173,7 +194,7 @@ export default function ConversaAurora() {
     setQuantas(0);
     setDigitando(false);
 
-    conversa.forEach((fala, i) => {
+    falas.forEach((fala, i) => {
       if (fala.de === "aurora") {
         acumulado += 350;
         marcar(() => setDigitando(true), acumulado);
@@ -193,7 +214,7 @@ export default function ConversaAurora() {
     marcar(() => setCiclo((c) => c + 1), acumulado + PAUSA_FINAL);
 
     return limpar;
-  }, [ligar, parado, ciclo]);
+  }, [ligar, parado, ciclo, falas]);
 
   // mantém a conversa colada embaixo, como num aplicativo de verdade
   useEffect(() => {
@@ -260,19 +281,30 @@ export default function ConversaAurora() {
         <div className="celular-tela overflow-hidden rounded-[2rem] bg-[#0b141a]">
           {/* Cabeçalho, como o do WhatsApp */}
           <div className="flex items-center gap-3 border-b border-white/[0.06] bg-[#1f2c34] px-4 py-3">
-            {/* <img> e não <Image>: o componente do Next recusa SVG
-                (erro 400) a menos que se ligue o "dangerouslyAllowSVG".
-                E não faz falta — vetor não tem o que otimizar. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/media/logo-od.svg"
-              alt=""
-              aria-hidden
-              className="h-9 w-9 object-contain"
-            />
+            {iniciais ? (
+              <span
+                aria-hidden
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-neon/15 font-display text-xs font-bold text-cyan-neon"
+              >
+                {iniciais}
+              </span>
+            ) : (
+              <>
+                {/* <img> e não <Image>: o componente do Next recusa SVG
+                    (erro 400) a menos que se ligue o "dangerouslyAllowSVG".
+                    E não faz falta — vetor não tem o que otimizar. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/media/logo-od.svg"
+                  alt=""
+                  aria-hidden
+                  className="h-9 w-9 object-contain"
+                />
+              </>
+            )}
             <div className="min-w-0">
               <p className="truncate font-display text-sm font-semibold text-white">
-                Aurora · Origem Digital
+                {nome}
               </p>
               <p className="text-[11px] text-cyan-neon">
                 {digitando ? "digitando…" : "online"}
@@ -299,7 +331,7 @@ export default function ConversaAurora() {
             {/* empurra tudo para baixo enquanto a conversa é curta */}
             <div className="mt-auto" />
 
-            {conversa.slice(0, quantas).map((fala, i) => (
+            {falas.slice(0, quantas).map((fala, i) => (
               <div
                 key={`${fala.hora}-${i}`}
                 className={`flex ${
@@ -331,7 +363,7 @@ export default function ConversaAurora() {
       </div>
 
       <span className="absolute -right-3 top-6 rounded-full border border-cyan-neon/50 bg-abyss px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-cyan-neon shadow-neon-cyan">
-        ao vivo
+        {selo}
       </span>
     </div>
   );

@@ -31,7 +31,7 @@ import { cases } from "@/lib/cases";
  * passa a ignorá-lo. Atualize esta linha quando mexer no TEXTO do
  * site, não a cada ajuste.
  */
-const ATUALIZADO_EM = new Date("2026-09-20");
+const ATUALIZADO_EM = new Date("2026-10-10");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const site = "https://origemdigitalsite.com.br";
@@ -45,6 +45,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // links, e é ela que precisa aparecer na busca por "site para
       // clínica" ou "agente de IA WhatsApp".
       priority: 1,
+    },
+    {
+      // Página do ramo: feita para aparecer em "site para clínica" e
+      // "atendente de WhatsApp para clínica". Próximos ramos entram
+      // aqui do mesmo jeito.
+      url: `${site}/clinicas`,
+      lastModified: ATUALIZADO_EM,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     {
       url: `${site}/cases`,

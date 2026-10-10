@@ -1,7 +1,13 @@
 import Link from "next/link";
 import Marca from "./Marca";
 
-export default function Footer() {
+/**
+ * `prefixo`: os links de navegação apontam para seções da página
+ * inicial (#sobre, #servicos…). Na própria página inicial basta o "#";
+ * em outra página (como /clinicas) o link precisa de "/" na frente,
+ * senão procura a seção na página atual, onde ela não existe.
+ */
+export default function Footer({ prefixo = "" }: { prefixo?: "" | "/" }) {
   return (
     <footer className="border-t border-white/10 pb-8 pt-14">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -19,10 +25,14 @@ export default function Footer() {
             Navegação
           </p>
           <ul className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
-            <li><Link href="#sobre" className="sublinha hover:text-cyan-neon">Sobre</Link></li>
-            <li><Link href="#servicos" className="sublinha hover:text-cyan-neon">Serviços e preços</Link></li>
-            <li><Link href="#como-funciona" className="sublinha hover:text-cyan-neon">Como funciona</Link></li>
-            <li><Link href="#faq" className="sublinha hover:text-cyan-neon">Perguntas frequentes</Link></li>
+            <li><Link href={`${prefixo}#sobre`} className="sublinha hover:text-cyan-neon">Sobre</Link></li>
+            <li><Link href={`${prefixo}#servicos`} className="sublinha hover:text-cyan-neon">Serviços e preços</Link></li>
+            <li><Link href={`${prefixo}#como-funciona`} className="sublinha hover:text-cyan-neon">Como funciona</Link></li>
+            <li><Link href={`${prefixo}#faq`} className="sublinha hover:text-cyan-neon">Perguntas frequentes</Link></li>
+            {/* Link para a página do ramo. Além de levar quem tem clínica
+                direto para ela, é o que mostra ao Google que a página
+                existe e faz parte do site. */}
+            <li><Link href="/clinicas" className="sublinha hover:text-cyan-neon">Para clínicas</Link></li>
           </ul>
         </div>
 

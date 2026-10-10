@@ -20,7 +20,7 @@ const body = Inter({
 const title =
   "Origem Digital — Sites profissionais e Agentes de IA no WhatsApp para pequenas empresas";
 const description =
-  "Pare de perder clientes por falta de site ou demora no WhatsApp. Sites profissionais e atendimento automatizado com IA 24/7, entregues em 1 a 2 semanas. Diagnóstico gratuito.";
+  "Pare de perder clientes por falta de site ou demora no WhatsApp. Sites profissionais e atendimento automatizado com IA 24/7, com a primeira versão em até 15 dias úteis. Diagnóstico gratuito.";
 
 export const metadata: Metadata = {
   // Endereço de base do site. Sem ele, a imagem de compartilhamento é

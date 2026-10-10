@@ -214,7 +214,7 @@ export default function HeroCinematic() {
               <p className="mt-8 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg">
                 A gente resolve: site profissional + agente de IA respondendo
                 em segundos, 24 horas por dia — seu negócio vendendo no digital
-                em até 2 semanas, enquanto você cuida dele.
+                enquanto você cuida dele.
               </p>
             </Reveal>
 
@@ -238,9 +238,10 @@ export default function HeroCinematic() {
             {/* Três garantias curtas logo abaixo do botão: tiram o medo
                 de clicar antes que ele apareça. */}
             <ul className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3">
+              {/* O prazo é o do Contrato Master (cláusula 3.1). */}
               {[
-                "Sem compromisso",
-                "No ar em 1 a 2 semanas",
+                "Diagnóstico sem compromisso",
+                "Primeira versão em até 15 dias úteis",
                 "Suporte contínuo incluso",
               ].map((item) => (
                 <li

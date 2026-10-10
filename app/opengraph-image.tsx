@@ -134,7 +134,7 @@ export default async function OpenGraphImage() {
               maxWidth: 900,
             }}
           >
-            Seu negócio vendendo no digital em até 2 semanas
+            Seu negócio respondendo clientes 24 horas por dia
           </div>
         </div>
 

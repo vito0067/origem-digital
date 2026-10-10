@@ -16,7 +16,7 @@ import Magnetic from "./Magnetic";
 
 const beneficios = [
   "Diagnóstico gratuito e sem compromisso",
-  "Projeto no ar em 1 a 2 semanas",
+  "Primeira versão em até 15 dias úteis",
   "Suporte contínuo incluso",
 ];
 

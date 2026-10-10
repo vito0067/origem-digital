@@ -17,6 +17,12 @@ import TituloSecao from "./TituloSecao";
  *
  * Os preços citados nas respostas são os mesmos da seção de planos.
  * Mudou um, mude o outro — e lembre da tabela da Aurora no n8n.
+ *
+ * Prazo, suporte, atraso e cancelamento seguem o Contrato Master
+ * revisado (outubro/2026): 15 dias úteis para a primeira versão,
+ * fidelidade de 3 meses no plano padrão, multa de 15%, suporte de
+ * segunda a sexta. O contrato manda; se ele mudar, estas respostas
+ * mudam junto — e as de components/Garantias.tsx e /termos também.
  */
 
 const faqs = [
@@ -26,7 +32,7 @@ const faqs = [
   },
   {
     q: "Quanto tempo demora?",
-    a: "Entre 1 e 2 semanas, tanto para o site quanto para o agente de IA. Você acompanha o progresso e aprova antes de ir ao ar.",
+    a: "A primeira versão fica pronta em até 15 dias úteis, contados depois do pagamento da entrada e do envio de todo o material (textos, fotos, logo e acessos). Você tem até 5 dias úteis para aprovar ou pedir ajustes — são até 4 rodadas incluídas — e, aprovado, o projeto vai ao ar em até 5 dias úteis.",
   },
   {
     q: "Como funciona o processo?",
@@ -42,23 +48,23 @@ const faqs = [
   },
   {
     q: "O atendimento é realmente 24 horas?",
-    a: "Sim. O agente funciona em nuvem, sem depender do seu celular ligado. Madrugada, feriado ou horário de pico: nenhuma mensagem fica sem resposta.",
+    a: "Sim. O agente funciona em nuvem, sem depender do seu celular ligado. Madrugada, feriado ou horário de pico: ele responde na hora, dentro do limite de conversas do seu plano.",
   },
   {
     q: "Posso personalizar o site e o agente?",
-    a: "Totalmente. O site segue a identidade visual da sua marca e o agente é configurado com o seu tom de atendimento. Ajustes pontuais depois da entrega custam R$ 97 (site) e R$ 147 (agente) — ou entram no seu plano mensal.",
+    a: "Sim. O site segue a identidade visual da sua marca e o agente é configurado com as informações e o tom de atendimento do seu negócio, tudo definido no escopo antes de começar. Depois da entrega, pequenos ajustes entram na mensalidade; o que passar do limite custa R$ 97 (site) ou R$ 147 (agente) por pedido.",
   },
   {
     q: "Vocês oferecem suporte depois da entrega?",
-    a: "Sim, o suporte contínuo está incluso nos planos mensais: manutenção, correções e acompanhamento para o digital nunca parar.",
+    a: "Sim, está incluso na mensalidade: hospedagem, monitoramento, correção de erros e pequenos ajustes — até 5 textos, imagens ou informações por pedido. O atendimento de suporte é de segunda a sexta, das 9h às 18h, com primeira resposta em até 1 dia útil.",
   },
   {
     q: "E se o projeto atrasar?",
-    a: "Temos garantia de implantação: se o seu projeto não estiver no ar em até 14 dias, trabalhamos sem nenhum custo adicional até concluí-lo.",
+    a: "O prazo de 15 dias úteis está escrito no contrato. Ele só pausa quando depende de você — material ou aprovação pendente — ou de serviços de terceiros, como WhatsApp e hospedagem. Sempre que isso acontecer, você é avisado.",
   },
   {
     q: "E se eu quiser cancelar?",
-    a: "Sem fidelidade escondida: conversamos abertamente sobre prazos e condições antes de qualquer contrato. Transparência faz parte do nosso jeito de trabalhar.",
+    a: "Está tudo escrito antes de você assinar. No plano padrão, a fidelidade é de 3 meses; depois disso, você cancela quando quiser, com 30 dias de aviso. No plano anual, você tem 30 dias de carência para cancelar sem multa. Fora desses casos e dos 7 dias de arrependimento (para pessoa física), o cancelamento antecipado tem multa de 15% sobre as mensalidades que faltam até o fim da fidelidade. Detalhes nos Termos de Uso.",
   },
 ];
 
