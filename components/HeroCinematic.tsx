@@ -7,7 +7,6 @@ import NeonButton from "./NeonButton";
 import TextReveal from "./TextReveal";
 import Reveal from "./Reveal";
 import Magnetic from "./Magnetic";
-import Particulas from "./Particulas";
 
 // O three.js só existe no navegador e pesa. Carregado à parte, ele não
 // atrasa o texto da capa — que é o que precisa aparecer primeiro.
@@ -37,6 +36,13 @@ const MarcaTridimensional = dynamic(() => import("./MarcaTridimensional"), {
  *  3. MARCA   — /media/marca.glb em 3D. Se o aparelho não der conta,
  *               cai para o logo em PNG com brilho, sem buraco na tela.
  *  4. TEXTO   — título, apoio e os dois botões.
+ *
+ * UMA ESTRELA SÓ. A capa já teve, ao mesmo tempo: vídeo, rede de
+ * partículas seguindo o mouse, uma faixa de luz varrendo de cima a
+ * baixo, a marca em 3D e três textos entrando palavra por palavra. Era
+ * coisa demais se mexendo para o olho saber onde parar. Ficaram o
+ * vídeo (apagado, ao fundo) e a marca em 3D; o "palavra por palavra"
+ * ficou só no título — o resto entra como bloco, em silêncio.
  */
 export default function HeroCinematic() {
   const video = useRef<HTMLVideoElement>(null);
@@ -138,10 +144,6 @@ export default function HeroCinematic() {
       />
       <div aria-hidden className="neon-grid absolute inset-0 opacity-70" />
 
-      {/* Rede de pontos se formando e se desfazendo, atraída pelo mouse.
-          Fica entre a grade e o texto: aparece atrás da fala, nunca por
-          cima dela. Só roda em tela grande e em aparelho que aguenta. */}
-      <Particulas />
       {/* `brilho-descida`: a cor destes brilhos vai do ciano ao violeta
           conforme a pessoa desce a página. A troca é lenta demais para
           alguém apontar o momento em que aconteceu — só se percebe que
@@ -154,13 +156,6 @@ export default function HeroCinematic() {
         aria-hidden
         className="brilho-descida absolute -left-32 bottom-0 h-[420px] w-[420px] rounded-full blur-[150px]"
       />
-
-      {!poucoMovimento && (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 h-40 animate-scanline bg-gradient-to-b from-transparent via-cyan-neon/[0.05] to-transparent"
-        />
-      )}
 
       {/* ===== Conteúdo ===== */}
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
@@ -182,14 +177,11 @@ export default function HeroCinematic() {
                 aria-hidden
                 className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-cyan-neon shadow-neon-cyan"
               />
-              <TextReveal
-                como="p"
-                passo={26}
-                origem="esquerda"
-                className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan-neon/90 sm:text-xs"
-              >
-                Agência digital · São Paulo · atende todo o Brasil
-              </TextReveal>
+              <Reveal de="esquerda" distancia={12}>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan-neon/90 sm:text-xs">
+                  Agência digital · São Paulo · atende todo o Brasil
+                </p>
+              </Reveal>
             </div>
 
             {/* O título entra palavra por palavra, da esquerda para a
@@ -215,15 +207,19 @@ export default function HeroCinematic() {
               </p>
             </Reveal>
 
-            <TextReveal
-              como="p"
-              passo={18}
-              origem="esquerda"
-              className="mt-8 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg"
-            >
-              A gente resolve: site profissional + agente de IA respondendo em segundos, 24 horas por dia — seu negócio vendendo no digital em até 2 semanas, enquanto você cuida dele.
-            </TextReveal>
+            {/* Parágrafo entra como bloco: palavra por palavra em texto
+                corrido atrasa a leitura justamente da frase que explica
+                o que a empresa faz. */}
+            <Reveal de="esquerda" delay={700} distancia={16}>
+              <p className="mt-8 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg">
+                A gente resolve: site profissional + agente de IA respondendo
+                em segundos, 24 horas por dia — seu negócio vendendo no digital
+                em até 2 semanas, enquanto você cuida dele.
+              </p>
+            </Reveal>
 
+            {/* O ímã fica só no botão principal. Nos dois lado a lado, os
+                botões se mexiam juntos e nenhum se destacava. */}
             <div className="mt-10 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
               <Magnetic>
                 <NeonButton
@@ -234,11 +230,9 @@ export default function HeroCinematic() {
                   Solicitar diagnóstico gratuito
                 </NeonButton>
               </Magnetic>
-              <Magnetic forca={0.2}>
-                <NeonButton href="#servicos" variant="ghost">
-                  Ver serviços e preços
-                </NeonButton>
-              </Magnetic>
+              <NeonButton href="#servicos" variant="ghost">
+                Ver serviços e preços
+              </NeonButton>
             </div>
 
             {/* Três garantias curtas logo abaixo do botão: tiram o medo

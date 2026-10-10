@@ -20,8 +20,10 @@ type Props = {
  * CSS puro, sem biblioteca: cada palavra é um span com um atraso próprio.
  * Sem JavaScript o texto aparece completo — nunca fica invisível.
  *
- * Use nos títulos das seções, não em parágrafo longo: palavra por palavra
- * em texto corrido atrasa a leitura e irrita.
+ * Hoje só o título da capa usa. Já esteve em todos os títulos de seção,
+ * e repetido dez vezes o efeito deixava de impressionar e virava
+ * espera — usado uma vez só, ele continua sendo um momento. Nunca em
+ * parágrafo: palavra por palavra em texto corrido atrasa a leitura.
  *
  * NUNCA use junto com a classe `text-gradient-neon`.
  * O degradê pinta as letras recortando o fundo do parágrafo inteiro, e

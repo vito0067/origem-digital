@@ -11,7 +11,7 @@
 
 html {
   scroll-behavior: smooth;
-  /* Vários blocos entram deslizando de lado (de "direita", 28px). No
+  /* Vários blocos entram deslizando de lado (de "direita", 18px). No
      instante antes de entrarem, eles passam da borda da tela. O body
      já esconde esse excesso, mas alguns navegadores de celular ainda
      deixam arrastar a página para o lado por causa dele. `clip` fecha
@@ -214,20 +214,6 @@ section[id] {
 }
 
 /* ============================================================
-   Cartão que inclina seguindo o cursor
-   Os ângulos vêm de --girox / --giroy, escritos pelo Holofote no
-   mesmo movimento de mouse que já alimenta o brilho — ou seja, o
-   efeito não custa um ouvinte a mais.
-   ============================================================ */
-.inclina {
-  transform: perspective(900px) rotateX(var(--girox, 0deg))
-    rotateY(var(--giroy, 0deg));
-  transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-
-/* ============================================================
    Sanfona do FAQ
    O truque é a linha de grade indo de 0fr a 1fr: dá para animar,
    enquanto `height: auto` não dá. O filho precisa de overflow
@@ -243,37 +229,6 @@ section[id] {
 }
 .sanfona > * {
   overflow: hidden;
-}
-
-/* ============================================================
-   Ponto de luz que acompanha o cursor
-   O tamanho e o brilho vêm do atributo data-estado, escrito pelo
-   CursorGlobal. Fica tudo no CSS para a troca de estado não custar
-   nada de JavaScript.
-   ============================================================ */
-.cursor-anel {
-  width: 30px;
-  height: 30px;
-  opacity: 0.55;
-  transition: width 0.28s ease, height 0.28s ease, opacity 0.28s ease,
-    background-color 0.28s ease, border-color 0.28s ease;
-  will-change: transform;
-}
-.cursor-anel[data-estado="clicavel"] {
-  width: 52px;
-  height: 52px;
-  opacity: 1;
-  background-color: rgba(0, 240, 255, 0.08);
-  border-color: rgba(0, 240, 255, 0.85);
-}
-.cursor-anel[data-estado="escondido"],
-.cursor-miolo[data-estado="escondido"] {
-  opacity: 0;
-}
-.cursor-miolo {
-  opacity: 0.9;
-  transition: opacity 0.28s ease;
-  will-change: transform;
 }
 
 /* ============================================================
@@ -331,48 +286,6 @@ section[id] {
   );
   opacity: calc(0.35 + var(--luz, 0) * 0.65);
   transition: opacity 0.4s ease;
-}
-
-/* ============================================================
-   Pulso lento de respiração — usado nos selos das garantias
-   ============================================================ */
-@keyframes respira {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.18);
-  }
-  50% {
-    transform: scale(1.045);
-    box-shadow: 0 0 34px rgba(0, 240, 255, 0.34);
-  }
-}
-.respira {
-  animation: respira 4.5s ease-in-out infinite;
-}
-
-/* ============================================================
-   Abertura da primeira visita
-   ============================================================ */
-@keyframes marcaEntra {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.94);
-    filter: blur(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-@keyframes enchendo {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
 }
 
 /* Balão de mensagem entrando na conversa da Aurora */
@@ -462,8 +375,6 @@ section[id] {
   .trilha { transform: none; }
   /* os contornos aparecem prontos, em vez de ficarem invisíveis */
   .escudo-traco { stroke-dashoffset: 0; }
-  .respira { animation: none !important; }
-  .inclina { transform: none !important; }
   .celular-3d { transform: none !important; }
   .brilho-passa::after { display: none; }
   /* a sanfona abre e fecha na hora, sem deslizar */

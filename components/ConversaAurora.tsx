@@ -87,10 +87,13 @@ const conversa: Fala[] = [
 
 /**
  * Quantos graus o celular gira de ponta a ponta ao seguir o cursor.
- * Fica maior do que o dos cartões (8): aqui o objeto É o assunto, e
- * uma inclinação tímida não leria como aparelho de verdade.
+ *
+ * Já foi 16. Com a conversa se digitando dentro dele, o aparelho
+ * balançando atrás do mouse disputava o olhar com as mensagens — e a
+ * conversa é o que vende. Em 6 ainda dá para sentir a espessura do
+ * aparelho, mas ele fica quieto o bastante para a leitura.
  */
-const GIRO_CELULAR = 16;
+const GIRO_CELULAR = 6;
 
 /** Pausa antes de o cliente escrever a próxima mensagem. */
 const PAUSA_CLIENTE = 800;

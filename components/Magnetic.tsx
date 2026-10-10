@@ -10,6 +10,14 @@ import { useEffect, useRef } from "react";
  *
  * Só em aparelho com mouse. No toque, nada acontece — o que é o certo,
  * porque no celular o efeito ficaria preso depois do toque.
+ *
+ * Use pouco: hoje só os dois botões onde a pessoa decide (o principal
+ * da capa e o do fechamento). Em todo botão, o efeito deixa de marcar
+ * o que importa e o site inteiro parece instável.
+ *
+ * O laço de animação DORME quando o botão chega ao lugar e só acorda
+ * com o próximo movimento do mouse. Antes ele rodava sem parar, a cada
+ * quadro, mesmo com a pessoa parada lendo.
  */
 export default function Magnetic({
   children,
@@ -31,7 +39,21 @@ export default function Magnetic({
     const destino = { x: 0, y: 0 };
     const atual = { x: 0, y: 0 };
     let animacao = 0;
-    let perto = false;
+    let rodando = false;
+
+    const quadro = () => {
+      const fx = destino.x - atual.x;
+      const fy = destino.y - atual.y;
+      atual.x += fx * 0.15;
+      atual.y += fy * 0.15;
+      el.style.transform = `translate3d(${atual.x.toFixed(2)}px,${atual.y.toFixed(2)}px,0)`;
+
+      if (Math.abs(fx) < 0.05 && Math.abs(fy) < 0.05) {
+        rodando = false; // chegou: dorme até o mouse se mexer de novo
+        return;
+      }
+      animacao = requestAnimationFrame(quadro);
+    };
 
     const aoMover = (e: MouseEvent) => {
       const r = el.getBoundingClientRect();
@@ -41,25 +63,22 @@ export default function Magnetic({
       const dy = e.clientY - cy;
       // campo de atração: o raio do botão mais 90px em volta
       const alcance = Math.max(r.width, r.height) / 2 + 90;
-      perto = Math.hypot(dx, dy) < alcance;
-      if (perto) {
-        destino.x = dx * forca;
-        destino.y = dy * forca;
-      } else {
-        destino.x = 0;
-        destino.y = 0;
+      const perto = Math.hypot(dx, dy) < alcance;
+      const nx = perto ? dx * forca : 0;
+      const ny = perto ? dy * forca : 0;
+
+      // longe e já em repouso: nada a fazer, nem acordar o laço
+      if (nx === destino.x && ny === destino.y) return;
+      destino.x = nx;
+      destino.y = ny;
+
+      if (!rodando) {
+        rodando = true;
+        animacao = requestAnimationFrame(quadro);
       }
     };
 
-    const quadro = () => {
-      animacao = requestAnimationFrame(quadro);
-      atual.x += (destino.x - atual.x) * 0.15;
-      atual.y += (destino.y - atual.y) * 0.15;
-      el.style.transform = `translate3d(${atual.x.toFixed(2)}px,${atual.y.toFixed(2)}px,0)`;
-    };
-
     window.addEventListener("mousemove", aoMover, { passive: true });
-    animacao = requestAnimationFrame(quadro);
 
     return () => {
       window.removeEventListener("mousemove", aoMover);

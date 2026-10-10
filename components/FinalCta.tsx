@@ -1,15 +1,17 @@
 import Reveal from "./Reveal";
 import NeonButton from "./NeonButton";
-import TextReveal from "./TextReveal";
 import Magnetic from "./Magnetic";
 
 /**
  * FECHAMENTO
  *
- * A frase de impacto ocupa a esquerda, grande, entrando palavra por
- * palavra. O cartão de ação fica à direita, destacado do fundo. É o
- * último bloco antes do rodapé: a frase convence e o botão está ali
- * do lado, sem a pessoa precisar procurar.
+ * A frase de impacto ocupa a esquerda, grande. O cartão de ação fica à
+ * direita, destacado do fundo. É o último bloco antes do rodapé: a
+ * frase convence e o botão está ali do lado, sem a pessoa precisar
+ * procurar.
+ *
+ * O botão daqui é um dos dois do site que ainda têm o ímã (o outro é o
+ * principal da capa): são os dois pontos onde a pessoa decide.
  */
 
 const beneficios = [
@@ -37,18 +39,13 @@ export default function FinalCta() {
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* ---- A frase ---- */}
           <div className="lg:col-span-7">
-            <TextReveal
-              como="h2"
-              passo={70}
-              origem="esquerda"
-              className="equilibrado font-display text-[2.4rem] font-bold leading-[1.06] text-white sm:text-5xl lg:text-[3.6rem]"
-            >
-              Cada dia sem site e sem IA é
-            </TextReveal>
-            {/* Bloco só, e não palavra por palavra: o degradê do
-                `text-gradient-neon` não sobrevive à máscara que o
-                TextReveal coloca em volta de cada palavra. */}
-            <Reveal de="esquerda" delay={420} distancia={36}>
+            {/* As duas linhas entram em sequência, cada uma como bloco. */}
+            <Reveal de="esquerda">
+              <h2 className="equilibrado font-display text-[2.4rem] font-bold leading-[1.06] text-white sm:text-5xl lg:text-[3.6rem]">
+                Cada dia sem site e sem IA é
+              </h2>
+            </Reveal>
+            <Reveal de="esquerda" delay={180}>
               <p className="equilibrado font-display text-[2.4rem] font-bold leading-[1.06] text-gradient-neon sm:text-5xl lg:text-[3.6rem]">
                 cliente indo embora.
               </p>

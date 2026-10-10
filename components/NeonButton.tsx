@@ -18,11 +18,15 @@ export default function NeonButton({
   // mouse chega. É só CSS, num pseudo-elemento — não acrescenta
   // marcação nem ouvinte nenhum.
   const base =
-    "brilho-passa inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-sm font-semibold tracking-wide transition-transform duration-200 hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-neon";
+    "brilho-passa inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-sm font-semibold tracking-wide transition-[transform,box-shadow] duration-200 hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-neon";
 
+  // O botão principal tem brilho FIXO, que acende mais quando o mouse
+  // chega. Antes o brilho pulsava sem parar — e como há um botão
+  // principal em quase toda seção, a página inteira piscava. Um botão
+  // que pisca chama atenção; oito piscando juntos viram ruído.
   const styles =
     variant === "primary"
-      ? "bg-cyan-neon text-abyss animate-pulse-glow"
+      ? "bg-cyan-neon text-abyss shadow-neon-cyan hover:shadow-[0_0_32px_rgba(0,240,255,0.6),0_0_96px_rgba(0,240,255,0.25)]"
       : "border border-white/15 bg-white/[0.05] text-white backdrop-blur-xl shadow-glass hover:border-violet-neon/60 hover:shadow-neon-violet";
 
   const externalProps = external

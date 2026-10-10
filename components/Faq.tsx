@@ -4,7 +4,6 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 import NeonButton from "./NeonButton";
 import TituloSecao from "./TituloSecao";
-import Magnetic from "./Magnetic";
 
 /**
  * FAQ
@@ -109,15 +108,13 @@ export default function Faq() {
 
             <Reveal de="esquerda" delay={220}>
               <div className="mt-9">
-                <Magnetic forca={0.2}>
-                  <NeonButton
-                    href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20os%20servi%C3%A7os."
-                    variant="ghost"
-                    external
-                  >
-                    Ainda tem dúvidas? Chama no WhatsApp
-                  </NeonButton>
-                </Magnetic>
+                <NeonButton
+                  href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20os%20servi%C3%A7os."
+                  variant="ghost"
+                  external
+                >
+                  Ainda tem dúvidas? Chama no WhatsApp
+                </NeonButton>
               </div>
             </Reveal>
           </div>

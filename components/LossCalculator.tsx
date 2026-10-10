@@ -5,7 +5,6 @@ import Reveal from "./Reveal";
 import NeonButton from "./NeonButton";
 import TituloSecao from "./TituloSecao";
 import Contador from "./Contador";
-import Magnetic from "./Magnetic";
 import { medir, EVENTOS } from "@/lib/medir";
 
 /**
@@ -213,14 +212,12 @@ export default function LossCalculator() {
               </p>
 
               <div className="relative mt-8">
-                <Magnetic>
-                  <NeonButton
-                    href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Fiz%20a%20conta%20no%20site%20e%20quero%20parar%20de%20perder%20clientes."
-                    external
-                  >
-                    Quero parar de perder esse dinheiro
-                  </NeonButton>
-                </Magnetic>
+                <NeonButton
+                  href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Fiz%20a%20conta%20no%20site%20e%20quero%20parar%20de%20perder%20clientes."
+                  external
+                >
+                  Quero parar de perder esse dinheiro
+                </NeonButton>
               </div>
             </div>
           </Reveal>

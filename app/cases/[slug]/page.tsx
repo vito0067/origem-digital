@@ -49,7 +49,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Vi%20o%20case%20no%20site%20e%20quero%20um%20projeto%20assim."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-xl bg-cyan-neon px-7 py-3.5 text-sm font-semibold text-abyss animate-pulse-glow"
+          className="inline-flex items-center justify-center rounded-xl bg-cyan-neon px-7 py-3.5 text-sm font-semibold text-abyss shadow-neon-cyan transition-[transform,box-shadow] hover:scale-[1.03] hover:shadow-[0_0_32px_rgba(0,240,255,0.6),0_0_96px_rgba(0,240,255,0.25)]"
         >
           Quero um projeto assim
         </a>

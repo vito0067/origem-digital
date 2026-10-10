@@ -5,8 +5,6 @@ import Reveal from "./Reveal";
 import NeonButton from "./NeonButton";
 import TituloSecao from "./TituloSecao";
 import Holofote from "./Holofote";
-import Magnetic from "./Magnetic";
-import CursorArea from "./CursorArea";
 
 /**
  * SISTEMA ORIGEM + DIFERENCIAIS — as duas viraram uma seção.
@@ -217,12 +215,10 @@ export default function SistemaOrigem() {
               direita: o cartão cortado na borda avisa que tem mais coisa
               adiante, sem precisar de seta.
 
-              O cursor vira um disco escrito "role" enquanto o mouse passa
-              por cima — é o aviso no lugar onde o olho já está. */}
-          <CursorArea
-            className="mt-12 overflow-hidden"
-            rotulo={prender && excedente > 0 ? "role" : "arraste"}
-          >
+              Já houve aqui um disco escrito "role" que tomava o lugar do
+              cursor. Saiu: ele escondia a seta do mouse, e o aviso
+              "role para avançar →" logo acima já diz a mesma coisa. */}
+          <div className="mt-12 overflow-hidden">
             <div
               ref={trilho}
               className={`mx-auto max-w-6xl px-6 ${
@@ -245,18 +241,16 @@ export default function SistemaOrigem() {
                 {etapas.map(cartao)}
               </ol>
             </div>
-          </CursorArea>
+          </div>
 
           <div className="mx-auto mt-12 w-full max-w-6xl px-6">
             <Reveal>
-              <Magnetic>
-                <NeonButton
-                  href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20pelo%20Sistema%20Origem%20com%20o%20diagn%C3%B3stico%20gratuito."
-                  external
-                >
-                  Começar pelo diagnóstico gratuito
-                </NeonButton>
-              </Magnetic>
+              <NeonButton
+                href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20pelo%20Sistema%20Origem%20com%20o%20diagn%C3%B3stico%20gratuito."
+                external
+              >
+                Começar pelo diagnóstico gratuito
+              </NeonButton>
             </Reveal>
           </div>
         </div>

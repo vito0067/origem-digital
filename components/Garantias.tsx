@@ -86,14 +86,14 @@ export default function Garantias() {
             delay={i * 100}
           >
             <Holofote className="glass-card flex h-full flex-col items-center p-8 text-center transition-colors duration-300 hover:border-cyan-neon/40">
-              {/* O selo respira devagar: cresce e diminui uns 4%, num
-                  ciclo de quatro segundos e meio. Cada um começa o
-                  ciclo num momento diferente, senão os três pulsariam
-                  juntos e pareceria um alarme piscando. */}
+              {/* O selo é parado. Já "respirou" — crescendo e
+                  diminuindo sem fim — mas o movimento aqui é o escudo
+                  se desenhando uma vez; o pulso eterno ao lado de uma
+                  promessa de garantia lia mais como alarme do que como
+                  segurança. */}
               <span
                 aria-hidden
-                className="respira flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-neon/40 bg-cyan-neon/[0.07]"
-                style={{ animationDelay: `${i * 1.3}s` }}
+                className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-neon/40 bg-cyan-neon/[0.07] shadow-[0_0_20px_rgba(0,240,255,0.18)]"
               >
                 <Escudo />
               </span>

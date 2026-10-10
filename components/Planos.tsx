@@ -5,7 +5,6 @@ import Reveal from "./Reveal";
 import NeonButton from "./NeonButton";
 import TituloSecao from "./TituloSecao";
 import Holofote from "./Holofote";
-import Magnetic from "./Magnetic";
 import Garantias from "./Garantias";
 import ContagemOferta from "./ContagemOferta";
 import Contador from "./Contador";
@@ -135,7 +134,6 @@ export default function Planos() {
             <Reveal key={s.title} de={i === 0 ? "esquerda" : "direita"} delay={i * 110}>
               <Holofote
                 as="article"
-                inclinar
                 className={`glass-card flex h-full flex-col p-8 transition-all duration-300 ${BRILHO[s.accent]}`}
               >
                 <p
@@ -299,15 +297,13 @@ export default function Planos() {
                 </p>
 
                 <div className="mt-8">
-                  <Magnetic>
-                    <NeonButton
-                      href={`${WA}Ol%C3%A1!%20Quero%20garantir%20o%20Pacote%20In%C3%ADcio%20Digital%20com%20desconto%20deste%20m%C3%AAs.`}
-                      variant="primary"
-                      external
-                    >
-                      Garantir minha condição de {mes}
-                    </NeonButton>
-                  </Magnetic>
+                  <NeonButton
+                    href={`${WA}Ol%C3%A1!%20Quero%20garantir%20o%20Pacote%20In%C3%ADcio%20Digital%20com%20desconto%20deste%20m%C3%AAs.`}
+                    variant="primary"
+                    external
+                  >
+                    Garantir minha condição de {mes}
+                  </NeonButton>
                 </div>
                 <p className="mt-4 text-xs text-slate-500">
                   Condição válida para contratações realizadas até o fim do mês.

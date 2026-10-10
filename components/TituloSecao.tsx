@@ -1,5 +1,4 @@
 import Reveal from "./Reveal";
-import TextReveal from "./TextReveal";
 
 type Props = {
   /** Palavra-chave pequena acima do título. */
@@ -22,12 +21,17 @@ const TOM = {
 
 /**
  * Cabeçalho padrão de seção: etiqueta, traço que se desenha da esquerda
- * para a direita, título entrando palavra por palavra e linha de apoio.
+ * para a direita, título e linha de apoio.
  *
  * Existe para que toda seção comece do mesmo jeito. Quando o começo é
  * sempre igual, o olho para de procurar onde a informação começa e a
  * página inteira parece mais organizada — é o que separa um site caro
  * de um amontoado de blocos bonitos.
+ *
+ * O título entra como bloco, junto com o resto. Já entrou palavra por
+ * palavra — mas em dez seções seguidas o efeito deixa de impressionar
+ * e vira espera. Agora o "palavra por palavra" é exclusivo do título da
+ * capa, e por isso continua chamando atenção lá.
  */
 export default function TituloSecao({
   etiqueta,
@@ -51,14 +55,9 @@ export default function TituloSecao({
           <span aria-hidden className="regua-neon w-16 sm:w-24" />
         </div>
 
-        <TextReveal
-          como="h2"
-          passo={52}
-          origem="esquerda"
-          className="equilibrado mt-5 max-w-3xl font-display text-3xl font-bold leading-[1.1] text-white sm:text-4xl lg:text-[2.75rem]"
-        >
+        <h2 className="equilibrado mt-5 max-w-3xl font-display text-3xl font-bold leading-[1.1] text-white sm:text-4xl lg:text-[2.75rem]">
           {titulo}
-        </TextReveal>
+        </h2>
 
         {apoio && (
           <p

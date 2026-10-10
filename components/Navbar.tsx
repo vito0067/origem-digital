@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Marca from "./Marca";
-import Magnetic from "./Magnetic";
 
 /**
  * BARRA DO TOPO
@@ -126,27 +125,23 @@ export default function Navbar() {
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          {/* O ímã fica só neste botão, e não em todos os links do
-              menu. Cada Magnetic mantém o próprio laço de animação
-              rodando; colocar em cinco links custaria cinco laços para
-              um efeito que, repetido, faz o menu inteiro parecer
-              instável. Aqui ele marca o botão que importa. */}
-          <Magnetic forca={0.18}>
-            <Link
-              href={WA}
-              target="_blank"
-              rel="noopener noreferrer"
-              // whitespace-nowrap: o botão nunca quebra em duas linhas
-              // (no Samsung ele virava um bloco alto que invadia a marca)
-              className="brilho-passa inline-block whitespace-nowrap rounded-lg border border-cyan-neon/40 bg-cyan-neon/10 px-3 py-2 text-xs font-medium text-cyan-neon backdrop-blur-md transition-shadow hover:shadow-neon-cyan sm:px-4 sm:text-sm"
-            >
-              Diagnóstico
-              {/* "gratuito" só entra quando cabe. Abaixo de 400px, o
-                  botão diz só "Diagnóstico" — a palavra "gratuito" já
-                  aparece grande no botão principal da capa, logo abaixo. */}
-              <span className="hidden min-[400px]:inline"> gratuito</span>
-            </Link>
-          </Magnetic>
+          {/* Sem ímã: numa barra fixa, que fica na tela a página
+              inteira, um botão que se mexe atrás do mouse distrai em
+              vez de convidar. O brilho ao passar o mouse já basta. */}
+          <Link
+            href={WA}
+            target="_blank"
+            rel="noopener noreferrer"
+            // whitespace-nowrap: o botão nunca quebra em duas linhas
+            // (no Samsung ele virava um bloco alto que invadia a marca)
+            className="brilho-passa inline-block whitespace-nowrap rounded-lg border border-cyan-neon/40 bg-cyan-neon/10 px-3 py-2 text-xs font-medium text-cyan-neon backdrop-blur-md transition-shadow hover:shadow-neon-cyan sm:px-4 sm:text-sm"
+          >
+            Diagnóstico
+            {/* "gratuito" só entra quando cabe. Abaixo de 400px, o
+                botão diz só "Diagnóstico" — a palavra "gratuito" já
+                aparece grande no botão principal da capa, logo abaixo. */}
+            <span className="hidden min-[400px]:inline"> gratuito</span>
+          </Link>
 
           {/* Botão do menu — só no celular e no tablet */}
           <button

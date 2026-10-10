@@ -1,7 +1,6 @@
 import Reveal from "./Reveal";
 import NeonButton from "./NeonButton";
 import TituloSecao from "./TituloSecao";
-import Magnetic from "./Magnetic";
 import ConversaAurora from "./ConversaAurora";
 import AntesDepois from "./AntesDepois";
 
@@ -113,14 +112,12 @@ export default function AgentDemo() {
 
             <Reveal de="direita" delay={400}>
               <div className="mt-9">
-                <Magnetic>
-                  <NeonButton
-                    href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20agente%20de%20IA%20e%20quero%20um%20para%20o%20meu%20neg%C3%B3cio."
-                    external
-                  >
-                    Quero um agente assim
-                  </NeonButton>
-                </Magnetic>
+                <NeonButton
+                  href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20agente%20de%20IA%20e%20quero%20um%20para%20o%20meu%20neg%C3%B3cio."
+                  external
+                >
+                  Quero um agente assim
+                </NeonButton>
               </div>
             </Reveal>
 

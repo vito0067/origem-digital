@@ -34,13 +34,20 @@ const DESLOCAMENTO = {
  * é o gancho que o traço neon dos títulos usa para se desenhar da
  * esquerda para a direita (regra `.desenhado .regua-neon` no globals.css).
  *
+ * MAIS CURTO E SEM DESFOQUE (limpeza de outubro/2026). Antes cada bloco
+ * percorria 28px e saía de um desfoque. Repetido em quase todo bloco da
+ * página, isso dava a sensação de o site inteiro estar "chegando" o
+ * tempo todo. Com 18px e sem desfoque a entrada continua perceptível,
+ * mas some do caminho da leitura — e desfoque animado ainda custa caro
+ * para celular simples.
+ *
  * Para quem pediu menos movimento no sistema, aparece tudo pronto.
  */
 export default function Reveal({
   children,
   delay = 0,
   de = "baixo",
-  distancia = 28,
+  distancia = 18,
   className = "",
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -77,11 +84,7 @@ export default function Reveal({
       style={{
         transform: visivel ? "none" : DESLOCAMENTO[de](distancia),
         opacity: visivel ? 1 : 0,
-        // O desfoque sumindo junto com o movimento é o que faz o bloco
-        // parecer entrar em foco, em vez de só deslizar.
-        filter: visivel ? "none" : "blur(6px)",
-        transition:
-          "transform .85s cubic-bezier(.22,1,.36,1), opacity .7s ease, filter .7s ease",
+        transition: "transform .7s cubic-bezier(.22,1,.36,1), opacity .6s ease",
         // Depois do atalho `transition`, senão o atraso é zerado por ele.
         transitionDelay: `${delay}ms`,
       }}

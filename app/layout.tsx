@@ -4,9 +4,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Medicao from "@/components/Medicao";
 import AvisoCookies from "@/components/AvisoCookies";
 import ParallaxGrade from "@/components/ParallaxGrade";
-import TransicaoPagina from "@/components/TransicaoPagina";
-import CursorGlobal from "@/components/CursorGlobal";
-import Abertura from "@/components/Abertura";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -92,10 +89,12 @@ export default function RootLayout({
         <Medicao />
         <AvisoCookies />
 
+        {/* Saíram daqui, na limpeza de animações de outubro/2026: a
+            abertura com a marca, a cortina entre páginas e o ponto de
+            luz que seguia o mouse. Os três atrasavam ou disputavam a
+            atenção com o conteúdo. Os arquivos estão em
+            _antigos/componentes-removidos, se um dia quiser de volta. */}
         <ParallaxGrade />
-        <TransicaoPagina />
-        <CursorGlobal />
-        <Abertura />
       </body>
     </html>
   );

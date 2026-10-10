@@ -220,7 +220,7 @@ export default function DiagnosticQuiz() {
                     href={`https://wa.me/5511939299209?text=${waText}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 inline-flex w-full animate-pulse-glow items-center justify-center rounded-xl bg-cyan-neon px-7 py-3.5 text-sm font-semibold text-abyss transition-transform hover:scale-[1.03]"
+                    className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-cyan-neon px-7 py-3.5 text-sm font-semibold text-abyss shadow-neon-cyan transition-[transform,box-shadow] hover:scale-[1.03] hover:shadow-[0_0_32px_rgba(0,240,255,0.6),0_0_96px_rgba(0,240,255,0.25)]"
                   >
                     Solicitar minha consultoria gratuita
                   </a>
