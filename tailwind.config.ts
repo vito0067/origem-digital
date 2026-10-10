@@ -18,6 +18,25 @@ const config: Config = {
         violet: {
           neon: "#A855F7",
         },
+        /**
+         * CINZA DOS TEXTOS PEQUENOS, MAIS CLARO DO QUE O PADRÃO.
+         *
+         * O `slate-500` original (#64748B) é o cinza das letras miúdas do
+         * site: observações, rodapé, legendas, horários. Sobre o fundo
+         * escuro ele dava contraste de 4,1 para 1 — abaixo do mínimo de
+         * 4,5 recomendado para texto pequeno. No celular, no sol, essas
+         * linhas sumiam.
+         *
+         * Clareando o tom aqui, num lugar só, os 37 textos que usam essa
+         * cor passam a 5,8 para 1 sem mexer em nenhum componente. E ele
+         * continua mais escuro que o `slate-400` do texto corrido (7,6
+         * para 1), então a hierarquia entre texto e observação se mantém.
+         *
+         * Só a tonalidade 500 muda; as outras do cinza seguem as padrão.
+         */
+        slate: {
+          500: "#7F8EA3",
+        },
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
