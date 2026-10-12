@@ -25,7 +25,9 @@ export const cases: Case[] = [
     problema:
       "Como toda empresa nova, precisávamos provar valor antes do primeiro cliente: apresentar serviços com clareza, transmitir autoridade técnica e atender interessados a qualquer hora — sem uma equipe de plantão.",
     solucao:
-      "Aplicamos o Sistema Origem™ em nós mesmos: site profissional com vídeo cinematográfico, demonstração real do agente de IA, calculadora de perda de clientes, diagnóstico interativo e agente de IA atendendo o WhatsApp 24/7 com nossos preços e serviços.",
+      // "vídeo cinematográfico" saiu (out/2026): a capa nova mostra a
+      // conversa da Aurora no lugar do vídeo, e o case precisa dizer a verdade.
+      "Aplicamos o Sistema Origem™ em nós mesmos: site profissional com preços abertos, uma demonstração da atendente respondendo as perguntas mais comuns e o agente de IA atendendo o WhatsApp 24/7 com nossos preços e serviços.",
     resultado:
       "Este site que você está navegando é o resultado — cada seção, animação e automação daqui é exatamente o que entregamos para nossos clientes. O produto é a prova.",
   },

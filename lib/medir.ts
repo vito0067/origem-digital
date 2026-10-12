@@ -42,4 +42,5 @@ export const EVENTOS = {
   diagnostico: "diagnostico_concluido",
   calculadora: "calculadora_usada",
   projeto: "projeto_visitado",
+  pergunta: "pergunta_feita",
 } as const;

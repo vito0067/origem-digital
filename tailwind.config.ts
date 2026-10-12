@@ -1,77 +1,60 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * "GELO" — A IDENTIDADE DESTA VERSÃO (outubro/2026).
+ *
+ * Futurismo limpo e calmo. O site de tecnologia típico grita: fundo
+ * preto, neon, esfera 3D girando. Este fala baixo: muito branco, vidro
+ * fosco, uma cor de destaque só — e o movimento acontece uma vez, na
+ * hora certa, e para.
+ *
+ * AS QUATRO CORES QUE O VITO ESCOLHEU:
+ *   #F8FAFC  gelo     — o fundo
+ *   #BAE6FD  ceu      — o azul-claro (brilhos, realces suaves)
+ *   #818CF8  violeta  — o destaque
+ *   #312E81  noite    — o índigo profundo (botão principal, títulos)
+ *
+ * E AS DE APOIO, PARA O TEXTO SER LEGÍVEL:
+ *   tinta    — o texto principal (índigo quase preto)
+ *   grafite  — texto corrido
+ *   cinza    — legendas
+ *   linha    — bordas finas
+ *   azul     — links e palavras em destaque (o violeta, escurecido o
+ *              bastante para passar no teste de contraste)
+ */
 const config: Config = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        abyss: "#0B0D17",
-        // Um degrau acima do abyss. Serve para separar uma faixa da outra
-        // sem desenhar borda: o olho percebe a mudança de seção sozinho.
-        surface: "#0E1120",
-        cyan: {
-          neon: "#00F0FF",
-        },
-        violet: {
-          neon: "#A855F7",
-        },
-        /**
-         * CINZA DOS TEXTOS PEQUENOS, MAIS CLARO DO QUE O PADRÃO.
-         *
-         * O `slate-500` original (#64748B) é o cinza das letras miúdas do
-         * site: observações, rodapé, legendas, horários. Sobre o fundo
-         * escuro ele dava contraste de 4,1 para 1 — abaixo do mínimo de
-         * 4,5 recomendado para texto pequeno. No celular, no sol, essas
-         * linhas sumiam.
-         *
-         * Clareando o tom aqui, num lugar só, os 37 textos que usam essa
-         * cor passam a 5,8 para 1 sem mexer em nenhum componente. E ele
-         * continua mais escuro que o `slate-400` do texto corrido (7,6
-         * para 1), então a hierarquia entre texto e observação se mantém.
-         *
-         * Só a tonalidade 500 muda; as outras do cinza seguem as padrão.
-         */
-        slate: {
-          500: "#7F8EA3",
-        },
+        gelo: "#F8FAFC",
+        papel: "#FFFFFF",
+        nevoa: "#F1F5FB",
+        ceu: { DEFAULT: "#BAE6FD", claro: "#E0F2FE", suave: "#F0F9FF" },
+        violeta: { DEFAULT: "#818CF8", claro: "#C7D2FE", suave: "#EEF2FF" },
+        noite: { DEFAULT: "#312E81", claro: "#3F3A9E", escuro: "#1E1B4B" },
+        tinta: "#1E1B4B",
+        grafite: "#475569",
+        cinza: "#64748B",
+        linha: "#E2E8F0",
+        azul: { DEFAULT: "#4F46E5", escuro: "#3730A3", claro: "#A5B4FC", suave: "#EEF2FF" },
+        zap: "#25D366",
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        body: ["var(--font-body)", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        body: ["var(--font-display)", "system-ui", "sans-serif"],
+        serifa: ["var(--font-serifa)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        "neon-cyan": "0 0 24px rgba(0, 240, 255, 0.35), 0 0 64px rgba(0, 240, 255, 0.15)",
-        "neon-violet": "0 0 24px rgba(168, 85, 247, 0.35), 0 0 64px rgba(168, 85, 247, 0.15)",
-        "glass": "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.45)",
+        vidro: "inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(30,27,75,.04), 0 18px 40px -18px rgba(49,46,129,.22)",
+        flutua: "inset 0 1px 0 rgba(255,255,255,.9), 0 2px 6px rgba(30,27,75,.05), 0 34px 70px -28px rgba(49,46,129,.35)",
+        botao: "inset 0 1px 0 rgba(255,255,255,.18), 0 1px 2px rgba(30,27,75,.2), 0 10px 24px -10px rgba(49,46,129,.6)",
+        cartao: "0 1px 2px rgba(30,27,75,.05), 0 8px 24px -12px rgba(49,46,129,.18)",
+        celular: "0 0 0 1px rgba(30,27,75,.06), 0 50px 90px -30px rgba(49,46,129,.45), 0 20px 40px -20px rgba(30,27,75,.25)",
       },
-      // Saíram daqui na limpeza de animações (outubro/2026): o brilho
-      // que pulsava sem parar nos botões principais (pulseGlow) e a
-      // faixa de luz que varria a capa de cima a baixo (scanline).
-      keyframes: {
-        floatY: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        // Faixa infinita que desliza da direita para a esquerda.
-        // Metade da largura porque o conteúdo é duplicado no HTML —
-        // quando a primeira cópia sai, a segunda já está no lugar dela.
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        // Traço que se desenha da esquerda para a direita sob os títulos.
-        drawLine: {
-          "0%": { transform: "scaleX(0)" },
-          "100%": { transform: "scaleX(1)" },
-        },
-      },
-      animation: {
-        "float-y": "floatY 6s ease-in-out infinite",
-        "marquee": "marquee 38s linear infinite",
-        "draw-line": "drawLine 1.1s cubic-bezier(.22,1,.36,1) forwards",
+      maxWidth: {
+        pagina: "76rem",
       },
     },
   },

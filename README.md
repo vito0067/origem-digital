@@ -1,19 +1,21 @@
-# Origem Digital — site
+# Origem Digital — "Gelo" (versão de outubro/2026)
 
-Site da Origem Digital: **[origemdigitalsite.com.br](https://origemdigitalsite.com.br)**.
-Sites profissionais e agentes de IA no WhatsApp (a Aurora) para pequenas empresas.
+**"O cliente chamou. Já foi respondido."**
+
+Futurismo limpo e calmo. O site de tecnologia típico grita (fundo preto, neon, esfera 3D girando); este fala baixo: muito branco, vidro fosco, uma cor de destaque — e o movimento acontece uma vez, na hora certa, e para.
+
+Cores: **#F8FAFC** (gelo) · **#BAE6FD** (azul-claro) · **#818CF8** (violeta) · **#312E81** (índigo).
+Letras: Instrument Sans (tudo), Instrument Serif itálico (uma frase por título), DM Mono (etiquetas).
 
 Feito em Next.js 14 + TypeScript + Tailwind CSS, publicado na Vercel.
 
 ---
 
-## Como uma mudança vai ao ar
+## As três coisas que só este site tem
 
-1. O arquivo é editado ou enviado aqui no GitHub (pelo navegador).
-2. A Vercel percebe a mudança e publica sozinha, em 1 a 2 minutos.
-3. O sinal verde ✓ ao lado da última mudança quer dizer que publicou. Um **X vermelho** quer dizer que a publicação falhou — **o site não cai**: continua no ar na versão anterior até a próxima publicação dar certo.
-
-⚠️ Ao enviar arquivos, confira a pasta. Um arquivo de `components/` enviado na raiz do repositório quebra a publicação.
+1. **O símbolo que se monta de pixels** (capa) — o "OD" se forma com milhares de pixels vindos da esquerda, uma vez, quando aparece na tela. Depois chegam a mensagem do cliente (23:47) e a resposta da atendente. `components/SimboloParticulas.tsx` e `components/Capa.tsx`.
+2. **"Pergunte"** — as perguntas frequentes viraram uma conversa: a pessoa escolhe a pergunta e a resposta chega como no WhatsApp. É o FAQ e a demonstração do produto ao mesmo tempo (a tela avisa que é demonstração). `components/Pergunte.tsx`.
+3. **Preços em abas** — Site / Atendente / Os dois, dois planos por aba. `components/Precos.tsx`.
 
 ---
 
@@ -21,42 +23,43 @@ Feito em Next.js 14 + TypeScript + Tailwind CSS, publicado na Vercel.
 
 | O que | Onde |
 |---|---|
-| A página inicial e a ordem das seções | `app/page.tsx` |
-| Cada seção da página inicial | `components/` (um arquivo por seção) |
-| **Todos os preços** | `lib/precos.ts` — fonte única; o resto do site lê daqui |
-| Página para clínicas | `app/clinicas/page.tsx` |
-| Cases (projetos entregues) | `lib/cases.ts` — case novo entra na lista e ganha página sozinho |
-| Termos de Uso | `app/termos/page.tsx` |
-| Política de Privacidade | `app/privacidade/page.tsx` |
-| Página de endereço não encontrado (404) | `app/not-found.tsx` |
-| Cores, fontes e animações gerais | `app/globals.css` e `tailwind.config.ts` |
-| Título e descrição para o Google, dados da empresa | `app/layout.tsx` |
-| Lista de páginas para o Google | `app/sitemap.ts` e `app/robots.ts` |
-| Imagem que aparece ao compartilhar o link | `app/opengraph-image.tsx` |
-| Imagens, vídeo e a marca em 3D | `public/media/` |
-| Ferramentas para comprimir imagem, vídeo e 3D | `scripts/` |
+| A ordem das seções | `app/page.tsx` |
+| **Todos os preços** | `lib/precos.ts` — fonte única |
+| A janela de conversa "Pergunte" | `components/Pergunte.tsx` |
+| Serviços (os dois cartões e a faixa do pacote) | `components/Servicos.tsx` |
+| Os quatro passos e as garantias do contrato | `components/ComoFunciona.tsx` |
+| Ramos e o case | `components/ParaQuem.tsx` |
+| **A lista dos 8 ramos** (página inicial, rodapé, sitemap) | `lib/ramos.ts` |
+| Páginas por ramo (só os textos) | `app/clinicas`, `app/petshops`, `app/saloes`, `app/restaurantes`, `app/oficinas`, `app/lojas`, `app/contabilidades`, `app/prestadores` |
+| Calculadora e questionário (página /diagnostico) | `app/diagnostico/page.tsx`, `components/Calculadora.tsx`, `components/Questionario.tsx` |
+| Perguntas frequentes (conversa e FAQ do Google) | `lib/perguntas.ts` |
+| O desenho das páginas por ramo | `components/PaginaSegmento.tsx` |
+| Termos, privacidade, cases | `components/PaginaSimples.tsx` |
+| Cores e letras | `tailwind.config.ts`, `app/globals.css`, `app/layout.tsx` |
+| Imagem de compartilhamento no WhatsApp | `app/**/opengraph-image.png` — imagens prontas, geradas com as fontes do site (peça ao Claude para refazer se mudar o texto) |
+| Ícones (aba do navegador, iPhone) | `app/icon.png`, `app/apple-icon.png` — gerados por `node scripts/gerar-marca.mjs` |
+
+**A logomarca completa** (SVG e PNG, versões para fundo claro e escuro, foto de perfil, ícone de app e a folha de apresentação) está em `Documents\Origem Digital\imagens-e-logos\logomarca-gelo-2026\`.
 
 ---
 
 ## Regras que evitam estrago
 
-**O contrato manda, o site acompanha.** Prazo, pagamento, fidelidade, cancelamento e garantias do site seguem o Contrato Master revisado. Pelo Código de Defesa do Consumidor, o que o site anuncia vale como parte do contrato — então o site nunca promete mais do que o contrato. Esses textos estão em `components/Garantias.tsx`, `components/Faq.tsx`, `app/termos/page.tsx` e `app/clinicas/page.tsx`.
+**O contrato manda, o site acompanha.** Prazo, pagamento, fidelidade, cancelamento e garantias seguem o Contrato Master revisado (out/2026). Esses textos estão em `lib/perguntas.ts`, `components/ComoFunciona.tsx`, `components/Precos.tsx`, `app/termos/page.tsx` e nas páginas por ramo.
 
-**Preço mudou?** Mude em `lib/precos.ts` e também nas respostas do FAQ (`components/Faq.tsx`), na conversa de demonstração (`components/ConversaAurora.tsx` e `components/AntesDepois.tsx`) — e, principalmente, **na tabela de preços da Aurora no n8n**. Senão o agente informa um valor e o site mostra outro.
+**Preço mudou?** Mude em `lib/precos.ts` (o resto do site lê de lá) e na conversa de `components/ConversaAurora.tsx` — e **na tabela de preços da Aurora no n8n**.
 
-**WhatsApp comercial** — (11) 93929-9209 — aparece em 14 arquivos. Para trocar, procure por `5511939299209` em `app/` e `components/`.
+**Regras das páginas por ramo (decididas pelo Vito, out/2026):** restaurante — a atendente tira dúvidas e manda cardápio/link de pedido, não fecha pedido; lojas — fala com loja física e virtual, e o nosso site é vitrine (não loja com carrinho); contabilidade — só informações do escritório, dúvida de imposto vai para o contador; prestadores — personal e estúdios, advogados e consultores, fotógrafos e eventos (nunca dá orientação técnica nem promete resultado). Em todas: a atendente se apresenta como IA, e agenda direto só no Agente Avançado.
 
-**E-mail oficial:** contato@origemdigitalsite.com.br.
+**Animação com moderação.** O símbolo se monta uma vez; a linha dos passos se desenha uma vez; a primeira pergunta se faz sozinha uma vez. Nada fica em looping, nada segue o mouse. Quem pede menos movimento no sistema vê tudo pronto.
 
-**Animação com moderação.** Uma coisa se mexendo por tela, sempre com motivo. Nada de efeito em looping infinito ou que persegue o mouse.
+**WhatsApp comercial** — (11) 93929-9209: procure por `5511939299209`. **E-mail:** contato@origemdigitalsite.com.br.
 
 ---
 
-## Para criar a página de outro ramo (salões, restaurantes…)
+## O que saiu, de propósito, para o site respirar
 
-1. Copie a pasta `app/clinicas` com o nome do ramo (ex.: `app/saloes`).
-2. Troque os textos e a conversa de exemplo.
-3. Acrescente a página em `app/sitemap.ts` e no rodapé (`components/Footer.tsx`).
+Comparação "chatbot × Aurora", método em seis etapas, diferenciais e a carta "sobre". A calculadora e o questionário de diagnóstico continuam no site, na página `/diagnostico` (menu "Faça as contas"). As informações que importam (preço, prazo, contrato, perguntas, ramos, case) continuam todas.
 
 ---
 
@@ -66,5 +69,3 @@ Feito em Next.js 14 + TypeScript + Tailwind CSS, publicado na Vercel.
 npm install
 npm run dev
 ```
-
-Depois, abrir http://localhost:3000.

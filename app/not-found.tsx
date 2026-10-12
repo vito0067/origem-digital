@@ -1,56 +1,36 @@
 import Link from "next/link";
-import Marca from "@/components/Marca";
+import Botao from "@/components/Botao";
+import { Simbolo } from "@/components/Marca";
 
 /**
- * PÁGINA NÃO ENCONTRADA (erro 404)
+ * PÁGINA NÃO ENCONTRADA (erro 404).
  *
- * Sem este arquivo, quem digita um endereço errado — ou abre um link
- * antigo — via a página padrão do Next, em inglês: "This page could not
- * be found." Num site que vende capricho, era a pior tela possível para
- * alguém cair.
- *
- * Aqui a pessoa entende o que houve em português e tem três saídas: a
- * página inicial, a página de clínicas e o WhatsApp. O Next já avisa ao
- * Google que esta página não deve ser indexada.
+ * Uma placa de vidro com três saídas: a página inicial, o WhatsApp e a
+ * página de clínicas. O Next já avisa ao Google que esta página não
+ * deve ser indexada.
  */
 export default function NaoEncontrada() {
   return (
-    <main className="relative flex min-h-svh items-center overflow-hidden bg-abyss px-6 py-24">
-      <div aria-hidden className="neon-grid absolute inset-0 opacity-50" />
-      <div className="relative mx-auto w-full max-w-xl text-center">
-        <Link href="/" aria-label="Origem Digital — página inicial" className="inline-block">
-          <Marca formato="empilhada" />
-        </Link>
-
-        <p className="mt-12 font-display text-6xl font-bold text-gradient-neon">404</p>
-        <h1 className="mt-4 font-display text-2xl font-bold text-white sm:text-3xl">
-          Esta página não existe
+    <main className="ceu-fundo relative flex min-h-svh items-center justify-center px-5 py-24">
+      <div aria-hidden className="pontos pointer-events-none absolute inset-0" />
+      <div className="vidro relative w-full max-w-xl rounded-[32px] px-8 pb-12 pt-12 text-center shadow-flutua sm:px-12">
+        <Simbolo id="od-404" className="mx-auto h-auto w-16" />
+        <p className="mt-6 font-mono text-[13px] uppercase tracking-[0.16em] text-azul">Erro 404</p>
+        <h1 className="mt-3 font-display text-[2rem] font-medium leading-tight tracking-[-0.035em] text-tinta sm:text-[2.4rem]">
+          Esta página <span className="font-serifa font-normal italic text-azul">não existe.</span>
         </h1>
-        <p className="mx-auto mt-4 max-w-md leading-relaxed text-slate-400">
-          O endereço pode ter sido digitado errado ou a página mudou de
-          lugar. Tudo o que importa continua a um clique daqui.
+        <p className="mx-auto mt-4 max-w-md text-[17px] leading-relaxed text-grafite">
+          O endereço pode ter sido digitado errado ou a página mudou de lugar. Tudo o que importa continua a um clique daqui.
         </p>
-
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center rounded-xl bg-cyan-neon px-7 py-3.5 text-sm font-semibold text-abyss shadow-neon-cyan transition-transform hover:scale-[1.03]"
-          >
-            Ir para a página inicial
-          </Link>
-          <a
-            href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20diagn%C3%B3stico%20gratuito."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/[0.05] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:border-cyan-neon/50"
-          >
-            Falar no WhatsApp
-          </a>
+        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Botao href="/" tom="vidro">
+            Página inicial
+          </Botao>
+          <Botao href="https://wa.me/5511939299209?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20diagn%C3%B3stico%20gratuito.">Falar no WhatsApp</Botao>
         </div>
-
-        <p className="mt-8 text-sm text-slate-500">
+        <p className="mt-8 text-[15px] text-cinza">
           Tem clínica?{" "}
-          <Link href="/clinicas" className="text-cyan-neon hover:underline">
+          <Link href="/clinicas" className="font-medium text-azul underline underline-offset-4">
             Veja a página feita para você
           </Link>
           .

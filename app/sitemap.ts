@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { cases } from "@/lib/cases";
+import { ramos } from "@/lib/ramos";
 
 /**
  * O MAPA DO SITE — a lista de páginas entregue pronta ao Google.
@@ -12,10 +13,9 @@ import { cases } from "@/lib/cases";
  * Assim como o robots, não existe arquivo em /public: o Next monta o
  * sitemap.xml a partir daqui ao publicar.
  *
- * AS PÁGINAS DE CASE SAEM DE lib/cases.ts, a mesma lista que cria as
- * páginas de verdade. Case novo que você escrever entra no mapa
- * sozinho — não há uma segunda lista para alguém esquecer de
- * atualizar.
+ * AS PÁGINAS DE RAMO SAEM DE lib/ramos.ts E AS DE CASE DE lib/cases.ts —
+ * as mesmas listas que criam os links do site. Página nova entra no
+ * mapa sozinha; não há uma segunda lista para alguém esquecer.
  *
  * ⚠️ /privacidade ESTÁ FORA DE PROPÓSITO. Ela pede para não ser
  * indexada; colocá-la no mapa seria mandar dois recados contrários
@@ -31,7 +31,7 @@ import { cases } from "@/lib/cases";
  * passa a ignorá-lo. Atualize esta linha quando mexer no TEXTO do
  * site, não a cada ajuste.
  */
-const ATUALIZADO_EM = new Date("2026-10-10");
+const ATUALIZADO_EM = new Date("2026-10-12");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const site = "https://origemdigitalsite.com.br";
@@ -42,18 +42,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: ATUALIZADO_EM,
       changeFrequency: "weekly",
       // A capa é a página que importa: é para ela que vão todos os
-      // links, e é ela que precisa aparecer na busca por "site para
-      // clínica" ou "agente de IA WhatsApp".
+      // links, e é ela que precisa aparecer na busca por "agente de IA
+      // WhatsApp" ou "site para pequena empresa".
       priority: 1,
     },
     {
-      // Página do ramo: feita para aparecer em "site para clínica" e
-      // "atendente de WhatsApp para clínica". Próximos ramos entram
-      // aqui do mesmo jeito.
-      url: `${site}/clinicas`,
+      // As ferramentas: calculadora de clientes perdidos e questionário.
+      url: `${site}/diagnostico`,
       lastModified: ATUALIZADO_EM,
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${site}/cases`,
@@ -69,6 +67,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Páginas por ramo: feitas para aparecer em buscas como "site para
+  // clínica" ou "atendente de WhatsApp para salão".
+  const paginasDeRamo: MetadataRoute.Sitemap = ramos.map((r) => ({
+    url: `${site}/${r.slug}`,
+    lastModified: ATUALIZADO_EM,
+    changeFrequency: "monthly",
+    priority: 0.9,
+  }));
+
   const paginasDeCase: MetadataRoute.Sitemap = cases.map((c) => ({
     url: `${site}/cases/${c.slug}`,
     lastModified: ATUALIZADO_EM,
@@ -76,5 +83,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...paginas, ...paginasDeCase];
+  return [...paginas, ...paginasDeRamo, ...paginasDeCase];
 }

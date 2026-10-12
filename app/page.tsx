@@ -1,111 +1,65 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import HeroCinematic from "@/components/HeroCinematic";
-import Faixa from "@/components/Faixa";
-import Numeros from "@/components/Numeros";
-import About from "@/components/About";
-import AgentDemo from "@/components/AgentDemo";
-import LossCalculator from "@/components/LossCalculator";
-import Planos from "@/components/Planos";
-import SistemaOrigem from "@/components/SistemaOrigem";
-import Projetos from "@/components/Projetos";
-import DiagnosticQuiz from "@/components/DiagnosticQuiz";
-import TecnologiaPorTras from "@/components/TecnologiaPorTras";
-import Faq from "@/components/Faq";
-import FinalCta from "@/components/FinalCta";
-import Footer from "@/components/Footer";
+import Topo from "@/components/Topo";
+import Capa from "@/components/Capa";
+import Servicos from "@/components/Servicos";
+import Pergunte from "@/components/Pergunte";
+import Precos from "@/components/Precos";
+import ChamadaDiagnostico from "@/components/ChamadaDiagnostico";
+import ComoFunciona from "@/components/ComoFunciona";
+import ParaQuem from "@/components/ParaQuem";
+import Fechamento from "@/components/Fechamento";
+import Rodape from "@/components/Rodape";
 import BotaoFlutuante from "@/components/BotaoFlutuante";
+import { perguntas } from "@/lib/perguntas";
 
 /**
- * A ORDEM DA PÁGINA E O PORQUÊ DELA
+ * O GELO, DE CIMA A BAIXO — cada seção com UMA ideia:
  *
- * Eram 15 seções. Agora são 10, sem uma frase a menos: seções que
- * diziam a mesma coisa foram juntadas em vez de cortadas.
+ *   capa          — "O cliente chamou. Já foi respondido." + o símbolo
+ *                   se montando de pixels + a mensagem respondida
+ *   serviços      — site e atendente, em dois cartões
+ *   pergunte      — o FAQ em forma de conversa com a atendente
+ *   preços        — três abas, dois planos por aba
+ *   faça as contas — a faixa que leva à calculadora e ao questionário
+ *                   (as ferramentas moram em /diagnostico)
+ *   como funciona — quatro passos e o que está no contrato
+ *   para quem     — os oito ramos (cada um com página) e o case
+ *   fechamento    — uma frase, o WhatsApp e o Instagram
  *
- *   Sobre        = "Sobre a empresa" + o fluxo da venda + a frase de
- *                  posicionamento ("não criamos apenas sites")
- *   Demonstração = o vídeo do agente + "por que não é um chatbot comum"
- *   Planos       = Serviços + a Oferta do mês + as três garantias
- *   Sistema      = as 6 etapas do método + os 6 diferenciais
- *
- * A sequência também mudou de propósito: a calculadora vem ANTES do
- * preço. A pessoa primeiro vê quanto está perdendo por mês e só então
- * lê quanto custa resolver. Nessa ordem o preço parece pequeno; na
- * ordem antiga ele aparecia sozinho, sem nada para comparar.
- *
- * SAIU DAQUI: a galeria "Na prática", com três prints da demonstração
- * (mostrando a tabela de preços velha dentro da imagem) e três espaços
- * vazios escritos "em breve". No lugar dela entrou Projetos, com
- * trabalho de verdade e link para abrir.
+ * O que saiu da página, de propósito, para ela respirar: comparação com
+ * chatbot, método em seis etapas, diferenciais e carta. A calculadora e
+ * o questionário continuam no site, em /diagnostico.
  */
 
-/**
- * Endereço oficial desta página. Links compartilhados no Instagram e no
- * WhatsApp chegam com pedaços a mais (?fbclid=…, ?igsh=…); sem isto, o
- * Google pode tratar cada variação como uma página diferente. Título e
- * descrição continuam vindo do layout.
- *
- * Fica em cada página, e não no layout, de propósito: no layout, TODAS
- * as páginas herdariam o endereço da capa e diriam ao Google que são
- * cópias dela.
- */
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const segmentos = [
-  "Clínicas",
-  "Salões",
-  "Restaurantes",
-  "Oficinas",
-  "Pet shops",
-  "Lojas",
-  "Contabilidades",
-  "Prestadores de serviço",
-];
+/** As perguntas frequentes também vão para o Google em formato de FAQ. */
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: perguntas.map((p) => ({
+    "@type": "Question",
+    name: p.q,
+    acceptedAnswer: { "@type": "Answer", text: p.a },
+  })),
+};
 
 export default function Home() {
   return (
-    <main className="bg-abyss">
-      <Navbar />
-
-      {/* 1. A capa: a fala à esquerda, a marca em 3D à direita */}
-      <HeroCinematic />
-      <Faixa itens={segmentos} />
-      <Numeros />
-
-      {/* 2. Quem somos e como a venda acontece */}
-      <About />
-
-      {/* 3. A prova: o agente atendendo, e por que não é chatbot */}
-      <AgentDemo />
-
-      {/* 4. A dor, em dinheiro */}
-      <LossCalculator />
-
-      {/* 5. O preço, logo depois da dor — com as garantias ao lado */}
-      <Planos />
-
-      {/* 6. Como trabalhamos e por que nós */}
-      <SistemaOrigem />
-
-      {/* 7. Trabalho entregue, no ar, com link para conferir */}
-      <Projetos />
-
-      {/* 8. O convite interativo */}
-      <DiagnosticQuiz />
-      <TecnologiaPorTras />
-
-      {/* 9. As dúvidas que travam a decisão */}
-      <Faq />
-
-      {/* 10. O fechamento */}
-      <FinalCta />
-
-      <Footer />
-
-      {/* Acompanha a rolagem: a partir da segunda tela, nunca falta um
-          caminho para o WhatsApp. */}
+    <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <Topo />
+      <Capa />
+      <Servicos />
+      <Pergunte />
+      <Precos />
+      <ChamadaDiagnostico />
+      <ComoFunciona />
+      <ParaQuem />
+      <Fechamento />
+      <Rodape />
       <BotaoFlutuante />
     </main>
   );

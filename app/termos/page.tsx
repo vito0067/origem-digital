@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PaginaSimples from "@/components/PaginaSimples";
 import { avulsos, reais } from "@/lib/precos";
 
 export const metadata: Metadata = {
@@ -85,19 +86,19 @@ const secoes: Secao[] = [
     titulo: "6. Fidelidade e cancelamento",
     paragrafos: [
       <>
-        <strong className="text-slate-300">Plano padrão:</strong> fidelidade
+        <strong className="font-semibold text-tinta">Plano padrão:</strong> fidelidade
         mínima de 3 meses, contados do início da mensalidade. Depois disso, o
         contrato segue sem prazo e qualquer parte pode encerrá-lo com 30 dias
         de aviso.
       </>,
       <>
-        <strong className="text-slate-300">Plano anual:</strong> 12 meses de
+        <strong className="font-semibold text-tinta">Plano anual:</strong> 12 meses de
         contrato. Nos primeiros 30 dias da assinatura há carência: o cliente
         pode cancelar sem multa, com aviso prévio e pagando o que já foi
         executado.
       </>,
       <>
-        <strong className="text-slate-300">Multa:</strong> fora da carência e
+        <strong className="font-semibold text-tinta">Multa:</strong> fora da carência e
         do direito de arrependimento, o cancelamento antes do fim da
         fidelidade tem multa de 15% sobre a soma das mensalidades que faltam
         até o fim dela. A multa não é cobrada se o cancelamento vier de uma
@@ -153,7 +154,7 @@ const secoes: Secao[] = [
         privacidade do contratante. Os dados podem ser processados por
         fornecedores de IA e de nuvem com servidores fora do Brasil. Sobre os
         dados de quem fala com a Origem Digital, veja a nossa{" "}
-        <Link href="/privacidade" className="text-cyan-neon hover:underline">
+        <Link href="/privacidade" className="font-medium text-azul underline-offset-4 hover:underline">
           Política de Privacidade
         </Link>
         .
@@ -178,44 +179,27 @@ const secoes: Secao[] = [
 
 export default function TermosPage() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-28">
-      <h1 className="font-display text-3xl font-bold text-white sm:text-4xl">
-        Termos de Uso e Contratação
-      </h1>
-      <p className="mt-3 text-sm text-slate-500">
-        Última atualização: outubro de 2026.
-      </p>
-
+    <PaginaSimples etiqueta="Contratação" titulo="Termos de Uso e Contratação" apoio="Última atualização: outubro de 2026.">
       {/* O aviso que dá a regra do jogo: isto é resumo, o que vale é o
           contrato assinado. */}
-      <p className="mt-8 rounded-xl border border-white/10 bg-white/[0.03] p-5 text-sm leading-relaxed text-slate-400">
-        Este é um resumo das regras de contratação, para você ler antes de
-        decidir. Ele não substitui o Contrato Master de Prestação de Serviços
-        e seus anexos: em caso de diferença, vale o contrato assinado pelas
-        duas partes.
+      <p className="rounded-2xl border border-azul/20 bg-azul-suave p-5 text-[15px] leading-relaxed text-tinta sm:p-6">
+        Este é um resumo das regras de contratação, para você ler antes de decidir. Ele não substitui o Contrato
+        Master de Prestação de Serviços e seus anexos: em caso de diferença, vale o contrato assinado pelas duas
+        partes.
       </p>
 
-      <div className="mt-14 flex flex-col gap-10">
+      <div className="mt-14 flex flex-col gap-12">
         {secoes.map((s) => (
           <section key={s.titulo}>
-            <h2 className="font-display text-lg font-bold text-white">
-              {s.titulo}
-            </h2>
+            <h2 className="font-display text-[1.4rem] font-semibold tracking-[-0.02em] text-tinta">{s.titulo}</h2>
             {s.paragrafos.map((p, i) => (
-              <p key={i} className="mt-4 text-sm leading-relaxed text-slate-400">
+              <p key={i} className="mt-4 text-[16px] leading-relaxed text-grafite">
                 {p}
               </p>
             ))}
           </section>
         ))}
       </div>
-
-      <Link
-        href="/"
-        className="mt-16 inline-block text-sm text-cyan-neon hover:underline"
-      >
-        ← Voltar para o início
-      </Link>
-    </main>
+    </PaginaSimples>
   );
 }

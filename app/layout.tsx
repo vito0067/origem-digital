@@ -1,31 +1,33 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Instrument_Sans, Instrument_Serif, DM_Mono } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import Medicao from "@/components/Medicao";
 import AvisoCookies from "@/components/AvisoCookies";
-import ParallaxGrade from "@/components/ParallaxGrade";
 import "./globals.css";
 
-const display = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-display",
-});
+/**
+ * AS TRÊS LETRAS DO "GELO"
+ *
+ * Instrument Sans — tudo: títulos e texto. Grotesca limpa, um pouco
+ *   estreita, com cara de interface bem desenhada.
+ * Instrument Serif (itálico) — UMA palavra ou frase por título, para
+ *   dar respiro humano no meio da tecnologia. É o que separa este site
+ *   do "site de tecnologia" de sempre.
+ * DM Mono — etiquetas pequenas e números de sistema.
+ *
+ * Só a primeira é pré-carregada; as outras duas aparecem em detalhes.
+ */
+const display = Instrument_Sans({ subsets: ["latin"], variable: "--font-display", axes: ["wdth"] });
+const serifa = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-serifa", preload: false });
+const mono = DM_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono", preload: false });
 
-const body = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-});
-
-const title =
-  "Origem Digital — Sites profissionais e Agentes de IA no WhatsApp para pequenas empresas";
+const title = "Origem Digital — Sites profissionais e Agentes de IA no WhatsApp para pequenas empresas";
 const description =
-  "Pare de perder clientes por falta de site ou demora no WhatsApp. Sites profissionais e atendimento automatizado com IA 24/7, com a primeira versão em até 15 dias úteis. Diagnóstico gratuito.";
+  "Site profissional e atendente de IA no WhatsApp para pequenas empresas. Seu cliente respondido em segundos, 24 horas por dia. Primeira versão em até 15 dias úteis. Diagnóstico gratuito.";
+
+export const viewport: Viewport = { themeColor: "#F8FAFC" };
 
 export const metadata: Metadata = {
-  // Endereço de base do site. Sem ele, a imagem de compartilhamento é
-  // anunciada com caminho relativo, e WhatsApp, Instagram e LinkedIn
-  // não conseguem buscar a imagem — o link volta a aparecer sem figura.
   metadataBase: new URL("https://origemdigitalsite.com.br"),
   title,
   description,
@@ -36,18 +38,8 @@ export const metadata: Metadata = {
     "automação com IA",
     "presença digital",
   ],
-  openGraph: {
-    title,
-    description,
-    locale: "pt_BR",
-    type: "website",
-    siteName: "Origem Digital",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-  },
+  openGraph: { title, description, locale: "pt_BR", type: "website", siteName: "Origem Digital" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const jsonLd = {
@@ -55,18 +47,11 @@ const jsonLd = {
   "@type": "LocalBusiness",
   name: "Origem Digital",
   description,
-  // Endereço e logo da empresa: é o que o Google usa para ligar o site
-  // ao nome "Origem Digital" nas buscas e mostrar o símbolo certo.
   url: "https://origemdigitalsite.com.br",
   logo: "https://origemdigitalsite.com.br/icon.png",
   image: "https://origemdigitalsite.com.br/opengraph-image",
   areaServed: "BR",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "São Paulo",
-    addressRegion: "SP",
-    addressCountry: "BR",
-  },
+  address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressRegion: "SP", addressCountry: "BR" },
   email: "contato@origemdigitalsite.com.br",
   telephone: "+55-11-93929-9209",
   sameAs: ["https://instagram.com/origem__digital"],
@@ -77,38 +62,19 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${display.variable} ${body.variable}`}>
-      <body className="bg-abyss font-body antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        {/* Rede de segurança: os blocos que entram ao rolar (Reveal)
-            nascem invisíveis e dependem do JavaScript para aparecer. Se
-            ele estiver desligado ou falhar, esta regra mostra tudo. */}
+    <html lang="pt-BR" className={`${display.variable} ${serifa.variable} ${mono.variable}`}>
+      <body className="font-body text-tinta antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <noscript
           dangerouslySetInnerHTML={{
-            __html:
-              "<style>[data-reveal]{opacity:1!important;transform:none!important}</style>",
+            __html: "<style>[data-reveal]{opacity:1!important;transform:none!important}</style>",
           }}
         />
         <SmoothScroll>{children}</SmoothScroll>
-
-        {/* A medição só entra depois de a pessoa permitir no aviso
-            abaixo. Sem permissão, o código nem é carregado. */}
         <Medicao />
         <AvisoCookies />
-
-        {/* Saíram daqui, na limpeza de animações de outubro/2026: a
-            abertura com a marca, a cortina entre páginas e o ponto de
-            luz que seguia o mouse. Os três atrasavam ou disputavam a
-            atenção com o conteúdo. Os arquivos estão em
-            _antigos/componentes-removidos, se um dia quiser de volta. */}
-        <ParallaxGrade />
       </body>
     </html>
   );
