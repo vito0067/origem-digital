@@ -57,7 +57,7 @@ function Notificacoes({ ligado }: { ligado: boolean }) {
 
       <div
         className="vidro relative ml-auto mt-3 w-[92%] rounded-2xl p-4 shadow-flutua sm:absolute sm:right-[1%] sm:top-[71%] sm:mt-0 sm:w-[330px]"
-        style={{ animation: "notifica .7s cubic-bezier(.22,1,.36,1) 1.1s both" }}
+        style={{ animation: "notifica .7s cubic-bezier(.22,1,.36,1) .7s both" }}
       >
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-cartao">

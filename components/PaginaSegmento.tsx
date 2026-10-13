@@ -109,7 +109,7 @@ export default function PaginaSegmento({ s }: { s: Segmento }) {
 
           <div className="lg:col-span-5">
             <div className="surge" style={{ ["--atraso" as string]: "200ms" }}>
-              <ConversaAurora falas={s.conversa.falas} nome={s.conversa.nome} iniciais={s.conversa.iniciais} selo="exemplo" atraso={800} />
+              <ConversaAurora falas={s.conversa.falas} nome={s.conversa.nome} iniciais={s.conversa.iniciais} selo="exemplo" atraso={300} />
               <p className="mt-1 text-center text-[13px] text-cinza">{s.conversa.aviso}</p>
             </div>
           </div>

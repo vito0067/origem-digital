@@ -176,15 +176,25 @@ export default function SimboloParticulas({ className = "", aoMontar }: { classN
       return pendentes;
     };
 
+    // As mensagens da capa entram quando o símbolo está quase pronto (1 s
+    // de montagem), e não só no fim — a conversa aparece mais cedo.
+    let avisou = false;
+    const anunciar = () => {
+      if (avisou) return;
+      avisou = true;
+      avisar.current?.();
+    };
+
     const quadroAQuadro = (agora: number) => {
       if (!inicio) inicio = agora;
       const faltam = desenhar(agora);
+      if (agora - inicio > 1000) anunciar();
       if (faltam > 0) {
         anima = requestAnimationFrame(quadroAQuadro);
       } else {
         terminou = true;
         desenhar(agora);
-        avisar.current?.();
+        anunciar();
       }
     };
 
@@ -193,7 +203,7 @@ export default function SimboloParticulas({ className = "", aoMontar }: { classN
     if (parado) {
       terminou = true;
       desenhar(0);
-      avisar.current?.();
+      anunciar();
     }
     // Só começa quando o símbolo aparece na tela: no celular ele fica
     // abaixo do título, e a montagem não pode acontecer sem ninguém ver.
@@ -202,10 +212,12 @@ export default function SimboloParticulas({ className = "", aoMontar }: { classN
         if (!e.isIntersecting) return;
         aparece.disconnect();
         if (terminou) return;
-        // um respiro antes de começar: o título chega primeiro
-        comeco = setTimeout(() => (anima = requestAnimationFrame(quadroAQuadro)), 350);
+        // no computador, um respiro para o título chegar primeiro; no
+        // celular o título já passou quando o símbolo aparece — começa já
+        const espera = window.innerWidth < 640 ? 0 : 350;
+        comeco = setTimeout(() => (anima = requestAnimationFrame(quadroAQuadro)), espera);
       },
-      { threshold: 0.4 }
+      { threshold: 0.15 }
     );
     aparece.observe(el);
 
@@ -221,7 +233,7 @@ export default function SimboloParticulas({ className = "", aoMontar }: { classN
       if (!preparar()) return;
       terminou = true;
       desenhar(0);
-      if (!estavaPronto) avisar.current?.();
+      if (!estavaPronto) anunciar();
     });
     vigia.observe(el);
 

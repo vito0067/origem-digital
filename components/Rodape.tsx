@@ -3,7 +3,7 @@ import { Simbolo } from "./Marca";
 import { ramos } from "@/lib/ramos";
 
 /**
- * O RODAPÉ — simples, em quatro colunas.
+ * O RODAPÉ — marca, navegação, ramos, contato e legal.
  *
  * `prefixo`: os links apontam para seções da página inicial; fora dela
  * (como em /clinicas) precisam de "/" na frente.

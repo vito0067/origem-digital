@@ -3,7 +3,6 @@
 import { useRef, useState, type KeyboardEvent } from "react";
 import Reveal from "./Reveal";
 import Botao from "./Botao";
-import ContagemOferta from "./ContagemOferta";
 import { VistoDuplo, WhatsApp } from "./Icones";
 import { avulsos, porFamilia, reais, setupSeparado, type Produto } from "@/lib/precos";
 
@@ -31,8 +30,8 @@ const ITENS: Record<string, string[]> = {
   "site-simples": ["Site profissional sob medida", "Pronto para o Google e para o celular", "Botão direto para o seu WhatsApp", "Domínio, hospedagem e manutenção inclusos"],
   "site-completo": ["Tudo do Site Simples", "Blog para aparecer mais no Google", "Formulários de contato e de pedido", "Para quem quer o site trabalhando por ele"],
   "agente-essencial": ["Atendimento 24/7 no seu WhatsApp", "Treinada com seus serviços e preços", "Registra cada contato interessado", "Responde no tom do seu negócio"],
-  "agente-avancado": ["Tudo do Agente Essencial", "Para volume alto de conversas", "CRM e qualificação de leads", "Transferência para humano e agenda integrada"],
-  "pacote-inicio": ["Site Simples + Agente Essencial", "12% de desconto no setup", "Presença e atendimento desde o primeiro dia", "Um contrato, um suporte"],
+  "agente-avancado": ["Tudo do Agente Essencial", "Agendamento direto na sua agenda", "CRM e qualificação de leads", "Contatos organizados em planilhas"],
+  "pacote-inicio": ["Site Simples + Agente Essencial", "12% de desconto no setup", "Primeira versão em até 15 dias úteis", "Um contrato, um suporte"],
   "pacote-completo": ["Site Completo + Agente Avançado", "12% de desconto no setup", "Tudo funcionando no máximo", "Um contrato, um suporte"],
 };
 
@@ -109,8 +108,6 @@ export default function Precos() {
     botoes.current[n]?.focus();
   };
 
-  const mes = new Intl.DateTimeFormat("pt-BR", { month: "long" }).format(new Date());
-
   return (
     <section id="precos" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-pagina px-5 sm:px-8">
@@ -159,9 +156,8 @@ export default function Precos() {
 
         {aba === "pacote" && (
           <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[14.5px] text-grafite">
-            <span className="rounded-full bg-violeta-suave px-3 py-1 font-mono text-[11.5px] uppercase tracking-[0.1em] text-azul">Oferta de {mes}</span>
-            12% off no setup do pacote, para contratações até o fim do mês.
-            <ContagemOferta className="font-medium text-azul" />
+            <span className="rounded-full bg-violeta-suave px-3 py-1 font-mono text-[11.5px] uppercase tracking-[0.1em] text-azul">Site + atendente</span>
+            12% de desconto no setup sempre que você contrata os dois juntos.
           </p>
         )}
 

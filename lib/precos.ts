@@ -91,7 +91,7 @@ export const produtos: Produto[] = [
     setup: AGENTE_AVANCADO,
     mensal: 327,
     indicado: "Volume alto e qualificação de leads",
-    diferenca: "Tudo do Essencial, mais CRM e transferência para humano",
+    diferenca: "Tudo do Essencial, mais agendamento, CRM e planilhas",
   },
   {
     id: "pacote-inicio",
