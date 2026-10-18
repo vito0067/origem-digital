@@ -10,7 +10,7 @@
  *
  * O KIT COMPLETO DA LOGOMARCA (logo com o nome, versões para fundo
  * escuro, foto de perfil, PNG em alta) fica em:
- *   Documents\Origem Digital\imagens-e-logos\logomarca-gelo-2026\
+ *   Documents\Origem Digital\2-marca\ATUAL-logomarca-gelo-2026\
  *
  * Uso: node scripts/gerar-marca.mjs
  */

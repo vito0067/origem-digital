@@ -39,7 +39,7 @@ Feito em Next.js 14 + TypeScript + Tailwind CSS, publicado na Vercel.
 | Imagem de compartilhamento no WhatsApp | `app/**/opengraph-image.png` — imagens prontas, geradas com as fontes do site (peça ao Claude para refazer se mudar o texto) |
 | Ícones (aba do navegador, iPhone) | `app/icon.png`, `app/apple-icon.png` — gerados por `node scripts/gerar-marca.mjs` |
 
-**A logomarca completa** (SVG e PNG, versões para fundo claro e escuro, foto de perfil, ícone de app e a folha de apresentação) está em `Documents\Origem Digital\imagens-e-logos\logomarca-gelo-2026\`.
+**A logomarca completa** (SVG e PNG, versões para fundo claro e escuro, foto de perfil, ícone de app e a folha de apresentação) está em `Documents\Origem Digital\2-marca\ATUAL-logomarca-gelo-2026\`. O mapa de todas as pastas (site, marca, documentos, mídia) está em `Documents\Origem Digital\LEIA-ME.md`.
 
 ---
 
