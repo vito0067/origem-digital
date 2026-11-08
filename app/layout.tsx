@@ -62,6 +62,13 @@ const jsonLd = {
   ],
 };
 
+/**
+ * Regenera as páginas a cada hora. Existe por causa da Black Friday
+ * (lib/precos.ts): quando a promoção acaba, os preços normais voltam
+ * sozinhos, sem precisar publicar de novo.
+ */
+export const revalidate = 3600;
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR" className={`${display.variable} ${serifa.variable} ${mono.variable}`}>

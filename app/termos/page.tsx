@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PaginaSimples from "@/components/PaginaSimples";
-import { avulsos, reais } from "@/lib/precos";
+import { avulsos, BLACK_FRIDAY, reais } from "@/lib/precos";
 
 export const metadata: Metadata = {
   title: "Termos de Uso e Contratação — Origem Digital",
@@ -78,6 +78,11 @@ const secoes: Secao[] = [
       "O setup (taxa de implementação) é pago em duas partes: 50% na assinatura, para começar, e 50% depois da entrega e antes da publicação. A publicação depende da quitação da segunda parte.",
       "A mensalidade não é cobrada no mês da implantação: começa no segundo mês, com vencimento todo dia 5. Pagamento por Pix ou cartão de crédito; encargos de parcelamento no cartão ficam com o cliente.",
       "No Pacote Completo, o desconto de 12% vale só sobre o setup somado dos dois itens. A mensalidade do pacote é a soma das mensalidades, sem desconto.",
+      ...(BLACK_FRIDAY.ativa
+        ? [
+            `${BLACK_FRIDAY.nome}: os preços promocionais de setup valem para contratos assinados até ${BLACK_FRIDAY.fimTexto}/2026, com o pagamento da primeira parte do setup. A promoção não altera a mensalidade, a fidelidade nem as demais condições, e não se acumula com outros descontos além dos 12% do pacote.`,
+          ]
+        : []),
       "Atraso de pagamento: multa de 2% e juros de 1% ao mês. Com mais de 10 dias de atraso, os serviços podem ser suspensos após aviso; com mais de 30, o contrato pode ser encerrado.",
     ],
   },

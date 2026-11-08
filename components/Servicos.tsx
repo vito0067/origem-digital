@@ -2,7 +2,7 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 import { VistoDuplo, Seta } from "./Icones";
 import { Simbolo } from "./Marca";
-import { acheProduto, reais, setupSeparado } from "@/lib/precos";
+import { acheProduto, BLACK_FRIDAY, reais, setupNormal, setupSeparado } from "@/lib/precos";
 
 /**
  * OS SERVIÇOS — duas peças, um objetivo.
@@ -115,9 +115,15 @@ export default function Servicos() {
             className="group mt-5 flex flex-col gap-4 rounded-[28px] bg-noite px-6 py-6 text-white shadow-botao transition-colors hover:bg-noite-claro sm:flex-row sm:items-center sm:justify-between sm:px-8"
           >
             <span>
-              <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-violeta-claro">Os dois juntos · 12% off no setup</span>
+              <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-violeta-claro">
+                {BLACK_FRIDAY.ativa ? `${BLACK_FRIDAY.nome} · até ${BLACK_FRIDAY.fimTexto}` : "Os dois juntos · 12% off no setup"}
+              </span>
               <span className="mt-1.5 block font-display text-[1.35rem] font-medium tracking-[-0.02em] sm:text-[1.5rem]">
-                {pacote.nome}: <s className="text-white/60 decoration-1">{reais(setupSeparado["pacote-inicio"])}</s> {reais(pacote.setup)}{" "}
+                {pacote.nome}:{" "}
+                <s className="text-white/60 decoration-1">
+                  {reais(BLACK_FRIDAY.ativa ? setupNormal["pacote-inicio"] : setupSeparado["pacote-inicio"])}
+                </s>{" "}
+                {reais(pacote.setup)}{" "}
                 <span className="text-white/75">+ {reais(pacote.mensal)}/mês</span>
               </span>
             </span>

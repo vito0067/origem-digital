@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Simbolo } from "./Marca";
 import { VistoDuplo } from "./Icones";
+import { acheProduto, reais } from "@/lib/precos";
 
 /**
  * A AURORA ATENDENDO, DENTRO DE UM CELULAR DESENHADO NA PÁGINA.
@@ -28,8 +29,9 @@ import { VistoDuplo } from "./Icones";
  * passar `falas`, `nome`, `iniciais` e `selo`.
  */
 
-const SITE_SETUP = "R$ 987";
-const SITE_MENSAL = "R$ 43/mês";
+// Sai de lib/precos.ts (antes era escrito à mão e ficaria velho na Black Friday).
+const SITE_SETUP = reais(acheProduto("site-simples").setup);
+const SITE_MENSAL = `${reais(acheProduto("site-simples").mensal)}/mês`;
 
 export type Fala = {
   de: "cliente" | "aurora";

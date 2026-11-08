@@ -1,4 +1,4 @@
-import { acheProduto, avulsos, reais } from "./precos";
+import { acheProduto, avulsos, BLACK_FRIDAY, reais } from "./precos";
 
 /**
  * AS PERGUNTAS FREQUENTES — fonte única.
@@ -19,7 +19,7 @@ const [AJUSTE_SITE, AJUSTE_AGENTE] = avulsos;
 export const perguntas = [
   {
     q: "Quanto custa?",
-    a: `Site a partir de ${reais(site.setup)} + ${reais(site.mensal)}/mês, com domínio, hospedagem e manutenção inclusos. Atendente de IA a partir de ${reais(agente.setup)} + ${reais(agente.mensal)}/mês. Os dois juntos têm 12% de desconto no setup: ${reais(pacote.setup)} + ${reais(pacote.mensal)}/mês.`,
+    a: `Site a partir de ${reais(site.setup)} + ${reais(site.mensal)}/mês, com domínio, hospedagem e manutenção inclusos. Atendente de IA a partir de ${reais(agente.setup)} + ${reais(agente.mensal)}/mês. Os dois juntos têm 12% de desconto no setup: ${reais(pacote.setup)} + ${reais(pacote.mensal)}/mês.${BLACK_FRIDAY.ativa ? ` Esses são os preços da ${BLACK_FRIDAY.nome}, para contratos assinados até ${BLACK_FRIDAY.fimTexto}; a mensalidade é a de sempre.` : ""}`,
   },
   {
     q: "Em quanto tempo fica pronto?",

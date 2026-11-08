@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Simbolo } from "./Marca";
+import { BLACK_FRIDAY } from "@/lib/precos";
 
 /**
  * O TOPO: uma cápsula de vidro flutuando sobre a página.
@@ -44,6 +45,14 @@ export default function Topo({ inicio = "#" }: { inicio?: string }) {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+      {BLACK_FRIDAY.ativa && !aberto && (
+        <Link
+          href={`${prefixo}#precos`}
+          className="absolute left-1/2 top-[80px] -translate-x-1/2 whitespace-nowrap rounded-full bg-noite px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-white shadow-botao transition-colors hover:bg-noite-claro sm:top-[86px] sm:text-[12px]"
+        >
+          {BLACK_FRIDAY.nome} · até 50% off<span className="hidden sm:inline"> no setup</span> · até {BLACK_FRIDAY.fimTexto} →
+        </Link>
+      )}
       <nav
         className={`mx-auto flex h-[60px] max-w-pagina items-center justify-between gap-3 rounded-full pl-5 pr-2 transition-[background-color,box-shadow,border-color] duration-500 ${
           descido || aberto ? "vidro shadow-vidro" : "border border-transparent"

@@ -4,7 +4,7 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import Reveal from "./Reveal";
 import Botao from "./Botao";
 import { VistoDuplo, WhatsApp } from "./Icones";
-import { avulsos, porFamilia, reais, setupSeparado, type Produto } from "@/lib/precos";
+import { avulsos, BLACK_FRIDAY, porFamilia, reais, setupNormal, setupSeparado, type Produto } from "@/lib/precos";
 
 /**
  * OS PREÇOS — três abas, dois planos por aba.
@@ -38,7 +38,12 @@ const ITENS: Record<string, string[]> = {
 const WA = (texto: string) => `https://wa.me/5511939299209?text=${encodeURIComponent(texto)}`;
 
 function Plano({ p, destaque }: { p: Produto; destaque: boolean }) {
-  const riscado = p.familia === "pacote" ? setupSeparado[p.id as keyof typeof setupSeparado] : undefined;
+  // Na Black Friday, o riscado é o preço normal ("de R$ 987"); fora dela, o pacote mostra a soma das partes.
+  const riscado = BLACK_FRIDAY.ativa
+    ? setupNormal[p.id]
+    : p.familia === "pacote"
+      ? setupSeparado[p.id as keyof typeof setupSeparado]
+      : undefined;
   return (
     <article
       className={`relative flex h-full flex-col rounded-[28px] p-7 sm:p-8 ${destaque ? "bg-noite text-white shadow-flutua" : "vidro text-tinta shadow-vidro"}`}
@@ -54,7 +59,9 @@ function Plano({ p, destaque }: { p: Produto; destaque: boolean }) {
       <p className={`mt-8 text-[13.5px] ${destaque ? "text-white/70" : "text-cinza"}`}>
         {riscado ? (
           <>
-            separado: <s>{reais(riscado)}</s>
+            {BLACK_FRIDAY.ativa ? `${BLACK_FRIDAY.nome}: de ` : "separado: "}
+            <s>{reais(riscado)}</s>
+            {BLACK_FRIDAY.ativa && " por"}
           </>
         ) : (
           "setup único"
@@ -153,6 +160,13 @@ export default function Precos() {
             <Plano key={p.id} p={p} destaque={aba === "pacote" && i === 0} />
           ))}
         </div>
+
+        {BLACK_FRIDAY.ativa && (
+          <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[14.5px] text-grafite">
+            <span className="rounded-full bg-noite px-3 py-1 font-mono text-[11.5px] uppercase tracking-[0.1em] text-white">{BLACK_FRIDAY.nome}</span>
+            Desconto no setup para contratos assinados até {BLACK_FRIDAY.fimTexto}. A mensalidade é a de sempre e só começa no 2º mês.
+          </p>
+        )}
 
         {aba === "pacote" && (
           <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[14.5px] text-grafite">

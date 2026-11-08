@@ -7,7 +7,7 @@ import BotaoFlutuante from "./BotaoFlutuante";
 import OutrosRamos from "./OutrosRamos";
 import ConversaAurora, { type Fala } from "./ConversaAurora";
 import { VistoDuplo } from "./Icones";
-import { acheProduto, reais, setupSeparado } from "@/lib/precos";
+import { acheProduto, BLACK_FRIDAY, reais, setupNormal, setupSeparado } from "@/lib/precos";
 
 /**
  * O MOLDE DAS PÁGINAS POR RAMO (clínicas, pet shops…), NO GELO.
@@ -56,7 +56,21 @@ function Preco({ etiqueta, valor, mensal, nota, riscado, destaque = false }: { e
   return (
     <div className={`flex h-full flex-col rounded-[28px] p-7 ${destaque ? "bg-noite text-white shadow-flutua" : "vidro text-tinta shadow-vidro"}`}>
       <p className={`font-mono text-[12px] uppercase tracking-[0.14em] ${destaque ? "text-ceu-claro" : "text-azul"}`}>{etiqueta}</p>
-      <p className={`mt-6 text-[13.5px] ${destaque ? "text-white/70" : "text-cinza"}`}>{riscado ? <>separado: <s>{riscado}</s></> : "a partir de"}</p>
+      <p className={`mt-6 text-[13.5px] ${destaque ? "text-white/70" : "text-cinza"}`}>
+        {riscado ? (
+          BLACK_FRIDAY.ativa ? (
+            <>
+              {BLACK_FRIDAY.nome}: de <s>{riscado}</s> por
+            </>
+          ) : (
+            <>
+              separado: <s>{riscado}</s>
+            </>
+          )
+        ) : (
+          "a partir de"
+        )}
+      </p>
       <p className="font-display text-[2.4rem] font-medium leading-tight tracking-[-0.04em]">{valor}</p>
       <p className={`font-mono text-[14px] ${destaque ? "text-ceu-claro" : "text-azul"}`}>+ {mensal}/mês</p>
       <p className={`mt-auto pt-6 text-[14px] leading-relaxed ${destaque ? "text-white/80" : "text-grafite"}`}>{nota}</p>
@@ -176,15 +190,17 @@ export default function PaginaSegmento({ s }: { s: Segmento }) {
             <h2 className={titulo2}>{s.tituloPreco}</h2>
             <p className="sem-orfa mt-5 max-w-2xl text-[17px] leading-relaxed text-grafite">
               O setup é pago metade no início e metade na entrega, antes de ir ao ar. A mensalidade começa no segundo mês.
+              {BLACK_FRIDAY.ativa && ` ${BLACK_FRIDAY.nome}: desconto no setup para contratos assinados até ${BLACK_FRIDAY.fimTexto}; a mensalidade é a de sempre.`}
             </p>
           </Reveal>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             <Reveal>
-              <Preco etiqueta={s.nomeSite} valor={reais(siteSimples.setup)} mensal={reais(siteSimples.mensal)} nota={`Site Completo: ${reais(siteCompleto.setup)} + ${reais(siteCompleto.mensal)}/mês.`} />
+              <Preco etiqueta={s.nomeSite} riscado={BLACK_FRIDAY.ativa ? reais(setupNormal["site-simples"]) : undefined} valor={reais(siteSimples.setup)} mensal={reais(siteSimples.mensal)} nota={`Site Completo: ${reais(siteCompleto.setup)} + ${reais(siteCompleto.mensal)}/mês.`} />
             </Reveal>
             <Reveal delay={90}>
               <Preco
                 etiqueta="Atendente de IA"
+                riscado={BLACK_FRIDAY.ativa ? reais(setupNormal["agente-essencial"]) : undefined}
                 valor={reais(essencial.setup)}
                 mensal={reais(essencial.mensal)}
                 nota={`Agente Avançado, ligado ao Google Agenda: ${reais(avancado.setup)} + ${reais(avancado.mensal)}/mês.`}
@@ -194,7 +210,7 @@ export default function PaginaSegmento({ s }: { s: Segmento }) {
               <Preco
                 destaque
                 etiqueta="Site + atendente"
-                riscado={reais(setupSeparado["pacote-inicio"])}
+                riscado={reais(BLACK_FRIDAY.ativa ? setupNormal["pacote-inicio"] : setupSeparado["pacote-inicio"])}
                 valor={reais(pacote.setup)}
                 mensal={reais(pacote.mensal)}
                 nota={`${pacote.nome}: Site Simples + Agente Essencial, com 12% de desconto no setup.`}

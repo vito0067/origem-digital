@@ -51,10 +51,44 @@ const semDesconto = (a: number, b: number) => a + b;
 const comDesconto = (a: number, b: number) =>
   Math.round((a + b) * (1 - DESCONTO_PACOTE));
 
-const SITE_SIMPLES = 987;
-const SITE_COMPLETO = 1647;
-const AGENTE_ESSENCIAL = 657;
-const AGENTE_AVANCADO = 1097;
+/**
+ * BLACK FRIDAY 2026: de 08/11 até 30/11/2026 (23h59, horário de Brasília).
+ *
+ * Aprovada pelo Vito em 08/11/2026. Desconto SÓ no setup; a mensalidade
+ * fica igual. Os pacotes continuam com os 12% em cima dos preços da
+ * promoção (por isso o Início Digital sai 743, e não um número à mão).
+ *
+ * Volta sozinha: depois do fim, `BLACK_FRIDAY.ativa` vira false e o site
+ * mostra os preços normais (o layout regenera as páginas a cada hora).
+ * Para encerrar antes, troque `fim`. ⚠️ A Aurora no n8n, a proposta e o
+ * contrato têm a mesma regra escrita à parte: mudou aqui, mude lá.
+ */
+const FIM_BLACK_FRIDAY = new Date("2026-11-30T23:59:59-03:00");
+export const BLACK_FRIDAY = {
+  ativa: Date.now() <= FIM_BLACK_FRIDAY.getTime(),
+  fim: FIM_BLACK_FRIDAY,
+  fimTexto: "30/11",
+  nome: "Black Friday",
+};
+
+const NORMAL = { siteSimples: 987, siteCompleto: 1647, agenteEssencial: 657, agenteAvancado: 1097 };
+const PROMO = { siteSimples: 497, siteCompleto: 997, agenteEssencial: 347, agenteAvancado: 647 };
+const TABELA = BLACK_FRIDAY.ativa ? PROMO : NORMAL;
+
+const SITE_SIMPLES = TABELA.siteSimples;
+const SITE_COMPLETO = TABELA.siteCompleto;
+const AGENTE_ESSENCIAL = TABELA.agenteEssencial;
+const AGENTE_AVANCADO = TABELA.agenteAvancado;
+
+/** Setup fora da promoção: o "de" riscado durante a Black Friday. */
+export const setupNormal: Record<string, number> = {
+  "site-simples": NORMAL.siteSimples,
+  "site-completo": NORMAL.siteCompleto,
+  "agente-essencial": NORMAL.agenteEssencial,
+  "agente-avancado": NORMAL.agenteAvancado,
+  "pacote-inicio": comDesconto(NORMAL.siteSimples, NORMAL.agenteEssencial),
+  "pacote-completo": comDesconto(NORMAL.siteCompleto, NORMAL.agenteAvancado),
+};
 
 export const produtos: Produto[] = [
   {
