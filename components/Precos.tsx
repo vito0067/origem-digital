@@ -4,7 +4,8 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import Reveal from "./Reveal";
 import Botao from "./Botao";
 import { VistoDuplo, WhatsApp } from "./Icones";
-import { avulsos, BLACK_FRIDAY, porFamilia, reais, setupNormal, setupSeparado, type Produto } from "@/lib/precos";
+import ContadorBF from "./ContadorBF";
+import { avulsos, BLACK_FRIDAY, economia, porFamilia, reais, setupNormal, setupSeparado, type Produto } from "@/lib/precos";
 
 /**
  * OS PREÇOS — três abas, dois planos por aba.
@@ -49,9 +50,12 @@ function Plano({ p, destaque }: { p: Produto; destaque: boolean }) {
       className={`relative flex h-full flex-col rounded-[28px] p-7 sm:p-8 ${destaque ? "bg-noite text-white shadow-flutua" : "vidro text-tinta shadow-vidro"}`}
     >
       {destaque && (
-        <span className="mb-5 self-start rounded-full bg-white/12 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ceu-claro ring-1 ring-white/20 sm:absolute sm:right-6 sm:top-6 sm:mb-0">
+        <span className={`mb-5 self-start rounded-full bg-white/12 px-3 py-1 font-mono text-[12.5px] uppercase tracking-[0.12em] text-ceu-claro ring-1 ring-white/20 ${BLACK_FRIDAY.ativa && economia(p.id, p.setup) > 0 ? "" : "sm:absolute sm:right-6 sm:top-6 sm:mb-0"}`}>
           Melhor custo-benefício
         </span>
+      )}
+      {BLACK_FRIDAY.ativa && economia(p.id, p.setup) > 0 && (
+        <span className="mb-3 self-start rounded-full bg-brasa px-3 py-1 font-mono text-[12.5px] font-medium uppercase tracking-[0.08em] text-white">Black Friday · economize {reais(economia(p.id, p.setup))}</span>
       )}
       <h3 className="font-display text-[1.45rem] font-medium tracking-[-0.025em]">{p.nome.replace("Pacote ", "")}</h3>
       <p className={`mt-1 text-[14.5px] ${destaque ? "text-white/75" : "text-cinza"}`}>{p.indicado}</p>
@@ -161,16 +165,9 @@ export default function Precos() {
           ))}
         </div>
 
-        {BLACK_FRIDAY.ativa && (
-          <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[14.5px] text-grafite">
-            <span className="rounded-full bg-noite px-3 py-1 font-mono text-[11.5px] uppercase tracking-[0.1em] text-white">{BLACK_FRIDAY.nome}</span>
-            Desconto no setup para contratos assinados até {BLACK_FRIDAY.fimTexto}. A mensalidade é a de sempre e só começa no 2º mês.
-          </p>
-        )}
-
         {aba === "pacote" && (
           <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[14.5px] text-grafite">
-            <span className="rounded-full bg-violeta-suave px-3 py-1 font-mono text-[11.5px] uppercase tracking-[0.1em] text-azul">Site + atendente</span>
+            <span className="rounded-full bg-violeta-suave px-3 py-1 font-mono text-[12.5px] uppercase tracking-[0.1em] text-azul">Site + atendente</span>
             12% de desconto no setup sempre que você contrata os dois juntos.
           </p>
         )}
@@ -195,6 +192,29 @@ export default function Precos() {
             </li>
           </ul>
         </Reveal>
+
+        {BLACK_FRIDAY.ativa && (
+          <Reveal delay={140}>
+            <div className="mt-10 flex flex-col gap-5 rounded-[28px] bg-brasa px-6 py-6 text-white shadow-[0_24px_50px_-24px_rgba(217,31,46,.8)] sm:flex-row sm:items-center sm:justify-between sm:px-9">
+              <div>
+                <p className="font-mono text-[12.5px] font-medium uppercase tracking-[0.14em] text-white/85">Black Friday · <ContadorBF /></p>
+                <p className="mt-1.5 font-display text-[1.45rem] font-medium leading-tight tracking-[-0.025em] sm:text-[1.7rem]">
+                  Desconto no setup só até {BLACK_FRIDAY.fimTexto}. Depois, os preços voltam ao normal.
+                </p>
+                <p className="mt-1 text-[14.5px] text-white/85">A mensalidade é a de sempre e só começa no 2º mês.</p>
+              </div>
+              <a
+                href={WA("Olá! Quero aproveitar a Black Friday da Origem Digital.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[52px] shrink-0 items-center justify-center gap-2.5 rounded-full bg-white px-7 text-[15.5px] font-semibold text-brasa-escuro transition-colors hover:bg-brasa-suave"
+              >
+                <WhatsApp className="h-[18px] w-[18px]" />
+                Quero a Black Friday
+              </a>
+            </div>
+          </Reveal>
+        )}
       </div>
     </section>
   );

@@ -81,6 +81,9 @@ const AGENTE_ESSENCIAL = TABELA.agenteEssencial;
 const AGENTE_AVANCADO = TABELA.agenteAvancado;
 
 /** Setup fora da promoção: o "de" riscado durante a Black Friday. */
+/** Quanto o cliente economiza no setup (0 fora da promoção). */
+export const economia = (id: string, setupAtual: number) => (BLACK_FRIDAY.ativa ? Math.max(0, setupNormal[id] - setupAtual) : 0);
+
 export const setupNormal: Record<string, number> = {
   "site-simples": NORMAL.siteSimples,
   "site-completo": NORMAL.siteCompleto,

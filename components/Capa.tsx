@@ -4,7 +4,9 @@ import { useState, type CSSProperties } from "react";
 import Botao from "./Botao";
 import SimboloParticulas from "./SimboloParticulas";
 import { Simbolo } from "./Marca";
-import { VistoDuplo } from "./Icones";
+import { VistoDuplo, Seta } from "./Icones";
+import { BLACK_FRIDAY, acheProduto, economia, reais, setupNormal } from "@/lib/precos";
+import ContadorBF from "./ContadorBF";
 
 /**
  * A CAPA — "O cliente chamou. Já foi respondido."
@@ -27,6 +29,39 @@ const numeros = [
   { valor: "15 dias úteis", texto: "para a primeira versão ficar pronta" },
   { valor: "R$ 0", texto: "para o diagnóstico do seu negócio" },
 ];
+
+/** O cartão da oferta, no alto da capa: o preço de verdade, o riscado, o quanto economiza e o relógio. */
+function OfertaBF() {
+  const site = acheProduto("site-simples");
+  const agente = acheProduto("agente-essencial");
+  const pacote = acheProduto("pacote-inicio");
+  const itens = [
+    { nome: "Site", de: setupNormal["site-simples"], por: site.setup },
+    { nome: "Atendente de IA", de: setupNormal["agente-essencial"], por: agente.setup },
+    { nome: "Site + atendente", de: setupNormal["pacote-inicio"], por: pacote.setup },
+  ];
+  return (
+    <div className="surge mt-7 max-w-[34rem] rounded-3xl border border-brasa/25 bg-brasa-suave/80 p-4 shadow-cartao sm:p-5" style={atraso(500)}>
+      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12.5px] font-medium uppercase tracking-[0.1em] text-brasa-escuro">
+        <span className="rounded-full bg-brasa px-3 py-1 text-white">Black Friday</span>
+        desconto no setup até 30/11 · <ContadorBF />
+      </p>
+      <ul className="mt-3 grid grid-cols-3 gap-1.5 sm:gap-2">
+        {itens.map((i) => (
+          <li key={i.nome} className="rounded-2xl bg-white/80 px-2.5 py-2 sm:px-3.5 sm:py-2.5">
+            <p className="text-[12.5px] leading-tight text-grafite sm:text-[13px]">{i.nome}</p>
+            <p className="flex flex-wrap items-baseline gap-x-2">
+              <s className="text-[12.5px] text-cinza decoration-brasa">{reais(i.de)}</s>
+              <span className="font-display text-[1.1rem] font-semibold sm:text-[1.3rem] tracking-[-0.03em] text-tinta">{reais(i.por)}</span>
+            </p>
+            <p className="text-[12px] font-medium leading-tight text-brasa-escuro sm:text-[12.5px]">economize {reais(economia(i.nome === "Site" ? "site-simples" : i.nome === "Atendente de IA" ? "agente-essencial" : "pacote-inicio", i.por))}</p>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-2.5 text-[13px] text-grafite">Mensalidade normal, e só começa no 2º mês.</p>
+    </div>
+  );
+}
 
 /** Só entram na página depois que o símbolo se monta: vidro fosco por
  *  cima de uma animação obriga o navegador a refazer o desfoque a cada
@@ -81,7 +116,7 @@ export default function Capa() {
   const [montado, setMontado] = useState(false);
 
   return (
-    <section id="inicio" className="ceu-fundo relative overflow-hidden pb-14 pt-[118px] sm:pt-[132px]">
+    <section id="inicio" className={`ceu-fundo relative overflow-hidden pb-14 ${BLACK_FRIDAY.ativa ? "pt-[150px] sm:pt-[158px]" : "pt-[118px] sm:pt-[132px]"}`}>
       <div aria-hidden className="pontos pointer-events-none absolute inset-0" />
 
       <div className="relative mx-auto grid max-w-pagina items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-6">
@@ -107,13 +142,23 @@ export default function Capa() {
             Preço, prazo e contrato claros antes de você decidir.
           </p>
 
+          {BLACK_FRIDAY.ativa && <OfertaBF />}
+
           <div className="surge mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style={atraso(560)}>
-            <Botao href={WA}>Quero o diagnóstico gratuito</Botao>
-            <Botao href="#precos" tom="vidro">
-              Ver preços
-            </Botao>
+            {BLACK_FRIDAY.ativa ? (
+              <a
+                href="#precos"
+                className="group inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-brasa px-6 py-3 text-center text-[15.5px] font-medium text-white shadow-[0_14px_30px_-12px_rgba(217,31,46,.75)] transition-[background-color,transform] duration-300 hover:bg-brasa-escuro"
+              >
+                Ver preços da Black Friday
+                <Seta className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+            ) : (
+              <Botao href={WA}>Quero o diagnóstico gratuito</Botao>
+            )}
+            {BLACK_FRIDAY.ativa ? <Botao href={WA} tom="vidro">Diagnóstico gratuito</Botao> : <Botao href="#precos" tom="vidro">Ver preços</Botao>}
           </div>
-          <p className="surge mt-5 font-mono text-[12px] uppercase tracking-[0.12em] text-cinza" style={atraso(680)}>
+          <p className="surge mt-5 font-mono text-[12.5px] uppercase tracking-[0.12em] text-cinza" style={atraso(680)}>
             Sem compromisso · 10 a 15 minutos · pelo WhatsApp
           </p>
         </div>
@@ -121,10 +166,10 @@ export default function Capa() {
         <div className="relative lg:col-span-6">
           <div className="relative mx-auto w-full max-w-[620px] sm:aspect-[1.45]">
             <div aria-hidden className="absolute inset-[8%] rounded-full bg-[radial-gradient(closest-side,rgba(186,230,253,.7),transparent)] blur-2xl" />
-            <SimboloParticulas className="h-[170px] sm:absolute sm:inset-x-0 sm:top-0 sm:h-[62%]" aoMontar={() => setMontado(true)} />
+            <SimboloParticulas className="h-[120px] sm:absolute sm:inset-x-0 sm:top-0 sm:h-[62%]" aoMontar={() => setMontado(true)} />
             <Notificacoes ligado={montado} />
           </div>
-          <p className="mt-5 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-cinza sm:mt-12">Exemplo de atendimento com IA</p>
+          <p className="mt-5 text-center font-mono text-[12.5px] uppercase tracking-[0.14em] text-cinza sm:mt-12">Exemplo de atendimento com IA</p>
         </div>
       </div>
 

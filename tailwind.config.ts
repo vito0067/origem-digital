@@ -39,6 +39,8 @@ const config: Config = {
         linha: "#E2E8F0",
         azul: { DEFAULT: "#4F46E5", escuro: "#3730A3", claro: "#A5B4FC", suave: "#EEF2FF" },
         zap: "#25D366",
+        // Black Friday 2026 (temporária): vermelho-brasa, o mesmo do anúncio. Texto branco sobre ele passa de 4,5:1.
+        brasa: { DEFAULT: "#D91F2E", escuro: "#A8121F", suave: "#FEF1F2" },
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],

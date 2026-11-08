@@ -24,7 +24,7 @@ export default function PaginaSimples({
   return (
     <>
       <Topo inicio="/" />
-      <main className="ceu-fundo relative pb-24 pt-[120px]">
+      <main className="ceu-fundo relative pb-24 pt-[150px]">
         <div aria-hidden className="pontos pointer-events-none absolute inset-x-0 top-0 h-[420px]" />
         <div className={`relative mx-auto px-4 sm:px-6 ${largura === "larga" ? "max-w-4xl" : "max-w-3xl"}`}>
           <article className="vidro rounded-[32px] px-6 pb-14 pt-12 shadow-flutua sm:px-14 sm:pt-14">

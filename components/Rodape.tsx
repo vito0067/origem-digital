@@ -10,7 +10,7 @@ import { ramos } from "@/lib/ramos";
  */
 export default function Rodape({ prefixo = "" }: { prefixo?: "" | "/" }) {
   const link = "text-[14.5px] text-grafite transition-colors hover:text-azul";
-  const titulo = "font-mono text-[11.5px] uppercase tracking-[0.16em] text-cinza";
+  const titulo = "font-mono text-[12.5px] uppercase tracking-[0.16em] text-cinza";
   return (
     <footer className="border-t border-linha bg-white/60 pb-8 pt-16">
       <div className="mx-auto grid max-w-pagina gap-12 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-12">
@@ -78,7 +78,7 @@ export default function Rodape({ prefixo = "" }: { prefixo?: "" | "/" }) {
 
       <div className="mx-auto mt-14 flex max-w-pagina flex-wrap items-center justify-between gap-3 border-t border-linha px-5 pt-6 sm:px-8">
         <p className="text-[13px] text-cinza">© {new Date().getFullYear()} Origem Digital. Todos os direitos reservados.</p>
-        <p className="font-mono text-[11.5px] uppercase tracking-[0.14em] text-cinza">Feito em São Paulo · online 24/7</p>
+        <p className="font-mono text-[12.5px] uppercase tracking-[0.14em] text-cinza">Feito em São Paulo · online 24/7</p>
       </div>
     </footer>
   );

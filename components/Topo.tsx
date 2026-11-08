@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Simbolo } from "./Marca";
 import { BLACK_FRIDAY } from "@/lib/precos";
+import ContadorBF from "./ContadorBF";
 
 /**
  * O TOPO: uma cápsula de vidro flutuando sobre a página.
@@ -48,9 +49,9 @@ export default function Topo({ inicio = "#" }: { inicio?: string }) {
       {BLACK_FRIDAY.ativa && !aberto && (
         <Link
           href={`${prefixo}#precos`}
-          className="absolute left-1/2 top-[80px] -translate-x-1/2 whitespace-nowrap rounded-full bg-noite px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-white shadow-botao transition-colors hover:bg-noite-claro sm:top-[86px] sm:text-[12px]"
+          className="absolute left-1/2 top-[78px] flex min-h-[44px] -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-brasa px-4 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-white shadow-[0_10px_24px_-10px_rgba(217,31,46,.7)] transition-colors hover:bg-brasa-escuro sm:top-[82px] sm:min-h-[40px] sm:text-[12.5px]"
         >
-          {BLACK_FRIDAY.nome} · até 50% off<span className="hidden sm:inline"> no setup</span> · até {BLACK_FRIDAY.fimTexto} →
+          <span aria-hidden className="h-2 w-2 rounded-full bg-white/90" />{BLACK_FRIDAY.nome}<span className="hidden sm:inline"> · até 50% off no setup</span> · <ContadorBF /> →
         </Link>
       )}
       <nav
@@ -68,7 +69,7 @@ export default function Topo({ inicio = "#" }: { inicio?: string }) {
             <Link
               key={l.href}
               href={`${prefixo}${l.href}`}
-              className="rounded-full px-4 py-2 text-[14.5px] text-grafite transition-colors hover:bg-white/70 hover:text-tinta"
+              className="rounded-full px-4 py-[11px] text-[14.5px] text-grafite transition-colors hover:bg-white/70 hover:text-tinta"
             >
               {l.label}
             </Link>
@@ -77,7 +78,7 @@ export default function Topo({ inicio = "#" }: { inicio?: string }) {
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-full px-4 py-2 text-[14.5px] text-grafite transition-colors hover:bg-white/70 hover:text-tinta"
+              className="rounded-full px-4 py-[11px] text-[14.5px] text-grafite transition-colors hover:bg-white/70 hover:text-tinta"
             >
               {l.label}
             </Link>
@@ -89,7 +90,7 @@ export default function Topo({ inicio = "#" }: { inicio?: string }) {
             href={WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden whitespace-nowrap rounded-full bg-noite px-5 py-2.5 text-[14px] font-medium text-white shadow-botao transition-colors hover:bg-noite-claro min-[420px]:inline-block"
+            className="hidden whitespace-nowrap min-h-[44px] items-center rounded-full bg-noite px-5 text-[14px] font-medium text-white shadow-botao transition-colors hover:bg-noite-claro min-[420px]:inline-flex"
           >
             Diagnóstico gratuito
           </a>

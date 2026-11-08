@@ -15,7 +15,7 @@ export default function OutrosRamos() {
   return (
     <section className="pb-8">
       <div className="mx-auto max-w-pagina px-5 sm:px-8">
-        <p className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-cinza">Também atendemos</p>
+        <p className="font-mono text-[12.5px] uppercase tracking-[0.16em] text-cinza">Também atendemos</p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {outros.map((r) => (
             <li key={r.slug}>

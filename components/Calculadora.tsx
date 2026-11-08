@@ -124,7 +124,7 @@ export default function Calculadora() {
           <Reveal delay={120} className="lg:col-span-5">
             <div className="coluna-presa">
               <div className="rounded-[28px] bg-noite p-7 text-white shadow-flutua sm:p-8" aria-live="polite">
-                <p className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-violeta-claro">A conta</p>
+                <p className="font-mono text-[12.5px] uppercase tracking-[0.16em] text-violeta-claro">A conta</p>
                 <div className="mt-4 font-mono text-[14px]">
                   <Linha esq="mensagens por mês" dir={String(msgs)} />
                   <Linha esq="× 40% são clientes" dir={`= ${interessados}`} />

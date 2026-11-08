@@ -104,7 +104,7 @@ export default function ComoFunciona() {
           <div className="mt-20 rounded-[28px] border border-linha bg-white/60 p-6 sm:p-8">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
               <p className="font-display text-[1.25rem] font-medium tracking-[-0.02em] text-tinta">Escrito no contrato, antes de você assinar.</p>
-              <Link href="/termos" className="text-[14.5px] font-medium text-azul underline-offset-4 hover:underline">
+              <Link href="/termos" className="inline-flex min-h-[44px] items-center text-[14.5px] font-medium text-azul underline-offset-4 hover:underline">
                 Ler os termos completos →
               </Link>
             </div>

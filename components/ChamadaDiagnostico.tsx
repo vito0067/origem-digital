@@ -16,7 +16,7 @@ export default function ChamadaDiagnostico() {
         <Reveal>
           <div className="vidro grid gap-3 rounded-[28px] p-3 shadow-vidro md:grid-cols-[1.1fr_1fr_1fr] md:items-stretch">
             <div className="px-4 py-4 md:py-5">
-              <p className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-azul">Ainda em dúvida?</p>
+              <p className="font-mono text-[12.5px] uppercase tracking-[0.16em] text-azul">Ainda em dúvida?</p>
               <p className="mt-2 font-display text-[1.35rem] font-medium leading-snug tracking-[-0.025em] text-tinta">
                 Faça as contas antes de decidir.
               </p>

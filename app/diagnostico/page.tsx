@@ -30,7 +30,7 @@ export default function Diagnostico() {
     <main>
       <Topo inicio="/" />
 
-      <section className="ceu-fundo relative overflow-hidden pb-10 pt-[124px] sm:pt-[140px]">
+      <section className="ceu-fundo relative overflow-hidden pb-10 pt-[150px] sm:pt-[156px]">
         <div aria-hidden className="pontos pointer-events-none absolute inset-0" />
         <div className="relative mx-auto max-w-pagina px-5 sm:px-8">
           <p className="surge rotulo">Ferramentas gratuitas</p>

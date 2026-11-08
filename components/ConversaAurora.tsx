@@ -272,7 +272,7 @@ export default function ConversaAurora({
         </div>
       </div>
 
-      <span className="absolute -top-3 right-6 rounded-full border border-linha bg-white px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-cinza shadow-cartao">
+      <span className="absolute -top-3 right-6 rounded-full border border-linha bg-white px-3 py-1 font-mono text-[12.5px] uppercase tracking-[0.12em] text-cinza shadow-cartao">
         {selo}
       </span>
 

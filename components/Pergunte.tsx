@@ -129,7 +129,7 @@ export default function Pergunte() {
                 </p>
                 <p className={`text-[12.5px] ${digitando ? "text-azul" : "text-cinza"}`}>{digitando ? "digitando…" : "online agora"}</p>
               </div>
-              <span className="ml-auto rounded-full border border-linha bg-white px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-cinza">
+              <span className="ml-auto rounded-full border border-linha bg-white px-3 py-1 font-mono text-[12.5px] uppercase tracking-[0.12em] text-cinza">
                 demonstração
               </span>
             </div>
@@ -190,7 +190,7 @@ export default function Pergunte() {
                 type="button"
                 onClick={() => perguntar(i)}
                 aria-disabled={ocupado}
-                className={`rounded-full border px-4 py-2 text-[14.5px] transition-[background-color,border-color,color,opacity] duration-200 ${
+                className={`min-h-[44px] rounded-full border px-4 py-2.5 text-[14.5px] transition-[background-color,border-color,color,opacity] duration-200 ${
                   feitas.has(i) ? "border-violeta-claro bg-violeta-suave text-azul-escuro" : "border-linha bg-white text-tinta hover:border-violeta hover:text-azul"
                 } ${ocupado ? "cursor-wait opacity-60" : ""}`}
               >
@@ -204,7 +204,7 @@ export default function Pergunte() {
             onClick={() => setLerTudo((v) => !v)}
             aria-expanded={lerTudo}
             aria-controls="respostas-em-texto"
-            className="mt-7 inline-flex items-center gap-2 text-[14.5px] font-medium text-azul underline-offset-4 hover:underline"
+            className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-[14.5px] font-medium text-azul underline-offset-4 hover:underline"
           >
             {lerTudo ? "Fechar as respostas" : "Prefere ler tudo de uma vez?"}
           </button>

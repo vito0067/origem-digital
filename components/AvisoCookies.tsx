@@ -37,12 +37,12 @@ export default function AvisoCookies() {
     <div
       role="region"
       aria-label="Aviso de privacidade"
-      className="fixed inset-x-0 bottom-0 z-[95] p-2 sm:bottom-5 sm:p-0"
+      className="fixed inset-x-0 bottom-0 z-[95] p-2 sm:inset-x-auto sm:bottom-5 sm:left-5 sm:p-0"
       style={{ animation: "revelaNaCarga .5s cubic-bezier(.22,1,.36,1) both", ["--de-y" as string]: "14px" }}
     >
       {/* No celular, uma faixa baixa (não cobre o botão da capa); da tela
           média para cima, a placa completa com o título. */}
-      <div className="mx-auto flex items-center gap-3 rounded-2xl border border-white bg-white/95 px-3.5 py-2.5 shadow-flutua backdrop-blur-xl sm:block sm:max-w-[44rem] sm:rounded-3xl sm:p-5 md:flex md:items-center md:gap-6">
+      <div className="mx-auto flex items-center gap-3 rounded-2xl border border-white bg-white/95 px-3.5 py-2.5 shadow-flutua backdrop-blur-xl sm:block sm:w-[24rem] sm:max-w-[calc(100vw-2.5rem)] sm:rounded-3xl sm:p-5">
         <div className="min-w-0 flex-1">
           <p className="hidden font-display text-[15.5px] font-semibold text-tinta sm:block">Um aviso rápido sobre privacidade</p>
           <p className="text-[12.5px] leading-snug text-grafite sm:hidden">
@@ -56,20 +56,20 @@ export default function AvisoCookies() {
             vistas — sem nome, sem telefone, sem identificar você.
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-1.5 sm:mt-3 sm:flex-wrap sm:gap-2 md:mt-0 md:flex-col md:items-stretch">
-          <button type="button" onClick={() => responder("aceito")} className="rounded-full bg-noite px-3.5 py-1.5 text-[13px] font-medium text-white sm:px-5 sm:py-2 sm:text-[14px]">
+        <div className="flex shrink-0 items-center gap-1.5 sm:mt-3 sm:flex-wrap sm:gap-2">
+          <button type="button" onClick={() => responder("aceito")} className="min-h-[40px] rounded-full bg-noite px-3.5 py-1.5 text-[13px] font-medium text-white sm:min-h-0 sm:px-5 sm:py-2 sm:text-[14px]">
             <span className="sm:hidden">Pode</span>
             <span className="hidden sm:inline">Pode contar</span>
           </button>
           <button
             type="button"
             onClick={() => responder("recusado")}
-            className="rounded-full border border-linha bg-white px-3.5 py-1.5 text-[13px] font-medium text-grafite hover:border-violeta sm:px-5 sm:py-2 sm:text-[14px]"
+            className="min-h-[40px] rounded-full border border-linha bg-white px-3.5 py-1.5 text-[13px] font-medium text-grafite hover:border-violeta sm:min-h-0 sm:px-5 sm:py-2 sm:text-[14px]"
           >
             <span className="sm:hidden">Não</span>
             <span className="hidden sm:inline">Prefiro que não</span>
           </button>
-          <Link href="/privacidade" className="ml-auto hidden text-[13px] text-azul underline underline-offset-4 sm:inline md:ml-0 md:text-center">
+          <Link href="/privacidade" className="ml-auto hidden text-[13px] text-azul underline underline-offset-4 sm:inline">
             Saiba mais
           </Link>
         </div>

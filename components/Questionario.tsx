@@ -32,7 +32,7 @@ function SimNao({ valor, aoEscolher, pergunta }: { valor: boolean | null; aoEsco
       onClick={() => aoEscolher(v)}
       aria-pressed={valor === v}
       aria-label={`${rotulo} — ${pergunta}`}
-      className={`min-w-[64px] rounded-full px-4 py-2 text-[14px] font-medium transition-colors duration-200 ${
+      className={`min-h-[44px] min-w-[64px] rounded-full px-4 py-2 text-[14px] font-medium transition-colors duration-200 ${
         valor === v ? "bg-noite text-white shadow-botao" : "text-grafite hover:text-tinta"
       }`}
     >

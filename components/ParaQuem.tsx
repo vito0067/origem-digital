@@ -51,7 +51,7 @@ export default function ParaQuem() {
             </div>
             <div className="flex items-center justify-between gap-4 px-3 pb-2 pt-4">
               <span>
-                <span className="block font-mono text-[11.5px] uppercase tracking-[0.14em] text-cinza">Projeto entregue</span>
+                <span className="block font-mono text-[12.5px] uppercase tracking-[0.14em] text-cinza">Projeto entregue</span>
                 <span className="mt-1 block font-display text-[1.2rem] font-medium tracking-[-0.02em] text-tinta">O Mundo da Sá · mundodasa.com.br</span>
               </span>
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-noite text-white transition-transform duration-300 group-hover:translate-x-0.5">

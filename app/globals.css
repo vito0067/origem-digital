@@ -60,7 +60,7 @@ section[id] {
 
   /* Etiqueta pequena em cima dos títulos: um pixel e o nome da seção */
   .rotulo {
-    @apply inline-flex items-center gap-2.5 font-mono text-[12px] uppercase tracking-[0.16em] text-azul;
+    @apply inline-flex items-center gap-2.5 font-mono text-[13px] uppercase tracking-[0.14em] text-azul;
   }
   .rotulo::before {
     content: "";

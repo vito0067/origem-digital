@@ -2,7 +2,7 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 import { VistoDuplo, Seta } from "./Icones";
 import { Simbolo } from "./Marca";
-import { acheProduto, BLACK_FRIDAY, reais, setupNormal, setupSeparado } from "@/lib/precos";
+import { acheProduto, BLACK_FRIDAY, economia, reais, setupNormal, setupSeparado } from "@/lib/precos";
 
 /**
  * OS SERVIÇOS — duas peças, um objetivo.
@@ -88,7 +88,9 @@ export default function Servicos() {
                 <Lista itens={["Design sob medida para a sua marca", "Pronto para o Google, com botão direto para o seu WhatsApp", "Domínio, hospedagem e manutenção inclusos"]} />
               </div>
               <p className="mt-auto pt-8 text-[14px] text-cinza">
+                {BLACK_FRIDAY.ativa && <s className="mr-2 text-cinza decoration-brasa">{reais(setupNormal["site-simples"])}</s>}
                 a partir de <span className="font-display text-[1.35rem] font-medium tracking-[-0.02em] text-tinta">{reais(site.setup)}</span> + {reais(site.mensal)}/mês
+                {BLACK_FRIDAY.ativa && <span className="ml-2 inline-block rounded-full bg-brasa px-2.5 py-0.5 align-middle text-[12.5px] font-medium text-white">economize {reais(economia("site-simples", site.setup))}</span>}
               </p>
             </article>
           </Reveal>
@@ -103,7 +105,9 @@ export default function Servicos() {
                 <Lista itens={["Treinada com as informações do seu negócio", "Tira dúvidas, qualifica e registra cada contato", "Passa a conversa para você na hora de fechar"]} />
               </div>
               <p className="mt-auto pt-8 text-[14px] text-cinza">
+                {BLACK_FRIDAY.ativa && <s className="mr-2 text-cinza decoration-brasa">{reais(setupNormal["agente-essencial"])}</s>}
                 a partir de <span className="font-display text-[1.35rem] font-medium tracking-[-0.02em] text-tinta">{reais(agente.setup)}</span> + {reais(agente.mensal)}/mês
+                {BLACK_FRIDAY.ativa && <span className="ml-2 inline-block rounded-full bg-brasa px-2.5 py-0.5 align-middle text-[12.5px] font-medium text-white">economize {reais(economia("agente-essencial", agente.setup))}</span>}
               </p>
             </article>
           </Reveal>
@@ -115,8 +119,8 @@ export default function Servicos() {
             className="group mt-5 flex flex-col gap-4 rounded-[28px] bg-noite px-6 py-6 text-white shadow-botao transition-colors hover:bg-noite-claro sm:flex-row sm:items-center sm:justify-between sm:px-8"
           >
             <span>
-              <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-violeta-claro">
-                {BLACK_FRIDAY.ativa ? `${BLACK_FRIDAY.nome} · até ${BLACK_FRIDAY.fimTexto}` : "Os dois juntos · 12% off no setup"}
+              <span className="font-mono text-[12.5px] uppercase tracking-[0.14em] text-violeta-claro">
+                {BLACK_FRIDAY.ativa ? `${BLACK_FRIDAY.nome} · até ${BLACK_FRIDAY.fimTexto} · economize ${reais(economia("pacote-inicio", pacote.setup))}` : "Os dois juntos · 12% off no setup"}
               </span>
               <span className="mt-1.5 block font-display text-[1.35rem] font-medium tracking-[-0.02em] sm:text-[1.5rem]">
                 {pacote.nome}:{" "}

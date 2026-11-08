@@ -8,6 +8,7 @@ import ChamadaDiagnostico from "@/components/ChamadaDiagnostico";
 import ComoFunciona from "@/components/ComoFunciona";
 import ParaQuem from "@/components/ParaQuem";
 import Fechamento from "@/components/Fechamento";
+import Depoimentos from "@/components/Depoimentos";
 import Rodape from "@/components/Rodape";
 import BotaoFlutuante from "@/components/BotaoFlutuante";
 import { perguntas } from "@/lib/perguntas";
@@ -58,6 +59,7 @@ export default function Home() {
       <ChamadaDiagnostico />
       <ComoFunciona />
       <ParaQuem />
+      <Depoimentos />
       <Fechamento />
       <Rodape />
       <BotaoFlutuante />

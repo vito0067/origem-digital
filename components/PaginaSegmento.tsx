@@ -91,7 +91,7 @@ export default function PaginaSegmento({ s }: { s: Segmento }) {
       <Topo inicio="/" />
 
       {/* ===== Capa ===== */}
-      <section className="ceu-fundo relative overflow-hidden pb-20 pt-[120px] sm:pt-[136px]">
+      <section className={`ceu-fundo relative overflow-hidden pb-20 ${BLACK_FRIDAY.ativa ? "pt-[150px] sm:pt-[156px]" : "pt-[120px] sm:pt-[136px]"}`}>
         <div aria-hidden className="pontos pointer-events-none absolute inset-0" />
         <div className="relative mx-auto grid max-w-pagina items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-7">
